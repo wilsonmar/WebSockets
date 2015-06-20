@@ -24,6 +24,24 @@ WebSockets as described on MDN:
   * https://developer.mozilla.org/en-US/docs/WebSockets/Writing_WebSocket_client_applications
 
 
+<hr />
+
+
+### <a name="DemoApps"> Demo Apps</a>
+There are several examples with coding that created it:
+
+* Tutorial http://www.pluralsight.com/courses/signalr-introduction
+ by Christian Weyer (@christianweyer) at http://www.thinkecture.com 
+ describes the student list demo app at
+ codeplex?
+
+
+### <a name="LightStreamer"> Java-based LightStreamer</a>
+There is a commercial product (with an open-source free version)
+that provides so many more sophisticated features that make other implementations seem like "toys". 
+
+It is programmed in Java.
+
 ### <a name="MS_WebSockets"> Microsoft Web Sockets</a>
 To implement Web Sockets Microsoft offers its SignalR library (at http://SignalR.net)
 for addition to all ASP.NET project types (MVC).
@@ -35,21 +53,4 @@ for addition to all ASP.NET project types (MVC).
   * http://shooter.signalr.net provides a demo app written in HTML using SignalR.
   
  * HTML5 Web Sockets - http://social.technet.microsoft.com/wiki/contents/articles/7148.websockets-in-asp-net.aspx
-
-
-### <a name="LightStreamer"> Java-based LightStreamer</a>
-There is a commercial product (with an open-source free version)
-that provides so many more sophisticated features that make other implementations seem like "toys". 
-
-It is programmed in Java.
-
-<hr />
-
-### <a name="DemoApps"> Demo Apps</a>
-There are several examples with coding that created it:
-
-* Tutorial http://www.pluralsight.com/courses/signalr-introduction
- by Christian Weyer (@christianweyer) at http://www.thinkecture.com 
- describes the student list demo app at
- codeplex?
 
