@@ -13,6 +13,9 @@ than REST API and forms technologies that preceded it.
 Websockets are also more "user friendly" 
 because it enables **two-way** communication, so pages automatically refresh without user action.
 
+WebSockets is a persistant but volatile connection, 
+not a "durable" connection like those provided by MQ (message queues).
+
 By its nature it's a full-duplex **asychronous** protocol.
 
 Web sockets provide push within the applications, such a used by "real-time" feeds such as 
@@ -40,7 +43,13 @@ There are several examples with coding that created it:
  * http://shooter.signalr.net provides a demo app written in HTML using 
   <a href="#SignalR">SignalR</a>.
 
-Code for demos:
+Code for demos downloaded and run in your localhost:
+
+* http://nuget.org/packages/Microsoft.AspNet.SignalR.Sample
+ provides a sample SignalR stock ticker solution built using
+  <a href="#SignalR">SignalR</a>.
+ It is installed in the Package Manager Console.
+ Its dependencies include JQuery and Owin.
 
 * Tutorial http://www.pluralsight.com/courses/signalr-introduction
  by Christian Weyer (@christianweyer) at http://www.thinkecture.com 
@@ -53,6 +62,15 @@ Code for demos:
  using node.js, SockJS, and the D3.js library instead of jQuery UI.
 
  The Java implementation uses Java Tomcat native WebSocket API, Atmosphere, and Vert.x libraries.
+
+### <a name="RealTimeTech"> Real-Time Technologies</a>
+A list of real-time technologies (which include WebSockets) is at
+http://www.leggetter.co.uk/real-time-web-technologies-guide/
+
+### <a name="Pusher"> Pusher.com</a>
+It's maintained by  is maintained by Phil Leggetter from 
+Pusher.com is a paid service for web application developers that handles the burden of delivering real-time updates to potentially millions of users and applications at once.
+
 
 
 ### <a name="JavaFirst"> Java Origins</a>
@@ -94,14 +112,37 @@ that provides so many more sophisticated features that make other implementation
 It is programmed in Java.
 
 ### <a name="NodeJS"> NodeJS Implementations</a>
+The Socket.io module for Node.js
 
 
 ### <a name="SignalR"> Microsoft Web Sockets SignalR</a>
-To implement Web Sockets Microsoft offers its SignalR library (at http://SignalR.net)
-for addition to all ASP.NET project types (MVC).
+To implement Web Sockets Microsoft offers its SignalR library 
+described at http://SignalR.net and stored as open-source repo at
+http://github.com/Microsoft/SignalR.
 
-SignalR is supported on Windows 2012/Windows 8 and newer.
+See http://www.wikiwand.com/en/SignalR
+
+SignalR packages available via NuGet at
+http://nuget.org/packages/Microsoft.AspNet.SignalR
+
+SignalR can be added to all ASP.NET project types (MVC).
+
+The **Microsoft.AspNet.SignalR** library brings in everything to run on IIS and ASP.NET
+within Windows 2012/Windows 8 and newer machines.
 Thus it is not common in production yet in 2015.
+
+The Microsoft.AspNet.SignalR.SystemWeb library provides components to use OWIN ASP.NET host.
+
+The Microsoft.AspNet.SignalR.Core library provides components to build SignalR endpoints.
+
+Its Microsoft.AspNet.SignalR.Client library enables the server to work with clients programmed in
+WinRT, Windows Phone 8, and Sliverlight5.
+Its Microsoft.AspNet.SignalR.Js library enables the server to work with clients programmed in JQuery.
+
+The Microsoft.AspNet.SignalR.Utils library provides command-line utilities to install performance counters
+and generate Hub JavaScript proxies.
+
+SignalR is supported 
 
   * http://www.pluralsight.com/courses/one-aspdotnet-from-scratch
   demostrates how to create a SignalR "ChatHub" app updates the user count on all browser instances automatically
@@ -110,8 +151,9 @@ Thus it is not common in production yet in 2015.
 QUESTION:
 Does SignalR support Websockets sub-protocols?
 
-
- * HTML5 Web Sockets - http://social.technet.microsoft.com/wiki/contents/articles/7148.websockets-in-asp-net.aspx
+### <a name="SignalRHubs"> Hubs in Microsoft Web Sockets SignalR</a>
+**Hubs** programming model 
+in a RPC-ish style of URLs.
 
 
 ### <a name="BenchmarkStudies"> Benchmark Studies</a>
@@ -119,3 +161,6 @@ Comparison of Comet vs. WebSockets technologies at
 http://webtide.intalio.com/2011/09/cometd-2-4-0-websocket-benchmarks/
 found an over 150x factor in favor of WebSockets (700ms vs. 3 ms at 50,000 users).
 
+
+## <a name="References"> References</a>
+ * HTML5 Web Sockets - http://social.technet.microsoft.com/wiki/contents/articles/7148.websockets-in-asp-net.aspx
