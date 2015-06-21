@@ -1,6 +1,31 @@
 This mark-down text page and associated solution files demonstrates how to program and performance test
 HTTP5 WebSocket implemented in Visual Studio and the C# language versus other competing technologies.
 
+### <a name="RealTimeTech"> Real-Time Technologies</a>
+Applications such as stock and sports tickers, on-line gaming, etc.
+used various techniques to provide "real-time" updates without the need for users to manually refresh the screen
+or click a button. Such techniques include:
+
+   * SSE
+   * "Forever Frame"
+   * "Long Polling"
+
+A list of real-time technologies (which include WebSockets) is at
+http://www.leggetter.co.uk/real-time-web-technologies-guide/
+maintained by by Phil Leggetter, the Technical Evangelist at 
+Pusher.com, a paid service for web application developers that handles the burden of delivering real-time updates to many users and applications at once.
+
+Before WebSockets, programmers "hacked" ways 
+Web sockets techonology is also used for communication between two servers without a human UI.
+
+WebSockets provides a quicker user experience than the "long polling" programming approach used in
+
+ * http://www.bitcoinmonitor.com/ which displays real-time trades over time.
+ * http://pokein.com/ integrates a DLL in a .NET project as well.
+ * http://www.frozenmountain.com/websync/
+ * Asana for task collaboration (developed by people from Facebook)
+
+
 ## <a name="Why"> Why WebSockets?</a>
 Web Sockets is gaining popularity now (in 2015) because:
 * its HTTP headers take less bytes than HTTP 
@@ -11,23 +36,11 @@ means that it's faster and processes more transactions than the same hardware
 than REST API and forms technologies that preceded it.
 
 Websockets are also more "user friendly" 
-because it enables **two-way** communication, so pages automatically refresh without user action.
-
-WebSockets is a persistant but volatile connection, 
+because it enables **two-way** communication, so pages automatically refresh without user action
+through a persistant but volatile connection, 
 not a "durable" connection like those provided by MQ (message queues).
 
 By its nature it's a full-duplex **asychronous** protocol.
-
-Web sockets provide push within the applications, such a used by "real-time" feeds such as 
-stock and sports tickers, on-line gaming, etc.
-Web sockets techonology is also used for communication between two servers without a human UI.
-
-WebSockets provides a quicker user experience than the "long polling" programming approach used in
-
- * http://www.bitcoinmonitor.com/ which displays real-time trades over time.
- * http://pokein.com/ integrates a DLL in a .NET project as well.
- * http://www.frozenmountain.com/websync/
- * Asana for task collaboration (developed by people from Facebook)
 
  
  
@@ -66,15 +79,6 @@ Code for demos downloaded and run in your localhost:
 
  In the tutorial he uses VisualStudio 2012 to show 
  <a href="#SimpleChat">construciton of a simple real-time chat program</a>.
-
-
-### <a name="RealTimeTech"> Real-Time Technologies</a>
-A list of real-time technologies (which include WebSockets) is at
-http://www.leggetter.co.uk/real-time-web-technologies-guide/
-
-### <a name="Pusher"> Pusher.com</a>
-It's maintained by  is maintained by Phil Leggetter from 
-Pusher.com is a paid service for web application developers that handles the burden of delivering real-time updates to potentially millions of users and applications at once.
 
 
 
@@ -138,6 +142,13 @@ Thus it is not common in production yet in 2015.
 
 The Microsoft.AspNet.SignalR.SystemWeb library provides components to use OWIN ASP.NET host.
 
+Katana (from http://katanaproject.codeplex.com/documentation)
+is a set of components for building and running Web applications on a common hosting abstraction. 
+The hosting abstraction is OWIN (Open Web Interface for .NET) programming model for developers.
+IIS is a process manager. OwinHost is a standalone executable that can start up an OWIN application. The new thing is WebListener which is ultra light-weight server component where you can expect pretty amazing performance results. 
+See http://www.techbubbles.com/aspnet/what-is-katana-and-owin-for-asp-net/
+
+
 The Microsoft.AspNet.SignalR.Core library provides components to build SignalR endpoints.
 
 Its Microsoft.AspNet.SignalR.Client library enables the server to work with clients programmed in
@@ -163,6 +174,7 @@ Does SignalR support Websockets sub-protocols?
 1). Open Visual Studio 2012.
 
 2). Create a MVC 4 Web product solution named SimpleChat.
+ This establishes ASP.NET Controllers and App_Start files WebApiConfig.cs, FilterConfig.cs, and RouteConfig.cs.
 
 3). In Solution Explorer, right-click on the project and press Ctrl+Shift+A to Add New Item **SignalR Hub Class**.
 
@@ -170,8 +182,63 @@ Does SignalR support Websockets sub-protocols?
 <img align="right" src="https://cloud.githubusercontent.com/assets/300046/8270037/a4ef6abe-1785-11e5-8a93-a6c13f050931.png"
 width="350" /></a>
 4). Name it "ChatHub.cs".
+ 
+ NuGet obtains over the internet various dependency packages, listed under the project's References.
 
-Define a hub C#
+ The dependencies include http://owin.org/ and the Newtonsoft assembly and package.
+
+5). Define a name attribute for check-in to the public API:
+
+```
+[HubName(chat)]
+```
+
+This makes use of Microsoft.AspNet.SignalR.Hubs;
+
+6). Instead of the default `public void Hello()`
+
+```
+ public void SendMessage(string message){
+     Clients.All.hello();
+ }
+```
+
+ This sends a string to all clients.
+
+7). In Global.aspx, add before the RouteConfig line:
+
+```
+RouteTable.Route.MapHubs();
+```
+
+8). Recompile and use URL that includes the base endpoint default name of "signalr".
+
+```
+http://localhost:???/signalr/hubs
+```
+
+which returns the JavaScript library downloaded by client browsers.
+
+9). In ChatHub.cs add a call to send a complex type:
+
+```
+public void SendMessageData(SendDate message)
+```
+
+10). Right-click on the line and select Create Class and insert in it:
+
+```
+public int Id { get; set; }
+public string Data { get; set; }
+```
+
+11). Add an async call task type:
+
+```
+public Task<int> SendDataAsync() {
+```
+
+
 
 serialized into and deserialized from JSON (using the JSON.NET library).
 
