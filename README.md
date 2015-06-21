@@ -1,35 +1,29 @@
 This mark-down text page and associated solution files demonstrates how to program and performance test
 HTTP5 WebSocket implemented in Visual Studio and the C# language versus other competing technologies.
 
-### <a name="RealTimeTech"> Real-Time Technologies</a>
 Applications such as stock and sports tickers, on-line gaming, etc.
 used various techniques to provide "real-time" updates without the need for users to manually refresh the screen
-or click a button. Such techniques include:
+or click a button. 
 
-   * SSE
-   * "Forever Frame"
-   * "Long Polling"
+### <a name="ObserveRealTimeTech"> Observe Older Real-Time Technologies</a>
+1). Open a browser which does not support WebSockets, such as Internet Explorer 8.
 
-A list of real-time technologies (which include WebSockets) is at
-http://www.leggetter.co.uk/real-time-web-technologies-guide/
-maintained by by Phil Leggetter, the Technical Evangelist at 
-Pusher.com, a paid service for web application developers that handles the burden of delivering real-time updates to many users and applications at once.
+2). Press F12 to Trace the HTTP packets involved.
 
-Before WebSockets, programmers "hacked" ways 
-Web sockets techonology is also used for communication between two servers without a human UI.
-
-WebSockets provides a quicker user experience than the "long polling" programming approach used in
+3). Specify one of these publicly available websites:
 
  * http://www.bitcoinmonitor.com/ which displays real-time trades over time.
- * http://pokein.com/ integrates a DLL in a .NET project as well.
+ * http://pokein.com/ integrates a DLL in a .NET project.
  * http://www.frozenmountain.com/websync/
  * Asana for task collaboration (developed by people from Facebook)
+
+4). Notice that this approach is rather "chatty".
 
 
 ## <a name="Why"> Why WebSockets?</a>
 Web Sockets is gaining popularity now (in 2015) because:
-* its HTTP headers take less bytes than HTTP 
-* payload data exchanged is more compact than JSON.
+  * its HTTP headers take less bytes than HTTP 
+  * payload data exchanged is more compact than JSON.
 
 This lighterweight and low-latency 
 means that it's faster and processes more transactions than the same hardware
@@ -42,13 +36,13 @@ not a "durable" connection like those provided by MQ (message queues).
 
 By its nature it's a full-duplex **asychronous** protocol.
 
- 
- 
-<hr />
-
 
 ### <a name="DemoApps"> Demo Apps</a>
-There are several examples with coding that created it:
+1). Open a modern browser 
+
+2). Press F12 to Trace the HTTP packets involved.
+
+3). Specify the URL of one of these demo sites created using WebSockets technology:
 
  * https://jabbr.net
   was written using <a href="#SignalR"> Microsoft ASP.NET SignalR</a>.
@@ -68,8 +62,7 @@ Code for demos downloaded and run in your localhost:
  is described by the author Chris Beams in a video at https://www.youtube.com/watch?v=z-CYO1ABCp4&t=8m44s
  by SpringSource (a VMware company).
  using node.js, SockJS, and the D3.js library instead of jQuery UI.
-
- The Java implementation uses Java Tomcat native WebSocket API, Atmosphere, and Vert.x libraries.
+(The Java implementation uses Java Tomcat native WebSocket API, Atmosphere, and Vert.x libraries.)
 
 
 * Tutorial http://www.pluralsight.com/courses/signalr-introduction
@@ -97,21 +90,78 @@ Tutorials in the Java language include:
    running on top of IOCP (I/O completion ports) in order to scale to large connection numbers (hundred thousands).
    http://stackoverflow.com/users/884770/oberstet
 
-### <a name="DataExchange"> Data Exchange Details</a>
-DO THIS:
-Use Fiddler2 to examine packets.
+
+### <a name="Negotiation"> Fall-back Negotiation</a>
+4). In the **web.config** file, specify a version that does not support WebSockets SignalR:
+
+```
+<httpRunTime targetFramework="4.0">
+```
+
+The first version that supports SignalR is **4.5**.
+
+5). Reload the web page so the client sends an initial request to the server, 
+the **negotiate** request.
+
+The JSON response contains
+  * ConnectionId
+  * ConnectionToken
+  * DisconnectTimeout
+  * ProtocolVersion
+  * TryWebSockets
+  * Url
+  * WebSocketUrl (no longer used)
 
 WebSockets is an IETF standard http://ietf.org/rfc/rfc6455.txt
 standardized by the W3C
 as described on MDN:
   * https://developer.mozilla.org/en-US/docs/WebSockets/Writing_WebSocket_client_applications
 
-WebSockets is not the **"push notification"** technology as what operating systems provide.
 
-WebSockets is not the persistent publish-subscribe design pattern since it's temporary to a particular session.
+6). Look at the JavaScript Console
+
+If the client does not support WebSockets, it responds with **500 HTTP status**,
+which is the standard response.
+
+Newer WebSockets technologies **fall back** to these in the sequence shown.
+
+### <a name="RealTimeTech"> Older Real-Time Technologies</a>
+Before WebSockets, programmers "hacked" ways 
+Web sockets techonology is also used for communication between two servers without a human UI.
+In order of preference:
+
+   1. Server Sent Event (SSE)
+   2. "Forever Frame"
+   3. "Long Polling"
+
+A list of real-time technologies (which include WebSockets) is at
+http://www.leggetter.co.uk/real-time-web-technologies-guide/
+maintained by by Phil Leggetter, the Technical Evangelist at 
+Pusher.com, a paid service for web application developers that handles the burden of delivering real-time updates to many users and applications at once.
+
+### <a name="RealTimeTech"> Older Real-Time Technologies</a>
+
+7). In the **web.config** file, specify a version that supports WebSockets SignalR:
+
+```
+<httpRunTime targetFramework="4.5">
+```
+
+8). Refresh the page.
+
+Notice in the JavaScript Console "WebSocket opened".
+
+### <a name="BrowserUpgrade"> Browser Upgrade</a>
 
 WebSockets begins by doing an "upgrade" to the HTTP protocol.
 If a client can do it, it responds with a HTTP 101 response code (rather than 400).
+
+
+
+
+WebSockets is not the **"push notification"** technology as what operating systems provide.
+
+WebSockets is not the persistent publish-subscribe design pattern since it's temporary to a particular session.
 
 
 ### <a name="LightStreamer"> Java-based LightStreamer</a>
@@ -148,6 +198,9 @@ The hosting abstraction is OWIN (Open Web Interface for .NET) programming model 
 IIS is a process manager. OwinHost is a standalone executable that can start up an OWIN application. The new thing is WebListener which is ultra light-weight server component where you can expect pretty amazing performance results. 
 See http://www.techbubbles.com/aspnet/what-is-katana-and-owin-for-asp-net/
 
+http://katanaproject.codeplex.com/
+
+https://github.com/owin/museum-piece-owin-hosting
 
 The Microsoft.AspNet.SignalR.Core library provides components to build SignalR endpoints.
 
