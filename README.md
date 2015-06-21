@@ -34,6 +34,19 @@ WebSockets provides a quicker user experience than the "long polling" programmin
 ### <a name="DemoApps"> Demo Apps</a>
 There are several examples with coding that created it:
 
+ * https://jabbr.net
+  was written using <a href="#SignalR"> Microsoft ASP.NET SignalR</a>.
+
+ * http://shooter.signalr.net provides a demo app written in HTML using 
+  <a href="#SignalR">SignalR</a>.
+
+Code for demos:
+
+* Tutorial http://www.pluralsight.com/courses/signalr-introduction
+ by Christian Weyer (@christianweyer) at http://www.thinkecture.com 
+ describes the student list demo app at
+ codeplex?
+
 * http://github.com/cbeams/bitcoin-rt
  is described by the author Chris Beams in a video at https://www.youtube.com/watch?v=z-CYO1ABCp4&t=8m44s
  by SpringSource (a VMware company).
@@ -41,13 +54,6 @@ There are several examples with coding that created it:
 
  The Java implementation uses Java Tomcat native WebSocket API, Atmosphere, and Vert.x libraries.
 
-* Tutorial http://www.pluralsight.com/courses/signalr-introduction
- by Christian Weyer (@christianweyer) at http://www.thinkecture.com 
- describes the student list demo app at
- codeplex?
-
-* http://shooter.signalr.net provides a demo app written in HTML using 
-  <a href="#SignalR">SignalR</a>.
 
 ### <a name="JavaFirst"> Java Origins</a>
 Because the JSR-356 deliver a Java API in Java EE 7,
