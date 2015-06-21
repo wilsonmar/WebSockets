@@ -6,13 +6,13 @@ Applications such as stock and sports tickers, on-line gaming, etc.
 provide "real-time" updates without the need for users to manually refresh the screen
 or click a button. 
 
+SignalR 2 comes with Visual Studio 2013.
+https://www.youtube.com/watch?v=QL-HPsC1SH0
+
 
 ### <a name="ObserveRealTimeTech"> Observe Older Real-Time Technologies</a>
 1). Open a browser which does not support WebSockets, such as Internet Explorer 9.
 (this may involve using a VMWare instance)
-
-http://caniuse.com/#search=websockets
-shows can almost all browsers in 2015 supports WebSockets.
 
 2). Press F12 to Trace the HTTP packets involved.
 
@@ -46,13 +46,22 @@ WebSockets is not the **"push notification"** technology as what operating syste
 
 WebSockets is not the persistent publish-subscribe design pattern since it's temporary to a particular session.
 
+
 The RTMP (Real Time Message Protocol) was used within Adobe Flash since 2003,
 but it's proprietary.
-
 
 ### <a name="JavaFirst"> Java Origins</a>
 Because the JSR-356 deliver a Java API in Java EE 7,
 the first implementations of WebSockets were in the Java language.
+
+<a href="http://lightstreamer.com/"> LightStreamer</a>
+is a commercial product (with a Java open-source free version)
+that provides so many more sophisticated features that make other implementations seem like "toys". 
+
+There is a commercial product (with an open-source free version)
+that provides so many more sophisticated features that make other implementations seem like "toys". 
+
+It is programmed in Java.
 
 * http://github.com/cbeams/bitcoin-rt
  is described by the author Chris Beams in a video at https://www.youtube.com/watch?v=z-CYO1ABCp4&t=8m44s
@@ -78,6 +87,9 @@ PHP programs can support WebSockets using http://socketo.me/
 
 ### <a name="DemoApps"> Demo Apps</a>
 1). Open a modern browser 
+
+http://caniuse.com/#search=websockets
+shows can almost all browsers in 2015 supports WebSockets.
 
 2). Press F12 to Trace the HTTP packets involved.
 
@@ -155,6 +167,7 @@ http://www.leggetter.co.uk/real-time-web-technologies-guide/
 maintained by by Phil Leggetter, the Technical Evangelist at 
 Pusher.com, a paid service for web application developers that handles the burden of delivering real-time updates to many users and applications at once.
 
+
 ### <a name="RealTimeTech"> Older Real-Time Technologies</a>
 
 7). In the **web.config** file, specify a version that supports WebSockets SignalR:
@@ -183,11 +196,6 @@ HTTP proxies were designed for HTTP document transfer and not for long-lived con
 HTTP Proxies may not be configured to propogate UPGRADE headers.
 
 
-### <a name="LightStreamer"> Java-based LightStreamer</a>
-There is a commercial product (with an open-source free version)
-that provides so many more sophisticated features that make other implementations seem like "toys". 
-
-It is programmed in Java.
 
 ### <a name="NodeJS"> NodeJS Implementations</a>
 The Socket.io module for Node.js
@@ -334,6 +342,25 @@ public void SendMessageForRoom( string room, string message) {
 }
 ```
 
+SignalR2 makes use of groups to differentiate anonymous connections by users who have not been authenticated.
+See https://www.youtube.com/watch?v=QL-HPsC1SH0.
+
+https://www.youtube.com/watch?v=QL-HPsC1SH0&t=4m24s
+SignalR2 introduces the **HubException** error type used in a CauseError method.
+
+On the client-side JavaScript:
+
+```
+$("#causeError").click(function (){
+    hub.server.causeError(-1)
+        .fail(functrion(err) {
+            $("#errorMessage").text(err.message);
+        });
+});
+```
+
+The "source" property ???
+
 SignalR dos not automatically persist groups on the server.
 Thus group counts are not provided by default.
 
@@ -366,6 +393,27 @@ Upon connection (such as opening a new browser window) ...
 Upon disconnection (such as closing of a browser window) ....
 
 ## <a name="OnReconnected"> OnReconnected</a>
+
+## <a name="OWinStartup"> OWin Startup</a>
+In order to de-couple use of IIS System.Web, and go to self-hosting outside ASP.NET,
+SignalR2 speifies the StartUp class:
+
+```
+Using Microsoft.Owin;
+using Owin;
+
+[assembly: OwinStartupAttribute(typeof(WebApplication100.Startup))]
+namespace WebApplication100 {
+    public partial class Startup {
+        public void Configuration(IAppBuilder app) {
+            ConfigureAuth(app);
+            app.MapSignalR();
+        }
+    }
+}
+```
+
+https://www.youtube.com/watch?v=kyFBgephmpQ
 
 ## <a name="BenchmarkStudies"> Benchmark Studies of Efficiency and Scalability</a>
 Comparison of Comet vs. WebSockets technologies at
