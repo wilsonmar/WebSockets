@@ -1,9 +1,12 @@
 This mark-down text page and associated solution files demonstrates how to program and performance test
-HTTP5 WebSocket implemented in Visual Studio and the C# language versus other competing technologies.
+HTTP5 WebSocket implemented in the C# language within Visual Studio using Microsoft's SignalR library on the server
+and client.
 
 Applications such as stock and sports tickers, on-line gaming, etc.
-used various techniques to provide "real-time" updates without the need for users to manually refresh the screen
+provide "real-time" updates without the need for users to manually refresh the screen
 or click a button. 
+
+
 
 ### <a name="ObserveRealTimeTech"> Observe Older Real-Time Technologies</a>
 1). Open a browser which does not support WebSockets, such as Internet Explorer 8.
