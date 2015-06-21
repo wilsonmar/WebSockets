@@ -36,6 +36,34 @@ not a "durable" connection like those provided by MQ (message queues).
 
 By its nature it's a full-duplex **asychronous** protocol.
 
+WebSockets is not the **"push notification"** technology as what operating systems provide.
+
+WebSockets is not the persistent publish-subscribe design pattern since it's temporary to a particular session.
+
+
+### <a name="JavaFirst"> Java Origins</a>
+Because the JSR-356 deliver a Java API in Java EE 7,
+the first implementations of WebSockets were in the Java language.
+
+* http://github.com/cbeams/bitcoin-rt
+ is described by the author Chris Beams in a video at https://www.youtube.com/watch?v=z-CYO1ABCp4&t=8m44s
+ by SpringSource (a VMware company).
+ using node.js, SockJS, and the D3.js library instead of jQuery UI.
+(The Java implementation uses Java Tomcat native WebSocket API, Atmosphere, and Vert.x libraries.)
+
+
+Tutorials in the Java language include:
+ * https://www.youtube.com/watch?v=z-CYO1ABCp4 by 
+
+ * http://kaazing.com/ see http://blog.kaazing.com/2011/11/17/the-industrys-best-websocket-emulation-real-time-web-apps-for-all-your-customers-even-if-theyre-on-ie6/ by Peter Moskovitz
+ 
+ * http://superwebsocket.codeplex.com/
+ * http://xsockets.net/
+ * Autobahn WebSockets, a high-performance WS server that supports Windows 
+   running on top of IOCP (I/O completion ports) in order to scale to large connection numbers (hundred thousands).
+   http://stackoverflow.com/users/884770/oberstet
+
+
 
 ### <a name="DemoApps"> Demo Apps</a>
 1). Open a modern browser 
@@ -58,13 +86,6 @@ Code for demos downloaded and run in your localhost:
  It is installed in the Package Manager Console.
  Its dependencies include JQuery and Owin.
 
-* http://github.com/cbeams/bitcoin-rt
- is described by the author Chris Beams in a video at https://www.youtube.com/watch?v=z-CYO1ABCp4&t=8m44s
- by SpringSource (a VMware company).
- using node.js, SockJS, and the D3.js library instead of jQuery UI.
-(The Java implementation uses Java Tomcat native WebSocket API, Atmosphere, and Vert.x libraries.)
-
-
 * Tutorial http://www.pluralsight.com/courses/signalr-introduction
  by Christian Weyer (@christianweyer) at http://www.thinkecture.com 
  describes the student list demo app at
@@ -74,21 +95,6 @@ Code for demos downloaded and run in your localhost:
  <a href="#SimpleChat">construciton of a simple real-time chat program</a>.
 
 
-
-### <a name="JavaFirst"> Java Origins</a>
-Because the JSR-356 deliver a Java API in Java EE 7,
-the first implementations of WebSockets were in the Java language.
-
-Tutorials in the Java language include:
- * https://www.youtube.com/watch?v=z-CYO1ABCp4 by 
-
- * http://kaazing.com/ see http://blog.kaazing.com/2011/11/17/the-industrys-best-websocket-emulation-real-time-web-apps-for-all-your-customers-even-if-theyre-on-ie6/ by Peter Moskovitz
- 
- * http://superwebsocket.codeplex.com/
- * http://xsockets.net/
- * Autobahn WebSockets, a high-performance WS server that supports Windows 
-   running on top of IOCP (I/O completion ports) in order to scale to large connection numbers (hundred thousands).
-   http://stackoverflow.com/users/884770/oberstet
 
 
 ### <a name="Negotiation"> Fall-back Negotiation</a>
@@ -158,10 +164,6 @@ If a client can do it, it responds with a HTTP 101 response code (rather than 40
 
 
 
-
-WebSockets is not the **"push notification"** technology as what operating systems provide.
-
-WebSockets is not the persistent publish-subscribe design pattern since it's temporary to a particular session.
 
 
 ### <a name="LightStreamer"> Java-based LightStreamer</a>
@@ -311,6 +313,10 @@ Grouping ...
 Comparison of Comet vs. WebSockets technologies at
 http://webtide.intalio.com/2011/09/cometd-2-4-0-websocket-benchmarks/
 found an over 150x factor in favor of WebSockets (700ms vs. 3 ms at 50,000 users).
+
+## <a name="PerftestScripts"> Performance Testing Script</a>
+QUESTION:
+Can Visual Studio do it?
 
 
 ## <a name="References"> References</a>
