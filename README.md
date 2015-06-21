@@ -129,12 +129,11 @@ as described on MDN:
 If the client does not support WebSockets, it responds with **500 HTTP status**,
 which is the standard response.
 
-Newer WebSockets technologies **fall back** to these in the sequence shown.
-
 ### <a name="RealTimeTech"> Older Real-Time Technologies</a>
 Before WebSockets, programmers "hacked" ways 
 Web sockets techonology is also used for communication between two servers without a human UI.
-In order of preference:
+
+Newer WebSockets technologies **fall back** to these in this sequence of preference:
 
    1. Server Sent Event (SSE)
    2. "Forever Frame"
@@ -156,6 +155,7 @@ Pusher.com, a paid service for web application developers that handles the burde
 8). Refresh the page.
 
 Notice in the JavaScript Console "WebSocket opened".
+
 
 ### <a name="BrowserUpgrade"> Browser Upgrade</a>
 
@@ -250,6 +250,9 @@ width="350" /></a>
 
 This makes use of Microsoft.AspNet.SignalR.Hubs;
 
+<a target="_blank" href="https://cloud.githubusercontent.com/assets/300046/8271005/37c9aa02-17bd-11e5-8644-c105418811f9.png">
+<img src="https://cloud.githubusercontent.com/assets/300046/8271005/37c9aa02-17bd-11e5-8644-c105418811f9.png"
+width="200" />
 6). Instead of the default `public void Hello()`
 
 ```
@@ -258,8 +261,16 @@ This makes use of Microsoft.AspNet.SignalR.Hubs;
  }
 ```
 
- This sends a string to all clients.
+The default hello method of the Clients class sends a string to All clients connected.
 
+A more realistic/common in the protocol response dynamically injects paramater values:
+
+```
+ var msg = string.Format ("{0}: {1}", Context.ConnectionId, message);
+ Clients.All.newMessage( msg );
+```
+
+ 
 7). In Global.aspx, add before the RouteConfig line:
 
 ```
