@@ -252,7 +252,7 @@ This makes use of Microsoft.AspNet.SignalR.Hubs;
 
 <a target="_blank" href="https://cloud.githubusercontent.com/assets/300046/8271005/37c9aa02-17bd-11e5-8644-c105418811f9.png">
 <img align="right" src="https://cloud.githubusercontent.com/assets/300046/8271005/37c9aa02-17bd-11e5-8644-c105418811f9.png"
-width="200" />
+width="200" /></a>
 6). Instead of the default `public void Hello()`
 
 ```
@@ -304,23 +304,42 @@ public string Data { get; set; }
 public Task<int> SendDataAsync() {
 ```
 
+## Grouping (by Chat Room)
+Connections and messages can be grouped into a collection such as a Room.
 
+```
+public void JoinRoom(string room) {
+    Groups.Add( Context.ConnectionId, room );
+}
+public void SendMessageForRoom( string room, string message) {
+    var msg = string.Format("{0}: {1}", Context.ConnectionId, message );
+    Clients.Group(room).newMessage(msg);
+}
+```
+
+SignalR dos not automatically persist groups on the server.
+Thus group counts are not provided by default.
+
+
+## Scraps
 
 serialized into and deserialized from JSON (using the JSON.NET library).
 
 Like other ASP.NET (such as MVC), first define a **route** in the host process definition code.
 ???
 
-in a RPC-ish style of URLs.
+## <a name="LifeCycle"> Lifecycle</a>
+QUESTION: Override pipeline event handlers or retrieve hub context via dependency resolver.
 
+## <a name="OnConnected"> OnConnected</a>
 Upon connection (such as opening a new browser window) ...
 
+## <a name="OnDisconnected"> OnDisconnected</a>
 Upon disconnection (such as closing of a browser window) ....
 
-Grouping ...
+## <a name="OnReconnected"> OnReconnected</a>
 
-
-### <a name="BenchmarkStudies"> Benchmark Studies of Efficiency and Scalability</a>
+## <a name="BenchmarkStudies"> Benchmark Studies of Efficiency and Scalability</a>
 Comparison of Comet vs. WebSockets technologies at
 http://webtide.intalio.com/2011/09/cometd-2-4-0-websocket-benchmarks/
 found an over 150x factor in favor of WebSockets (700ms vs. 3 ms at 50,000 users).
