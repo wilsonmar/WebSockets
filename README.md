@@ -251,7 +251,7 @@ width="350" /></a>
 This makes use of Microsoft.AspNet.SignalR.Hubs;
 
 <a target="_blank" href="https://cloud.githubusercontent.com/assets/300046/8271005/37c9aa02-17bd-11e5-8644-c105418811f9.png">
-<img src="https://cloud.githubusercontent.com/assets/300046/8271005/37c9aa02-17bd-11e5-8644-c105418811f9.png"
+<img align="right" src="https://cloud.githubusercontent.com/assets/300046/8271005/37c9aa02-17bd-11e5-8644-c105418811f9.png"
 width="200" />
 6). Instead of the default `public void Hello()`
 
