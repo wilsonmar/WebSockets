@@ -2,8 +2,9 @@ This mark-down text page and associated solution files demonstrates how to progr
 HTTP5 WebSocket implemented in the C# language within Visual Studio using Microsoft's SignalR library on the server
 and client.
 
-Applications such as stock and sports tickers, on-line gaming, etc.
-provide "real-time" updates without the need for users to manually refresh the screen
+Applications such as stock and sports tickers, on-line gaming, inventory trackers, 
+chats, and other apps needing "real-time" updates 
+without the need for users to manually refresh the screen
 or click a button. 
 
 SignalR 2 comes with Visual Studio 2013.
@@ -95,8 +96,10 @@ shows can almost all browsers in 2015 supports WebSockets.
 
 3). Specify the URL of one of these demo sites created using WebSockets technology:
 
+ <img align="right" src="https://cloud.githubusercontent.com/assets/300046/8271426/6edde23a-17d4-11e5-9949-6bffe160d06d.png" 
+ />
  * https://jabbr.net
-  was written using <a href="#SignalR"> Microsoft ASP.NET SignalR</a>.
+  is a browser chat web app written using <a href="#SignalR"> Microsoft ASP.NET SignalR</a>.
 
  * http://shooter.signalr.net provides a demo app written in HTML using 
   <a href="#SignalR">SignalR</a>.
@@ -238,7 +241,10 @@ Its Microsoft.AspNet.SignalR.Js library enables the server to work with clients 
 The Microsoft.AspNet.SignalR.Utils library provides command-line utilities to install performance counters
 and generate Hub JavaScript proxies.
 
-SignalR is supported 
+A **hub** is a high-level **pipeline** built upon the Connection API 
+that allows client and server to call methods on each other directly.
+
+
 
   * http://www.pluralsight.com/courses/one-aspdotnet-from-scratch
   demostrates how to create a SignalR "ChatHub" app updates the user count on all browser instances automatically
@@ -420,10 +426,19 @@ Comparison of Comet vs. WebSockets technologies at
 http://webtide.intalio.com/2011/09/cometd-2-4-0-websocket-benchmarks/
 found an over 150x factor in favor of WebSockets (700ms vs. 3 ms at 50,000 users).
 
+## <a name="Scaling Out"> Scaling Out</a>
+A **backplane** allows apps to scale to multiple servers
+by receiving messages and forwarding them to other app instances.
+
+
 ## <a name="PerftestScripts"> Performance Testing Script</a>
 QUESTION:
 Can Visual Studio do it?
 
 
 ## <a name="References"> References</a>
+ * https://www.youtube.com/watch?v=kyFBgephmpQ
+   by JonGalloway and 
+   BradyGaster.com
+
  * HTML5 Web Sockets - http://social.technet.microsoft.com/wiki/contents/articles/7148.websockets-in-asp-net.aspx
