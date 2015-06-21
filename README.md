@@ -7,9 +7,12 @@ provide "real-time" updates without the need for users to manually refresh the s
 or click a button. 
 
 
-
 ### <a name="ObserveRealTimeTech"> Observe Older Real-Time Technologies</a>
-1). Open a browser which does not support WebSockets, such as Internet Explorer 8.
+1). Open a browser which does not support WebSockets, such as Internet Explorer 9.
+(this may involve using a VMWare instance)
+
+http://caniuse.com/#search=websockets
+shows can almost all browsers in 2015 supports WebSockets.
 
 2). Press F12 to Trace the HTTP packets involved.
 
@@ -43,6 +46,9 @@ WebSockets is not the **"push notification"** technology as what operating syste
 
 WebSockets is not the persistent publish-subscribe design pattern since it's temporary to a particular session.
 
+The RTMP (Real Time Message Protocol) was used within Adobe Flash since 2003,
+but it's proprietary.
+
 
 ### <a name="JavaFirst"> Java Origins</a>
 Because the JSR-356 deliver a Java API in Java EE 7,
@@ -66,6 +72,8 @@ Tutorials in the Java language include:
    running on top of IOCP (I/O completion ports) in order to scale to large connection numbers (hundred thousands).
    http://stackoverflow.com/users/884770/oberstet
 
+
+PHP programs can support WebSockets using http://socketo.me/
 
 
 ### <a name="DemoApps"> Demo Apps</a>
@@ -138,7 +146,7 @@ Web sockets techonology is also used for communication between two servers witho
 
 Newer WebSockets technologies **fall back** to these in this sequence of preference:
 
-   1. Server Sent Event (SSE)
+   1. Server Sent Event (SSE) - part of HTML5/W3C (Event Source)
    2. "Forever Frame"
    3. "Long Polling"
 
@@ -166,7 +174,13 @@ WebSockets begins by doing an "upgrade" to the HTTP protocol.
 If a client can do it, it responds with a HTTP 101 response code (rather than 400).
 
 
+### <a name="HTTPProxies"> HTTP Proxies</a>
+Some organizations use transparent HTTP Proxy servers to filter all network traffic
+to monitor conditions for security by shutting off connections that are open too long.
 
+HTTP proxies were designed for HTTP document transfer and not for long-lived connections
+
+HTTP Proxies may not be configured to propogate UPGRADE headers.
 
 
 ### <a name="LightStreamer"> Java-based LightStreamer</a>
@@ -323,6 +337,17 @@ public void SendMessageForRoom( string room, string message) {
 SignalR dos not automatically persist groups on the server.
 Thus group counts are not provided by default.
 
+
+## <a name="WSS"> WSS</a>
+Instead of HTTP or HTTPS, WebSockets use the WSS protocol.
+
+## <a name="OfflineMode"> Offline Mode</a>
+QUESTION: How does WebSockets handle connections that fade out.
+
+Are messages buffered in the client and server side?
+
+QUESTION: Keep-alive pings and heartbeats to make sure browsers don't time out (after default 2 minutes)
+are not built into the WebSockets protocol.
 
 ## Scraps
 
