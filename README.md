@@ -51,17 +51,22 @@ Code for demos downloaded and run in your localhost:
  It is installed in the Package Manager Console.
  Its dependencies include JQuery and Owin.
 
-* Tutorial http://www.pluralsight.com/courses/signalr-introduction
- by Christian Weyer (@christianweyer) at http://www.thinkecture.com 
- describes the student list demo app at
- codeplex?
-
 * http://github.com/cbeams/bitcoin-rt
  is described by the author Chris Beams in a video at https://www.youtube.com/watch?v=z-CYO1ABCp4&t=8m44s
  by SpringSource (a VMware company).
  using node.js, SockJS, and the D3.js library instead of jQuery UI.
 
  The Java implementation uses Java Tomcat native WebSocket API, Atmosphere, and Vert.x libraries.
+
+
+* Tutorial http://www.pluralsight.com/courses/signalr-introduction
+ by Christian Weyer (@christianweyer) at http://www.thinkecture.com 
+ describes the student list demo app at
+ codeplex? 
+
+ In the tutorial he uses VisualStudio 2012 to show 
+ <a href="#SimpleChat">construciton of a simple real-time chat program</a>.
+
 
 ### <a name="RealTimeTech"> Real-Time Technologies</a>
 A list of real-time technologies (which include WebSockets) is at
@@ -153,10 +158,36 @@ Does SignalR support Websockets sub-protocols?
 
 ### <a name="SignalRHubs"> Hubs in Microsoft Web Sockets SignalR</a>
 **Hubs** programming model 
+
+### <a name="SimpleChat"> Construciton of a simple real-time chat program</a>.
+1). Open Visual Studio 2012.
+
+2). Create a MVC 4 Web product solution named SimpleChat.
+
+3). In Solution Explorer, right-click on the project and press Ctrl+Shift+A to Add New Item **SignalR Hub Class**.
+
+<a target="_blank" href="https://cloud.githubusercontent.com/assets/300046/8270037/a4ef6abe-1785-11e5-8a93-a6c13f050931.png">
+<img align="right" src="https://cloud.githubusercontent.com/assets/300046/8270037/a4ef6abe-1785-11e5-8a93-a6c13f050931.png"
+width="350" /></a>
+4). Name it "ChatHub.cs".
+
+Define a hub C#
+
+serialized into and deserialized from JSON (using the JSON.NET library).
+
+Like other ASP.NET (such as MVC), first define a **route** in the host process definition code.
+???
+
 in a RPC-ish style of URLs.
 
+Upon connection (such as opening a new browser window) ...
 
-### <a name="BenchmarkStudies"> Benchmark Studies</a>
+Upon disconnection (such as closing of a browser window) ....
+
+Grouping ...
+
+
+### <a name="BenchmarkStudies"> Benchmark Studies of Efficiency and Scalability</a>
 Comparison of Comet vs. WebSockets technologies at
 http://webtide.intalio.com/2011/09/cometd-2-4-0-websocket-benchmarks/
 found an over 150x factor in favor of WebSockets (700ms vs. 3 ms at 50,000 users).
