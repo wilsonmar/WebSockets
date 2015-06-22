@@ -1,11 +1,10 @@
 This mark-down text page and associated solution files demonstrates how to program and performance test
-HTTP5 WebSocket implemented in the C# language within Visual Studio using Microsoft's SignalR library on the server
-and client.
+HTTP5 WebSockets implemented in the C# language within Visual Studio 
+using Microsoft's SignalR library on the server and various client technologies.
 
 Applications such as stock and sports tickers, on-line gaming, inventory trackers, 
 chats, and other apps needing "real-time" updates 
-without the need for users to manually refresh the screen
-or click a button. 
+without the need for users to manually refresh the screen or click a button. 
 
 SignalR 2 comes with Visual Studio 2013.
 https://www.youtube.com/watch?v=QL-HPsC1SH0
@@ -15,7 +14,8 @@ https://www.youtube.com/watch?v=QL-HPsC1SH0
 1). Open a browser which does not support WebSockets, such as Internet Explorer 9.
 (this may involve using a VMWare instance)
 
-2). Press F12 to Trace the HTTP packets involved.
+2). Press F12 or right-click and select **Inspect Element** 
+ to Trace the HTTP packets involved.
 
 3). Specify one of these publicly available websites:
 
@@ -216,7 +216,9 @@ Damien Edwards, SignalR developer.
 
 https://www.youtube.com/watch?v=us-Q3do-N7M
 TechNet North America
-SignalR: Building Real-Time Applications with ASP.NET SignalR
+SignalR: Building Real-Time Applications with ASP.NET SignalR [59:44] May 19 2014
+by Brady Gaster building a HitCounter using Ultimate 2013.
+
 
 https://www.youtube.com/watch?v=0nMAuigjYh8
 Lunch & Learn - Real Time Web Messaging with SignalR
@@ -416,13 +418,15 @@ Upon disconnection (such as closing of a browser window) ....
 
 ## <a name="OnReconnected"> OnReconnected</a>
 
-## <a name="OWinStartup"> OWin Startup</a>
-In order to de-couple use of IIS System.Web, and go to self-hosting outside ASP.NET,
-SignalR2 speifies the StartUp class:
+
+
+## <a name="OWinStartup"> OWin Startup Routing</a>
+SignalR2 specifies the StartUp class:
 
 ```
 Using Microsoft.Owin;
 using Owin;
+using MyWebApplication;
 
 [assembly: OwinStartupAttribute(typeof(WebApplication100.Startup))]
 namespace WebApplication100 {
@@ -435,7 +439,75 @@ namespace WebApplication100 {
 }
 ```
 
-https://www.youtube.com/watch?v=kyFBgephmpQ
+**Startup.cs** needs to be added to call app.MapSignalR() within Configuration
+to de-couple use of IIS System.Web controlled by global.aspx. 
+
+Like routing. ???
+
+Starting in OWin enables **self-hosting** outside ASP.NET (System.Web).
+
+ConfigureAuth(app); is added ???
+
+
+
+## <a name="AddHTML"> Default.HTML Page</a>
+
+Drag from Solution Manager:
+
+```
+<script src="Scripts/jquery-1.6.4.js"></script>
+<script src="Scripts/jquery.signalR-2.0.3.js"></script>
+<script type="text/javascript">
+```
+
+Create a physical connection (con)
+to which the "hub" acts as a proxy object to text handling code.
+
+```
+    $(function(){
+        var con = $.hubConnection();
+        var hub = con.createHubProxy('hitCounter');
+        hub.on('onHitRecorded', function(i) {
+            $('#hitCount').text(i);
+        });
+        con.start( function(){
+            hub.invoke('recordHit');
+        });
+    })
+</script>
+```
+
+
+
+## <a name="Hub.cs"> Hub.cs</a>
+Right-click HitCounter to Add | SignalR Hub Class (v2) | named "HitCounterHub.cs"
+
+Add the app name:
+
+```
+[HubName("hitCounter")]
+```
+
+Initialize the counter:
+
+```
+private static int _hitCount = 0;
+```
+
+Increment the counter:
+
+```
+    _hitCount += 1;
+```
+
+Accounce the counter:
+
+```
+    this.Clients.All.onHitRecorded(_hitCount);
+```
+## <a name="UnreliableConnection"> Unreliable Connection</a>
+Assume that about 1 out of 100 messages are dropped.
+
 
 ## <a name="BenchmarkStudies"> Benchmark Studies of Efficiency and Scalability</a>
 Comparison of Comet vs. WebSockets technologies at
@@ -446,6 +518,8 @@ found an over 150x factor in favor of WebSockets (700ms vs. 3 ms at 50,000 users
 A **backplane** allows apps to scale to multiple servers
 by receiving messages and forwarding them to other app instances.
 
+http://www.asp.net/signalr/overview/guide-to-the-api/handling-connection-lifetime-events
+from June 10, 2014.
 
 ## <a name="PerftestScripts"> Performance Testing Script</a>
 QUESTION:
@@ -454,7 +528,9 @@ Can Visual Studio do it?
 
 ## <a name="References"> References</a>
  * https://www.youtube.com/watch?v=kyFBgephmpQ
-   by JonGalloway and 
+   Real-Time Web Apps with Asp.Net SignalR
+   by CodeGeek
+   JonGalloway and 
    BradyGaster.com
 
  * HTML5 Web Sockets - http://social.technet.microsoft.com/wiki/contents/articles/7148.websockets-in-asp-net.aspx
