@@ -97,9 +97,10 @@ shows can almost all browsers in 2015 supports WebSockets.
 
 3). Specify the URL of one of these demo sites created using WebSockets technology:
 
+ <a target="_blank" href="https://jabbr.net/">
  <img align="right" src="https://cloud.githubusercontent.com/assets/300046/8271426/6edde23a-17d4-11e5-9949-6bffe160d06d.png" 
- />
- * https://jabbr.net
+ /></a>
+ * <a target="_blank" href="https://jabbr.net/">https://jabbr.net</a>
   is a browser chat web app written using <a href="#SignalR"> Microsoft ASP.NET SignalR</a>
   and featured at the upper-right corner on asp.net web page.
 
