@@ -123,6 +123,10 @@ Code for demos downloaded and run in your localhost:
  In the tutorial he uses VisualStudio 2012 to show 
  <a href="#SimpleChat">construciton of a simple real-time chat program</a>.
 
+Several internet cloud-only (SaaS) offerings:
+ 
+* Google Channel Python API
+  https://cloud.google.com/appengine/docs/python/channel/?csw=1
 
 
 
