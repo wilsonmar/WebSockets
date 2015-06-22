@@ -51,6 +51,7 @@ WebSockets is not the persistent publish-subscribe design pattern since it's tem
 The RTMP (Real Time Message Protocol) was used within Adobe Flash since 2003,
 but it's proprietary.
 
+
 ### <a name="JavaFirst"> Java Origins</a>
 Because the JSR-356 deliver a Java API in Java EE 7,
 the first implementations of WebSockets were in the Java language.
@@ -99,7 +100,8 @@ shows can almost all browsers in 2015 supports WebSockets.
  <img align="right" src="https://cloud.githubusercontent.com/assets/300046/8271426/6edde23a-17d4-11e5-9949-6bffe160d06d.png" 
  />
  * https://jabbr.net
-  is a browser chat web app written using <a href="#SignalR"> Microsoft ASP.NET SignalR</a>.
+  is a browser chat web app written using <a href="#SignalR"> Microsoft ASP.NET SignalR</a>
+  and featured at the upper-right corner on asp.net web page.
 
  * http://shooter.signalr.net provides a demo app written in HTML using 
   <a href="#SignalR">SignalR</a>.
@@ -130,7 +132,7 @@ Code for demos downloaded and run in your localhost:
 <httpRunTime targetFramework="4.0">
 ```
 
-The first version that supports SignalR is **4.5**.
+The first version of the framework which supports SignalR is **4.5**.
 
 5). Reload the web page so the client sends an initial request to the server, 
 the **negotiate** request.
@@ -207,7 +209,20 @@ The Socket.io module for Node.js
 ### <a name="SignalR"> Microsoft Web Sockets SignalR</a>
 To implement Web Sockets Microsoft offers its SignalR library 
 described at http://SignalR.net and stored as open-source repo at
-http://github.com/Microsoft/SignalR.
+http://github.com/Microsoft/SignalR
+by 
+Damien Edwards, SignalR developer. 
+
+https://www.youtube.com/watch?v=us-Q3do-N7M
+TechNet North America
+SignalR: Building Real-Time Applications with ASP.NET SignalR
+
+https://www.youtube.com/watch?v=0nMAuigjYh8
+Lunch & Learn - Real Time Web Messaging with SignalR
+by LogicalAdvantage
+
+https://www.youtube.com/watch?v=WJpoDCGEIW0
+by Chris Johnson
 
 See http://www.wikiwand.com/en/SignalR
 
