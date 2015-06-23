@@ -8,12 +8,14 @@ Here, sample apps are analyzed, then we describe how they were built.
 
 ## Contents
 0. <a href="#RealTimeUseCase"> Real-Time Use Case</a>
-0. <a href="#RealTimeTech"> Technologies for Real-Time</a>
-0. <a href="#Why"> Why WebSockets?</a>
+0. <a href="#ModernBrowsers"> Internet Browsers for Real-Time</a>
+0. <a href="#Why"> WebSockets Smaller and Faster</a>
 0. <a href="#JavaFirst"> WebSockets Origin in Java</a>
       0. <a href="#BenchmarkStudies"> Benchmark Studies of Efficiency and Scalability</a>
 
 0. <a href="#ASP.NET_Env"> Microsoft Web Servers</a>
+
+0. <a href="#OlderTech"> Older Technologies for Real-Time</a>
 
 
 ## <a name="RealTimeUseCase"> Real-Time Use Case</a>
@@ -21,127 +23,94 @@ Applications such as stock and sports tickers that roll across the screen
 chat windows, on-line gaming, inventory trackers, 
 and other apps need "real-time" update to **all participants at the same time**.
 
-And those updates happen without the need for users to manually refresh the screen or click a button. 
 
-More and more websites and mobile apps work that way.
+## <a name="ModernBrowsers"> Internet Browsers for Real-Time</a>
 
+1). Open an internet browser. Internet Explorer comes with Windows.
+    Firefox and Google Chrome are downloaded by each user.
 
-## <a name="RealTimeTech"> Older Technologies for Real-Time</a>
-Early on, Message Queue technologies provided durable **publish-subscribe** design pattern.
+2). Identify your browser's version.
 
-Since 2003, Adobe Flash used its RTMP (Real Time Message Protocol).
-But it's proprietary.
+3). http://caniuse.com/#search=websockets
+shows almost all browsers in 2015 supports WebSockets.
 
-<a name="Comet"></a>
-More recently, the "Comet" design pattern in JavaScript tricked HTTP to behave to
-keep connections open between client and server -- to maintain "full duplex" asychronous communications.
-Newer WebSockets technologies **fall back** to these in this sequence of preference:
+4). The WebSockets protocol was defined in 20111 at http://ietf.org/rfc/rfc6455.txt
+an IETF (Internet Engineering Task Force) standard
+standardized by the W3C
 
-   1. Server Sent Event (SSE) - part of HTML5/W3C (Event Source)
-   2. "Forever Frame"
-   3. "Long Polling"
+The key words from its description is **"two-way communication"**.
+This is big change from people needing to click or press Control + R to refresh the screen.
 
-A list of real-time technologies is at
-http://www.leggetter.co.uk/real-time-web-technologies-guide/
-maintained by Phil Leggetter, the Technical Evangelist at 
-Pusher.com, a paid service for web application developers that handles the burden of delivering real-time updates to many users and applications at once.
-
-Other internet cloud-only (SaaS) offerings for real-time include
-Google Channel Python API (https://cloud.google.com/appengine/docs/python/channel/?csw=1).
+More and more websites and mobile apps work that way now,
+like an electronic billboard we drive by. 
+It changes on its own, without needing manual refresh.
 
 
-## <a name="Why"> Why WebSockets?</a>
-WebSockets is gaining popularity now (in 2015) because:
+## <a name="Why"> WebSockets Smaller and Faster</a>
+WebSockets is also gaining popularity now (in 2015) because:
   * its HTTP headers take less bytes;
   * payload data exchanged is **more compact** than JSON and XML.
 
 Its lighterweight and low-latency 
-means that it's faster and processes more transactions than the same hardware
-than REST API and forms technologies that preceded it.
+means that it's faster and processes more transactions on the same hardware
+than <a href="#OlderTech">technologies that preceded it</a>.
 
-
-### <a name="BenchmarkStudies"> Benchmark Studies of Efficiency and Scalability</a>
-Comparison of Comet vs. WebSockets technologies at
+5). Comparison runs reported at
 http://webtide.intalio.com/2011/09/cometd-2-4-0-websocket-benchmarks/
 found an over 150x factor in favor of WebSockets (700ms vs. 3 ms at 50,000 users).
 
-Websockets are also more "user friendly" 
-because it enables **two-way** communication, so pages automatically refresh without user action.
+This investigation used a Node.js web server running a JavaScript program using the Socket.io library
+to communicate with Google Chrome browser at version 32.
 
-Websockets provide a persistant but volatile connection, 
-not a "durable" connection like those provided by MQ (message queues).
+There are many other combinations of technology implementing WebSockets,
+such as server softwere coded in Java and client software running in iPhones written in Apple's Objective-C.
 
-By its nature it's called a full-duplex **asychronous** protocol.
-
-Although with WebSockets servers can initiate transmissions, 
-WebSockets is not the **"push notification"** technology as what operating systems provide.
-WebSockets are programmed into individual custom application programming code.
-
-
-
-### <a name="JavaFirst"> WebSockets Origin in Java</a>
-Because the JSR-356 deliver a Java API in Java EE 7,
-the first implementations of WebSockets were in the Java language.
-
-<a href="http://lightstreamer.com/"> LightStreamer</a>
-is a commercial product (with a Java open-source free version)
-that provides so many more sophisticated features that make other implementations seem like "toys". 
-
-There is a commercial product (with an open-source free version)
-that provides so many more sophisticated features that make other implementations seem like "toys". 
-
-It is programmed in Java.
-
-* http://github.com/cbeams/bitcoin-rt
- is described by the author Chris Beams in a video at https://www.youtube.com/watch?v=z-CYO1ABCp4&t=8m44s
- by SpringSource (a VMware company).
- using node.js, SockJS, and the D3.js library instead of jQuery UI.
-(The Java implementation uses Java Tomcat native WebSocket API, Atmosphere, and Vert.x libraries.)
-
-
-Tutorials in the Java language include:
- * https://www.youtube.com/watch?v=z-CYO1ABCp4 by 
-
- * http://kaazing.com/ see http://blog.kaazing.com/2011/11/17/the-industrys-best-websocket-emulation-real-time-web-apps-for-all-your-customers-even-if-theyre-on-ie6/ by Peter Moskovitz
- 
- * http://superwebsocket.codeplex.com/
- * http://xsockets.net/
- * Autobahn WebSockets, a high-performance WS server that supports Windows 
-   running on top of IOCP (I/O completion ports) in order to scale to large connection numbers (hundred thousands).
-   http://stackoverflow.com/users/884770/oberstet
-
-
-PHP programs can support WebSockets using http://socketo.me/
-
-Node.js has the Socket.io module.
+We want to know the speed and capacity from various combinations of clients and servers.
 
 
 ### <a name="SignalR"> Microsoft Web Sockets SignalR</a>
 To implement WebSockets, Damien Edwards and others at Microsoft 
-developed the SignalR library 
-described at http://SignalR.net and currently stored in an open-source repo at
-http://github.com/SignalR/SignalR.
-See http://www.wikiwand.com/en/SignalR.
+developed the SignalR library described at 
 
-SignalR can be added to all ASP.NET project types (MVC).
+6). http://www.wikiwand.com/en/SignalR
+
+and
+
+7). http://SignalR.net 
+
+Notice the ASP.NET in front of the SignalR name.
+That means SignalR programs run under ASP.NET web server technology such as IIS.
+The SignalR library can be added to all ASP.NET project types (Forms, MVC, etc.).
+
+What SignalR adds is **graceful fallback** to other older techniques and technologies when either side
+is not able to use WebSockets.
+
+The library is currently stored in an open-source public repo at
+
+8). http://github.com/SignalR/SignalR.
+
+However, the full list of ASP.NET codebase is described at
+
+9). http://aspnet.codeplex.com/
+
+The "front page" face of ASP.NET is at
+
+10). http://www.asp.net/
 
 
 ## <a name="SignalRAppDemo"> Trace a Demo SignalR App</a>
-Before showing how to <a href="#BuildSignalR">build the app from scratch</a> later in this page,
-let's dive into some sample apps running over the internet
+Before showing how to <a href="#BuildSignalR">build apps from scratch</a> later in this page,
+let's dive into some sample apps running in production mode over the internet
 to examine what makes WebSockets so fast and useful.
 
-1). Open a modern browser 
+1). If you haven't already, open an internet browser that handles HTML5, such as Internet Explorer 11 that comes with Windows 8.
 
-http://caniuse.com/#search=websockets
-shows can almost all browsers in 2015 supports WebSockets.
-
-2). Press F12 to initiate diagnostics.
+2). On a PC, press F12 to initiate diagnostics.
     or right-click on the page and select **Inspect Element**.
 
-3). Click to Trace the HTTP packets involved.
+3). Click to Trace the HTTP packets to be handled by the browser.
 
-4). Specify the URL of one of these demo sites created using WebSockets technology:
+4). Specify the URL of a site created using SignalR WebSockets technology:
 
  <a target="_blank" href="https://jabbr.net/">
  <img align="right" src="https://cloud.githubusercontent.com/assets/300046/8271426/6edde23a-17d4-11e5-9949-6bffe160d06d.png" 
@@ -150,29 +119,14 @@ shows can almost all browsers in 2015 supports WebSockets.
   is a browser chat web app written using <a href="#SignalR"> Microsoft ASP.NET SignalR</a>
   and featured at the upper-right corner on asp.net web page.
 
- * http://shooter.signalr.net provides a demo app written in HTML using 
+BTW, there is also a
+<a name="ShooterSignalR"> Sample SignalR Online Game</a>
+ http://shooter.signalr.net provides a demo app written in HTML using 
   <a href="#SignalR">SignalR</a>.
-
-Code for demos downloaded and run in your localhost:
-
-* http://nuget.org/packages/Microsoft.AspNet.SignalR.Sample
- provides a sample SignalR stock ticker solution built using
-  <a href="#SignalR">SignalR</a>.
- It is installed in the Package Manager Console.
- Its dependencies include JQuery and Owin.
-
-* Tutorial http://www.pluralsight.com/courses/signalr-introduction
- by Christian Weyer (@christianweyer) at http://www.thinkecture.com 
- describes the student list demo app at
- codeplex? 
-
- In the tutorial he uses VisualStudio 2012 to show 
- <a href="#SimpleChat">construciton of a simple real-time chat program</a>.
-
 
 
 ### <a name="Negotiation"> Fall-back Negotiation</a>
-5). In the **web.config** file, specify a version that does not support WebSockets SignalR:
+6). In the **web.config** file, specify a version that does not support WebSockets SignalR:
 
 ```
 <httpRunTime targetFramework="4.0">
@@ -191,11 +145,6 @@ The JSON response contains
   * TryWebSockets
   * Url
   * WebSocketUrl (no longer used)
-
-WebSockets is an IETF standard http://ietf.org/rfc/rfc6455.txt
-standardized by the W3C
-as described on MDN:
-  * https://developer.mozilla.org/en-US/docs/WebSockets/Writing_WebSocket_client_applications
 
 
 7). Look at the JavaScript Console
@@ -585,4 +534,103 @@ by Chris Johnson
 
 SignalR packages available via NuGet at
 http://nuget.org/packages/Microsoft.AspNet.SignalR
+
+
+Code for demos downloaded and run in your localhost:
+
+* http://nuget.org/packages/Microsoft.AspNet.SignalR.Sample
+ provides a sample SignalR stock ticker solution built using
+  <a href="#SignalR">SignalR</a>.
+ It is installed in the Package Manager Console.
+ Its dependencies include JQuery and Owin.
+
+* Tutorial http://www.pluralsight.com/courses/signalr-introduction
+ by Christian Weyer (@christianweyer) at http://www.thinkecture.com 
+ describes the student list demo app at
+ codeplex? 
+
+ In the tutorial he uses VisualStudio 2012 to show 
+ <a href="#SimpleChat">construciton of a simple real-time chat program</a>.
+
+
+as described on MDN:
+  * https://developer.mozilla.org/en-US/docs/WebSockets/Writing_WebSocket_client_applications
+
+
+
+## <a name="OlderTech"> Older Technologies for Real-Time</a>
+Early on, Message Queue technologies provided durable **publish-subscribe** design pattern.
+
+Since 2003, Adobe Flash used its RTMP (Real Time Message Protocol).
+But it's proprietary.
+
+<a name="Comet"></a>
+More recently, the "Comet" design pattern in JavaScript tricked HTTP to behave to
+keep connections open between client and server -- to maintain "full duplex" asychronous communications.
+
+   1. Server Sent Event (SSE) - part of HTML5/W3C (Event Source)
+   2. "Forever Frame"
+   3. "Long Polling"
+
+Newer WebSockets technologies **fall back** to these in this sequence of preference:
+
+These are listed among real-time technologies at
+http://www.leggetter.co.uk/real-time-web-technologies-guide/
+maintained by Phil Leggetter, the Technical Evangelist at 
+Pusher.com, a paid service for web application developers that handles the burden of delivering real-time updates to many users and applications at once.
+
+Other internet cloud-only (SaaS) offerings for real-time include
+Google Channel Python API (https://cloud.google.com/appengine/docs/python/channel/?csw=1).
+
+as described on MDN:
+  * https://developer.mozilla.org/en-US/docs/WebSockets/Writing_WebSocket_client_applications
+
+
+
+Websockets provide a persistant but volatile connection, 
+not a "durable" connection like those provided by MQ (message queues).
+
+By its nature it's called a full-duplex **asychronous** protocol.
+
+Although with WebSockets servers can initiate transmissions, 
+WebSockets is not the **"push notification"** technology as what operating systems provide.
+WebSockets are programmed into individual custom application programming code.
+
+
+
+### <a name="JavaFirst"> WebSockets Origin in Java</a>
+Because the JSR-356 deliver a Java API in Java EE 7,
+the first implementations of WebSockets were in the Java language.
+
+<a href="http://lightstreamer.com/"> LightStreamer</a>
+is a commercial product (with a Java open-source free version)
+that provides so many more sophisticated features that make other implementations seem like "toys". 
+
+There is a commercial product (with an open-source free version)
+that provides so many more sophisticated features that make other implementations seem like "toys". 
+
+It is programmed in Java.
+
+* http://github.com/cbeams/bitcoin-rt
+ is described by the author Chris Beams in a video at https://www.youtube.com/watch?v=z-CYO1ABCp4&t=8m44s
+ by SpringSource (a VMware company).
+ using node.js, SockJS, and the D3.js library instead of jQuery UI.
+(The Java implementation uses Java Tomcat native WebSocket API, Atmosphere, and Vert.x libraries.)
+
+
+Tutorials in the Java language include:
+ * https://www.youtube.com/watch?v=z-CYO1ABCp4 by 
+
+ * http://kaazing.com/ see http://blog.kaazing.com/2011/11/17/the-industrys-best-websocket-emulation-real-time-web-apps-for-all-your-customers-even-if-theyre-on-ie6/ by Peter Moskovitz
+ 
+ * http://superwebsocket.codeplex.com/
+ * http://xsockets.net/
+ * Autobahn WebSockets, a high-performance WS server that supports Windows 
+   running on top of IOCP (I/O completion ports) in order to scale to large connection numbers (hundred thousands).
+   http://stackoverflow.com/users/884770/oberstet
+
+
+PHP programs can support WebSockets using http://socketo.me/
+
+Node.js has the Socket.io module.
 
