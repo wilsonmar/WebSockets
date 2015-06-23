@@ -108,16 +108,21 @@ The "front page" face of ASP.NET is at
 
 10). http://www.asp.net/
 
+Here is where the documentation and references to all things ASP.NET.
 
-## <a name="SignalRAppDemo"> Trace a Demo SignalR App</a>
+
+## <a name="SignalRAppDemo"> Trace a Production Demo SignalR App</a>
 Before showing how to <a href="#BuildSignalR">build apps from scratch</a> later in this page,
 let's dive into some sample apps running in production mode over the internet
 to examine what makes WebSockets so fast and useful.
 
-1). If you haven't already, open an internet browser that handles HTML5, such as Internet Explorer 11 that comes with Windows 8.
+1). If you haven't already, open a Google Chrome internet browser.
+because it has the best debugger.
 
-2). On a PC, press F12 to initiate diagnostics.
-    or right-click on the page and select **Inspect Element**.
+2). 
+
+3). On a PC, press F12 to initiate diagnostics.
+    Or right-click (on a Mac control-click) anywhere on the page and select **Inspect Element**.
 
 3). Click to Trace the HTTP packets to be handled by the browser.
 
