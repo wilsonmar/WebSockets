@@ -11,12 +11,16 @@ Here, sample apps are analyzed, then we describe how they were built.
 0. <a href="#RealTimeTech"> Technologies for Real-Time</a>
 0. <a href="#Why"> Why WebSockets?</a>
 0. <a href="#JavaFirst"> WebSockets Origin in Java</a>
+      0. <a href="#BenchmarkStudies"> Benchmark Studies of Efficiency and Scalability</a>
+
+0. <a href="#ASP.NET_Env"> Microsoft Web Servers</a>
 
 
 ## <a name="RealTimeUseCase"> Real-Time Use Case</a>
 Applications such as stock and sports tickers, on-line gaming, inventory trackers, 
 chats, and other apps need "real-time" updates to all participants at the same time
 without the need for users to manually refresh the screen or click a button. 
+
 
 ## <a name="RealTimeTech"> Older Technologies for Real-Time</a>
 Since 2003, the RTMP (Real Time Message Protocol) was used within Adobe Flash.
@@ -50,6 +54,12 @@ Web Sockets is gaining popularity now (in 2015) because:
 Its lighterweight and low-latency 
 means that it's faster and processes more transactions than the same hardware
 than REST API and forms technologies that preceded it.
+
+### <a name="BenchmarkStudies"> Benchmark Studies of Efficiency and Scalability</a>
+Comparison of Comet vs. WebSockets technologies at
+http://webtide.intalio.com/2011/09/cometd-2-4-0-websocket-benchmarks/
+found an over 150x factor in favor of WebSockets (700ms vs. 3 ms at 50,000 users).
+
 
 Websockets are also more "user friendly" 
 because it enables **two-way** communication, so pages automatically refresh without user action
@@ -98,7 +108,13 @@ Tutorials in the Java language include:
 PHP programs can support WebSockets using http://socketo.me/
 
 
-## <a name="ASP.NET_Env"> Web Server</a>
+## <a name="SignalR"> Code SignalR Program From Scratch</a>
+Microsoft's real-time offering is the SignalR library.
+
+To ensure that you fully understand the technology, several introductory videos show how to create a new
+
+
+## <a name="ASP.NET_Env"> Microsoft Web Servers</a>
 Instead of the IIS (Internet Information Server) process manager,
 **WebListener** is an "ultra light-weight" web server component. 
 It is part of a set of components for building and running Web applications on a common hosting abstraction called 
@@ -119,15 +135,18 @@ More information on it:
 https://github.com/owin/museum-piece-owin-hosting
 
 
-## <a name="DemoApps"> Demo Apps</a>
+## <a name="DemoApps"> Trace a Demo SignalR App</a>
 1). Open a modern browser 
 
 http://caniuse.com/#search=websockets
 shows can almost all browsers in 2015 supports WebSockets.
 
-2). Press F12 to Trace the HTTP packets involved.
+2). Press F12 to initiate diagnostics.
+    or right-click on the page and select **Inspect Element**.
 
-3). Specify the URL of one of these demo sites created using WebSockets technology:
+3). Click to Trace the HTTP packets involved.
+
+4). Specify the URL of one of these demo sites created using WebSockets technology:
 
  <a target="_blank" href="https://jabbr.net/">
  <img align="right" src="https://cloud.githubusercontent.com/assets/300046/8271426/6edde23a-17d4-11e5-9949-6bffe160d06d.png" 
@@ -159,7 +178,7 @@ Code for demos downloaded and run in your localhost:
 
 
 ### <a name="Negotiation"> Fall-back Negotiation</a>
-4). In the **web.config** file, specify a version that does not support WebSockets SignalR:
+5). In the **web.config** file, specify a version that does not support WebSockets SignalR:
 
 ```
 <httpRunTime targetFramework="4.0">
@@ -167,7 +186,7 @@ Code for demos downloaded and run in your localhost:
 
 The first version of the framework which supports SignalR is **4.5**.
 
-5). Reload the web page so the client sends an initial request to the server, 
+6). Reload the web page so the client sends an initial request to the server, 
 the **negotiate** request.
 
 The JSON response contains
@@ -185,10 +204,11 @@ as described on MDN:
   * https://developer.mozilla.org/en-US/docs/WebSockets/Writing_WebSocket_client_applications
 
 
-6). Look at the JavaScript Console
+7). Look at the JavaScript Console
 
 If the client does not support WebSockets, it responds with **500 HTTP status**,
 which is the standard response.
+
 
 
 ### <a name="ObserveRealTimeTech"> Observe Older Real-Time Technologies</a>
@@ -538,11 +558,6 @@ Accounce the counter:
 ## <a name="UnreliableConnection"> Unreliable Connection</a>
 Assume that about 1 out of 100 messages are dropped.
 
-
-## <a name="BenchmarkStudies"> Benchmark Studies of Efficiency and Scalability</a>
-Comparison of Comet vs. WebSockets technologies at
-http://webtide.intalio.com/2011/09/cometd-2-4-0-websocket-benchmarks/
-found an over 150x factor in favor of WebSockets (700ms vs. 3 ms at 50,000 users).
 
 ## <a name="Scaling Out"> Scaling Out</a>
 A **backplane** allows apps to scale to multiple servers
