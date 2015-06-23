@@ -1,7 +1,7 @@
 This mark-down text page and associated files within this git repo 
 demonstrate how to program, run, and performance-test 
-real-time and push capabilities using
-HTTP5 WebSockets implemented in the C# language within Visual Studio 
+real-time and push capabilities using the
+**WebSockets** protocol implemented in the C# language within Visual Studio 
 using Microsoft's SignalR library on the server and various client technologies.
 
 Here, sample apps are analyzed, then we describe how they were built.
@@ -17,18 +17,23 @@ Here, sample apps are analyzed, then we describe how they were built.
 
 
 ## <a name="RealTimeUseCase"> Real-Time Use Case</a>
-Applications such as stock and sports tickers, on-line gaming, inventory trackers, 
-chats, and other apps need "real-time" updates to all participants at the same time
-without the need for users to manually refresh the screen or click a button. 
+Applications such as stock and sports tickers that roll across the screen
+chat windows, on-line gaming, inventory trackers, 
+and other apps need "real-time" update to **all participants at the same time**.
+
+And those updates happen without the need for users to manually refresh the screen or click a button. 
+
+More and more websites and mobile apps work that way.
 
 
 ## <a name="RealTimeTech"> Older Technologies for Real-Time</a>
-Since 2003, the RTMP (Real Time Message Protocol) was used within Adobe Flash.
+Early on, Message Queue technologies provided durable **publish-subscribe** design pattern.
+
+Since 2003, Adobe Flash used its RTMP (Real Time Message Protocol).
 But it's proprietary.
 
-Before it, Message Queue technologies provided persistent publish-subscribe design pattern.
-
-More recently, "Comet" design pattern in JavaScript tricked HTTP to behave to
+<a name="Comet"></a>
+More recently, the "Comet" design pattern in JavaScript tricked HTTP to behave to
 keep connections open between client and server -- to maintain "full duplex" asychronous communications.
 Newer WebSockets technologies **fall back** to these in this sequence of preference:
 
@@ -36,40 +41,41 @@ Newer WebSockets technologies **fall back** to these in this sequence of prefere
    2. "Forever Frame"
    3. "Long Polling"
 
-A list of real-time technologies (which include WebSockets) is at
+A list of real-time technologies is at
 http://www.leggetter.co.uk/real-time-web-technologies-guide/
-maintained by by Phil Leggetter, the Technical Evangelist at 
+maintained by Phil Leggetter, the Technical Evangelist at 
 Pusher.com, a paid service for web application developers that handles the burden of delivering real-time updates to many users and applications at once.
 
-BTW, internet cloud-only (SaaS) offerings include
-Google Channel Python API
-  https://cloud.google.com/appengine/docs/python/channel/?csw=1
+Other internet cloud-only (SaaS) offerings for real-time include
+Google Channel Python API (https://cloud.google.com/appengine/docs/python/channel/?csw=1).
 
 
 ## <a name="Why"> Why WebSockets?</a>
-Web Sockets is gaining popularity now (in 2015) because:
-  * its HTTP headers take less bytes than HTTP 
-  * payload data exchanged is more compact than JSON.
+WebSockets is gaining popularity now (in 2015) because:
+  * its HTTP headers take less bytes;
+  * payload data exchanged is **more compact** than JSON and XML.
 
 Its lighterweight and low-latency 
 means that it's faster and processes more transactions than the same hardware
 than REST API and forms technologies that preceded it.
+
 
 ### <a name="BenchmarkStudies"> Benchmark Studies of Efficiency and Scalability</a>
 Comparison of Comet vs. WebSockets technologies at
 http://webtide.intalio.com/2011/09/cometd-2-4-0-websocket-benchmarks/
 found an over 150x factor in favor of WebSockets (700ms vs. 3 ms at 50,000 users).
 
-
 Websockets are also more "user friendly" 
-because it enables **two-way** communication, so pages automatically refresh without user action
-through a persistant but volatile connection, 
+because it enables **two-way** communication, so pages automatically refresh without user action.
+
+Websockets provide a persistant but volatile connection, 
 not a "durable" connection like those provided by MQ (message queues).
 
-By its nature it's a full-duplex **asychronous** protocol.
+By its nature it's called a full-duplex **asychronous** protocol.
 
+Although with WebSockets servers can initiate transmissions, 
 WebSockets is not the **"push notification"** technology as what operating systems provide.
-
+WebSockets are programmed into individual custom application programming code.
 
 
 
@@ -107,35 +113,24 @@ Tutorials in the Java language include:
 
 PHP programs can support WebSockets using http://socketo.me/
 
-
-## <a name="SignalR"> Code SignalR Program From Scratch</a>
-Microsoft's real-time offering is the SignalR library.
-
-To ensure that you fully understand the technology, several introductory videos show how to create a new
+Node.js has the Socket.io module.
 
 
-## <a name="ASP.NET_Env"> Microsoft Web Servers</a>
-Instead of the IIS (Internet Information Server) process manager,
-**WebListener** is an "ultra light-weight" web server component. 
-It is part of a set of components for building and running Web applications on a common hosting abstraction called 
-Katana (from http://katanaproject.codeplex.com/documentation).
-The hosting abstraction is OWIN (Open Web Interface for .NET) programming model for developers.
+### <a name="SignalR"> Microsoft Web Sockets SignalR</a>
+To implement WebSockets, Damien Edwards and others at Microsoft 
+developed the SignalR library 
+described at http://SignalR.net and currently stored in an open-source repo at
+http://github.com/SignalR/SignalR.
+See http://www.wikiwand.com/en/SignalR.
 
-**OwinHost.exe** is a standalone executable that can start up an OWIN application. 
-
-It can be installed from Chocolately with command:
-
-```
-cinst owinhost -pre
-```
-
-More information on it:
-   * http://www.techbubbles.com/aspnet/what-is-katana-and-owin-for-asp-net/
-
-https://github.com/owin/museum-piece-owin-hosting
+SignalR can be added to all ASP.NET project types (MVC).
 
 
-## <a name="DemoApps"> Trace a Demo SignalR App</a>
+## <a name="SignalRAppDemo"> Trace a Demo SignalR App</a>
+Before showing how to <a href="#BuildSignalR">build the app from scratch</a> later in this page,
+let's dive into some sample apps running over the internet
+to examine what makes WebSockets so fast and useful.
+
 1). Open a modern browser 
 
 http://caniuse.com/#search=websockets
@@ -174,7 +169,6 @@ Code for demos downloaded and run in your localhost:
  In the tutorial he uses VisualStudio 2012 to show 
  <a href="#SimpleChat">construciton of a simple real-time chat program</a>.
 
- 
 
 
 ### <a name="Negotiation"> Fall-back Negotiation</a>
@@ -209,6 +203,27 @@ as described on MDN:
 If the client does not support WebSockets, it responds with **500 HTTP status**,
 which is the standard response.
 
+
+
+## <a name="ASP.NET_Env"> Microsoft Web Servers</a>
+Instead of the IIS (Internet Information Server) process manager,
+**WebListener** is an "ultra light-weight" web server component. 
+It is part of a set of components for building and running Web applications on a common hosting abstraction called 
+Katana (from http://katanaproject.codeplex.com/documentation).
+The hosting abstraction is OWIN (Open Web Interface for .NET) programming model for developers.
+
+**OwinHost.exe** is a standalone executable that can start up an OWIN application. 
+
+It can be installed from Chocolately with command:
+
+```
+cinst owinhost -pre
+```
+
+More information on it:
+   * http://www.techbubbles.com/aspnet/what-is-katana-and-owin-for-asp-net/
+
+https://github.com/owin/museum-piece-owin-hosting
 
 
 ### <a name="ObserveRealTimeTech"> Observe Older Real-Time Technologies</a>
@@ -263,36 +278,7 @@ HTTP Proxies may not be configured to propogate UPGRADE headers.
 
 
 
-### <a name="NodeJS"> NodeJS Implementations</a>
-The Socket.io module for Node.js
-
-
-### <a name="SignalR"> Microsoft Web Sockets SignalR</a>
-To implement Web Sockets Microsoft offers its SignalR library 
-described at http://SignalR.net and stored as open-source repo at
-http://github.com/Microsoft/SignalR
-by 
-Damien Edwards, SignalR developer. 
-
-https://www.youtube.com/watch?v=us-Q3do-N7M
-TechNet North America
-SignalR: Building Real-Time Applications with ASP.NET SignalR [59:44] May 19 2014
-by Brady Gaster building a HitCounter using Ultimate 2013.
-
-
-https://www.youtube.com/watch?v=0nMAuigjYh8
-Lunch & Learn - Real Time Web Messaging with SignalR
-by LogicalAdvantage
-
-https://www.youtube.com/watch?v=WJpoDCGEIW0
-by Chris Johnson
-
-See http://www.wikiwand.com/en/SignalR
-
-SignalR packages available via NuGet at
-http://nuget.org/packages/Microsoft.AspNet.SignalR
-
-SignalR can be added to all ASP.NET project types (MVC).
+### <a name="SignalR_modules"> SignalR modules</a>
 
 The **Microsoft.AspNet.SignalR** library brings in everything to run on IIS and ASP.NET
 within Windows 2012/Windows 8 and newer machines.
@@ -571,6 +557,9 @@ QUESTION:
 Can Visual Studio do it?
 
 
+## <a name="Clients"> Clients</a>
+* http://dyknow.github.io/SignalR-ObjC/ for Mac and iOS.
+
 ## <a name="References"> References</a>
  * https://www.youtube.com/watch?v=kyFBgephmpQ
    Real-Time Web Apps with Asp.Net SignalR
@@ -581,5 +570,19 @@ Can Visual Studio do it?
  * HTML5 Web Sockets - http://social.technet.microsoft.com/wiki/contents/articles/7148.websockets-in-asp-net.aspx
 
 
-## <a name="Clients"> Clients</a>
-* http://dyknow.github.io/SignalR-ObjC/ for Mac and iOS.
+https://www.youtube.com/watch?v=us-Q3do-N7M
+TechNet North America
+SignalR: Building Real-Time Applications with ASP.NET SignalR [59:44] May 19 2014
+by Brady Gaster building a HitCounter using Ultimate 2013.
+
+
+https://www.youtube.com/watch?v=0nMAuigjYh8
+Lunch & Learn - Real Time Web Messaging with SignalR
+by LogicalAdvantage
+
+https://www.youtube.com/watch?v=WJpoDCGEIW0
+by Chris Johnson
+
+SignalR packages available via NuGet at
+http://nuget.org/packages/Microsoft.AspNet.SignalR
+
