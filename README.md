@@ -1,17 +1,19 @@
 This mark-down text page and associated files within this git repo 
 demonstrate how to program, run, and performance-test 
-real-time and push capabilities using the
+<a href="#RealTimeUseCse">**real-time** capabilities</a> using the
 **WebSockets** protocol implemented in the C# language within Visual Studio 
 using Microsoft's SignalR library on the server and various client technologies.
 
-Here, sample apps are analyzed, then we describe how they were built.
+We being by analyzing communications between a sample apps and the server,
+then we build the client and server app demonstrated.
+Along the way, we talk about the architecture.
 
 ## Contents
 0. <a href="#RealTimeUseCase"> Real-Time Use Case</a>
 0. <a href="#ModernBrowsers"> Internet Browsers for Real-Time</a>
 0. <a href="#Why"> WebSockets Smaller and Faster</a>
 0. <a href="#JavaFirst"> WebSockets Origin in Java</a>
-      0. <a href="#BenchmarkStudies"> Benchmark Studies of Efficiency and Scalability</a>
+0. <a href="#BenchmarkStudies"> Benchmark Studies of Efficiency and Scalability</a>
 
 0. <a href="#ASP.NET_Env"> Microsoft Web Servers</a>
 
@@ -30,6 +32,12 @@ and other apps need "real-time" update to **all participants at the same time**.
     Firefox and Google Chrome are downloaded by each user.
 
 2). Identify your browser's version.
+
+Generally, mouse to the top of the screen and click to expand the Help menu.
+* In Firefox, select Help | Troubleshooting Information.
+* In Internet Explorer, select Help | About.
+* In Chrome, click the "hamburger" icon at the upper right and select About Google Chrome.
+
 
 3). http://caniuse.com/#search=websockets
 shows almost all browsers in 2015 supports WebSockets.
@@ -634,3 +642,5 @@ PHP programs can support WebSockets using http://socketo.me/
 
 Node.js has the Socket.io module.
 
+
+http://www.pythian.com/blog/basic-io-monitoring-on-linux/
