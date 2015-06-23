@@ -31,9 +31,8 @@ and other apps need "real-time" update to **all participants at the same time**.
 1). Open an internet browser. Internet Explorer comes with Windows.
     Firefox and Google Chrome are downloaded by each user.
 
-2). Identify your browser's version.
-
-Generally, mouse to the top of the screen and click to expand the Help menu.
+2). To identify your browser's version, 
+generally, mouse to the top of the screen and click to expand the Help menu.
 * In Firefox, select Help | Troubleshooting Information.
 * In Internet Explorer, select Help | About.
 * In Chrome, click the "hamburger" icon at the upper right and select About Google Chrome.
