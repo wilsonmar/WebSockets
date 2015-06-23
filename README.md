@@ -1,30 +1,45 @@
-This mark-down text page and associated solution files demonstrates how to program and performance test
+This mark-down text page and associated files within this git repo 
+demonstrate how to program, run, and performance-test 
+real-time and push capabilities using
 HTTP5 WebSockets implemented in the C# language within Visual Studio 
 using Microsoft's SignalR library on the server and various client technologies.
 
+Here, sample apps are analyzed, then we describe how they were built.
+
+## Contents
+0. <a href="#RealTimeUseCase"> Real-Time Use Case</a>
+0. <a href="#RealTimeTech"> Technologies for Real-Time</a>
+0. <a href="#Why"> Why WebSockets?</a>
+0. <a href="#JavaFirst"> WebSockets Origin in Java</a>
+
+
+## <a name="RealTimeUseCase"> Real-Time Use Case</a>
 Applications such as stock and sports tickers, on-line gaming, inventory trackers, 
-chats, and other apps needing "real-time" updates 
+chats, and other apps need "real-time" updates to all participants at the same time
 without the need for users to manually refresh the screen or click a button. 
 
-SignalR 2 comes with Visual Studio 2013.
-https://www.youtube.com/watch?v=QL-HPsC1SH0
+## <a name="RealTimeTech"> Older Technologies for Real-Time</a>
+Since 2003, the RTMP (Real Time Message Protocol) was used within Adobe Flash.
+But it's proprietary.
 
+Before it, Message Queue technologies provided persistent publish-subscribe design pattern.
 
-### <a name="ObserveRealTimeTech"> Observe Older Real-Time Technologies</a>
-1). Open a browser which does not support WebSockets, such as Internet Explorer 9.
-(this may involve using a VMWare instance)
+More recently, "Comet" design pattern in JavaScript tricked HTTP to behave to
+keep connections open between client and server -- to maintain "full duplex" asychronous communications.
+Newer WebSockets technologies **fall back** to these in this sequence of preference:
 
-2). Press F12 or right-click and select **Inspect Element** 
- to Trace the HTTP packets involved.
+   1. Server Sent Event (SSE) - part of HTML5/W3C (Event Source)
+   2. "Forever Frame"
+   3. "Long Polling"
 
-3). Specify one of these publicly available websites:
+A list of real-time technologies (which include WebSockets) is at
+http://www.leggetter.co.uk/real-time-web-technologies-guide/
+maintained by by Phil Leggetter, the Technical Evangelist at 
+Pusher.com, a paid service for web application developers that handles the burden of delivering real-time updates to many users and applications at once.
 
- * http://www.bitcoinmonitor.com/ which displays real-time trades over time.
- * http://pokein.com/ integrates a DLL in a .NET project.
- * http://www.frozenmountain.com/websync/
- * Asana for task collaboration (developed by people from Facebook)
-
-4). Notice that this approach is rather "chatty".
+BTW, internet cloud-only (SaaS) offerings include
+Google Channel Python API
+  https://cloud.google.com/appengine/docs/python/channel/?csw=1
 
 
 ## <a name="Why"> Why WebSockets?</a>
@@ -32,7 +47,7 @@ Web Sockets is gaining popularity now (in 2015) because:
   * its HTTP headers take less bytes than HTTP 
   * payload data exchanged is more compact than JSON.
 
-This lighterweight and low-latency 
+Its lighterweight and low-latency 
 means that it's faster and processes more transactions than the same hardware
 than REST API and forms technologies that preceded it.
 
@@ -45,14 +60,10 @@ By its nature it's a full-duplex **asychronous** protocol.
 
 WebSockets is not the **"push notification"** technology as what operating systems provide.
 
-WebSockets is not the persistent publish-subscribe design pattern since it's temporary to a particular session.
 
 
-The RTMP (Real Time Message Protocol) was used within Adobe Flash since 2003,
-but it's proprietary.
 
-
-### <a name="JavaFirst"> Java Origins</a>
+### <a name="JavaFirst"> WebSockets Origin in Java</a>
 Because the JSR-356 deliver a Java API in Java EE 7,
 the first implementations of WebSockets were in the Java language.
 
@@ -87,7 +98,28 @@ Tutorials in the Java language include:
 PHP programs can support WebSockets using http://socketo.me/
 
 
-### <a name="DemoApps"> Demo Apps</a>
+## <a name="ASP.NET_Env"> Web Server</a>
+Instead of the IIS (Internet Information Server) process manager,
+**WebListener** is an "ultra light-weight" web server component. 
+It is part of a set of components for building and running Web applications on a common hosting abstraction called 
+Katana (from http://katanaproject.codeplex.com/documentation).
+The hosting abstraction is OWIN (Open Web Interface for .NET) programming model for developers.
+
+**OwinHost.exe** is a standalone executable that can start up an OWIN application. 
+
+It can be installed from Chocolately with command:
+
+```
+cinst owinhost -pre
+```
+
+More information on it:
+   * http://www.techbubbles.com/aspnet/what-is-katana-and-owin-for-asp-net/
+
+https://github.com/owin/museum-piece-owin-hosting
+
+
+## <a name="DemoApps"> Demo Apps</a>
 1). Open a modern browser 
 
 http://caniuse.com/#search=websockets
@@ -123,11 +155,7 @@ Code for demos downloaded and run in your localhost:
  In the tutorial he uses VisualStudio 2012 to show 
  <a href="#SimpleChat">construciton of a simple real-time chat program</a>.
 
-Several internet cloud-only (SaaS) offerings:
  
-* Google Channel Python API
-  https://cloud.google.com/appengine/docs/python/channel/?csw=1
-
 
 
 ### <a name="Negotiation"> Fall-back Negotiation</a>
@@ -162,20 +190,28 @@ as described on MDN:
 If the client does not support WebSockets, it responds with **500 HTTP status**,
 which is the standard response.
 
-### <a name="RealTimeTech"> Older Real-Time Technologies</a>
-Before WebSockets, programmers "hacked" ways 
-Web sockets techonology is also used for communication between two servers without a human UI.
 
-Newer WebSockets technologies **fall back** to these in this sequence of preference:
+### <a name="ObserveRealTimeTech"> Observe Older Real-Time Technologies</a>
+1). Open a browser which does not support WebSockets, such as Internet Explorer 9.
+(this may involve using a VMWare instance)
 
-   1. Server Sent Event (SSE) - part of HTML5/W3C (Event Source)
-   2. "Forever Frame"
-   3. "Long Polling"
+2). Press F12 or right-click and select **Inspect Element** 
+ to Trace the HTTP packets involved.
 
-A list of real-time technologies (which include WebSockets) is at
-http://www.leggetter.co.uk/real-time-web-technologies-guide/
-maintained by by Phil Leggetter, the Technical Evangelist at 
-Pusher.com, a paid service for web application developers that handles the burden of delivering real-time updates to many users and applications at once.
+3). Specify one of these publicly available websites:
+
+ * http://www.bitcoinmonitor.com/ which displays real-time trades over time.
+ * http://pokein.com/ integrates a DLL in a .NET project.
+ * http://www.frozenmountain.com/websync/
+ * Asana for task collaboration (developed by people from Facebook)
+
+4). Notice that this approach is rather "chatty".
+
+
+SignalR 2 comes with Visual Studio 2013.
+https://www.youtube.com/watch?v=QL-HPsC1SH0
+
+
 
 
 ### <a name="RealTimeTech"> Older Real-Time Technologies</a>
@@ -243,16 +279,6 @@ within Windows 2012/Windows 8 and newer machines.
 Thus it is not common in production yet in 2015.
 
 The Microsoft.AspNet.SignalR.SystemWeb library provides components to use OWIN ASP.NET host.
-
-Katana (from http://katanaproject.codeplex.com/documentation)
-is a set of components for building and running Web applications on a common hosting abstraction. 
-The hosting abstraction is OWIN (Open Web Interface for .NET) programming model for developers.
-IIS is a process manager. OwinHost is a standalone executable that can start up an OWIN application. The new thing is WebListener which is ultra light-weight server component where you can expect pretty amazing performance results. 
-See http://www.techbubbles.com/aspnet/what-is-katana-and-owin-for-asp-net/
-
-http://katanaproject.codeplex.com/
-
-https://github.com/owin/museum-piece-owin-hosting
 
 The Microsoft.AspNet.SignalR.Core library provides components to build SignalR endpoints.
 
