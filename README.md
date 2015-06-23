@@ -81,7 +81,7 @@ developed the SignalR library described at
 
 6). http://www.wikiwand.com/en/SignalR
 
-and
+says it's a **server-side** software working on the server.
 
 7). http://SignalR.net 
 
@@ -92,7 +92,11 @@ The SignalR library can be added to all ASP.NET project types (Forms, MVC, etc.)
 What SignalR adds is **graceful fallback** to other older techniques and technologies when either side
 is not able to use WebSockets.
 
-The library is currently stored in an open-source public repo at
+SignalR does more than what is mentioned in the WebSockets, such as 
+connection management  (connect/disconnect events), 
+grouping connections, and authorization. 
+
+SignalR code is currently stored in an open-source public repo at
 
 8). http://github.com/SignalR/SignalR.
 
