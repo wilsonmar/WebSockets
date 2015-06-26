@@ -41,7 +41,7 @@ generally, mouse to the top of the screen and click to expand the Help menu.
 3). http://caniuse.com/#search=websockets
 shows almost all browsers in 2015 supports WebSockets.
 
-4). The WebSockets protocol was defined in 20111 at http://ietf.org/rfc/rfc6455.txt
+4). The WebSockets protocol was defined in 2011 at http://ietf.org/rfc/rfc6455.txt
 an IETF (Internet Engineering Task Force) standard
 standardized by the W3C
 
