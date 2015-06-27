@@ -652,3 +652,5 @@ Node.js has the Socket.io module.
 
 
 http://www.pythian.com/blog/basic-io-monitoring-on-linux/
+
+Some also use Redis cache to cache data such as leaderboars.
