@@ -11,6 +11,8 @@ This page is based on several sources:
 * http://www.pluralsight.com/courses/java-web-fundamentals by Kevin Jones about creating Java servlets,
   filters (controllers), and listeners. These are build using IntelliJ, built using Maven,
   and run on Tomcat.apache.org web servers.
+* https://www.youtube.com/watch?v=4mfFSrxpl0Y JMeter Load Testing Beginner Tutorial
+* https://www.youtube.com/watch?v=cv7KqxaLZd8 Learn JMeter in 60 minutes by Ophir of BlazeMeter
 
 ## Contents
 0. <a href="#Java"> Java SDK Pre-requisite</a>
@@ -25,10 +27,11 @@ This page is based on several sources:
 0. <a href="#Samplers"> Samplers</a>
 0. <a href="#ConfigNodes"> Configuration Nodes</a>
 0. <a href="#LogicControllers"> Logic Controllers</a>
-0. <a href="#Timers"> Timers</a>
-0. <a href="#Listeners"> Listeners</a>
+0. <a href="#Timers"> Timers</a> (to add delays)
+0. <a href="#Listeners"> Listeners</a> (for reporting, logging, debugging)
 0. <a href="#Attributes"> Attributes</a>
-0. <a href="#Assertions"> Assertions</a>
+0. <a href="#Assertions"> Assertions</a> (for error checking)
+0. <a href="#SimulateJavaScript"> Simulate JavaScript</a>
 0. <a href="#Plugins"> JMeter Plug-ins</a>
 
 
@@ -44,9 +47,11 @@ This is the same across operating systems, which is why JMeter can run on PC and
 
 
 ## <a name="Download"> Download JMeter</a>
-If you run Windows, rather than downloading and running the installer directly from
-Apache, 
-it's simpler to:
+If you run Windows, rather than downloading and running the installer directly from a mirror listed 
+<a target="_blank" href="http://jmeter.apache.org/download_jmeter.cgi"> Apache website</a>
+(as <a target="_blank" href="http://zacster.blogspot.com/2008/03/quick-howto-to-setup-jmeter.html">
+Zac explained in 2008</a>),
+I think it's simpler to:
 
 1) open a command window,
 
@@ -70,9 +75,10 @@ NOTE: Instructions below are based on version 2.1.2 downloaded June 30, 2015.
 
 2) Create a folder to hold test assets. Test plans are containers.
 
-3) Open an internet browser to htt://github.com/wilsonmar/WebSockets/JMeterSample1.
+3) Open an internet browser to https://github.com/jribble/jmeter-demo
+(http://github.com/wilsonmar/WebSockets/JMeterSimpleDemo1).
   
-4) Click <strong>Download ZIP</strong> to obtain file JMeterSample1-repository.zip.
+4) Click <strong>Download ZIP</strong> to obtain file name ending with <strong>-master.zip</strong>.
 
 5) Unzip.
 
@@ -82,13 +88,7 @@ NOTE: Instructions below are based on version 2.1.2 downloaded June 30, 2015.
 
 
 ## <a name="RunBatch"> Run in Batch Mode</a>
-A test is invoked from the JMeter UI several ways:
-
-* Click the Run button
-* Select menu Run | Start
-* Press command + R.
-
-However, JMeter is often invoked automatically by a continuous integration tool such as Jenkins.
+JMeter is often invoked automatically by a continuous integration tool such as Jenkins.
 See https://wiki.jenkins-ci.org/display/JENKINS/Performance+Plugin.
 A sample command to invoke JMeter:
 
@@ -105,6 +105,8 @@ Parameter `-l` disables all listeners because they can be resource intensive.
 2) Select menu Open.
 
 3) Navigate to the sample test plan.
+
+Open a command window, navigate into JMeter's bin folder, and invoke <strong>Jmeter.bat</strong>.
 
 4) Run the test from the JMeter UI one of several ways:
 
@@ -226,15 +228,17 @@ Within each <strong>test plan</strong> are these elements:
 6. <a href="#Assertions"> Assertions</a>
 7. <a href="#Listeners"> Listeners</a>
 
+More samplers (for JSON, OAuth, HBase and Hadoop, etc.)
+are at https://github.com/ATLANTBH/jmeter-components.
+
 
 ## <a name="Samplers"> Samplers</a>
 JMeter <strong>samplers</strong> emulate real clients by sending (a lot of) requests to servers.
-One sampler for WebSockets was created by 
-https://github.com/maciejzaleski/JMeter-WebSocketSampler
 
-Samplers run as <strong>Thread groups</strong>.
+Samplers for WebSockets:
 
-Each group contains <strong>nodes</strong> which contain various <strong>elements</strong>.
+  * https://github.com/kawasima/jmeter-websocket
+  * https://github.com/maciejzaleski/JMeter-WebSocketSampler
 
 
 ## <a name="ConfigNodes"> Configuration Nodes</a>
@@ -285,15 +289,22 @@ Validation of the validity of what was returned from the server is done by
 <strong>assertions</strong>, which are based on the format of the response.
 
 VIDEO: 
-https://www.youtube.com/watch?t=74&v=kKnLsKpHn0Y
+https://www.youtube.com/watch?t=74&v=kKnLsKpHn0Y (Dec. 11, 2015)
 provides a 30-minute introduction to various assertions:
 Duration, Size, XML, HTML, Response, XPath Compare.
+
+
+## <a name="SimulateJavaScript"> Simulate JavaScript</a>
+JMeter does not execute JavaScript.
+
+If JavaScript is downloaded from the server, JMeter can only parse it for data.
 
 
 ## <a name="Plugins"> JMeter Plug-ins</a>
 Plug-ins extend the capability of JMeter.
 
 https://github.com/undera/jmeter-plugins
+
 
 ## Others
 Start no pauses.
