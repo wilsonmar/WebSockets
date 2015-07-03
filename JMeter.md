@@ -33,15 +33,18 @@ This page is based on several sources:
 0. <a href="#Assertions"> Assertions</a> (for error checking)
 0. <a href="#SimulateJavaScript"> Simulate JavaScript</a>
 0. <a href="#Plugins"> JMeter Plug-ins</a>
+0. <a href="#SetupThreadGroup"> Setup Thread Group</a>
+0. <a href="#tearDownThreadGroup"> tearDown Thread Group</a>
 
 
 ## <a name="Java"> Java SDK Pre-requisite</a>
 JMeter was written in Java.
 
 The path to the Java bin folder must be in the system PATH environment variable
-so Java executables can be found.
+so Java executables can be found. See https://wiki.apache.org/jmeter/TestRecording210
 
-The path to JVM_HOME also needs to be defined.
+The path to JVM_HOME also needs to be defined, such as 
+set JAVA_HOME=C:\jdk1.7.0_45
 
 This is the same across operating systems, which is why JMeter can run on PC and Mac.
 
@@ -103,50 +106,44 @@ jmeter -n -t demo.jmx -l test.jtl.
 * Parameter `-n` ???
 * Parameter `-t` ???
 * Parameter `-l` disables all listeners because they can be resource intensive.
-* test.jtl ???
+* test.jtl is the text file to hold results from the run. See http://wiki.apache.org/jmeter/JtlFiles.
 
 
 ## <a name="JMeterUI"> JMeter UI Run</a>
 1) Invoke the JMeter UI from Windows Explorer or Mac Finder.
 
-  Open a command window, navigate into JMeter's bin folder, and invoke <strong>Jmeter.bat</strong>.
+  Open a command window, navigate into JMeter's bin folder (src/test/jmeter)
+  
+2) Invoke <strong>Jmeter.bat</strong>.
 
-2) Select menu Open.
+3) Select menu Open.
 
-3) Navigate to the sample test plan.
+4) Navigate to the sample test plan.
 
-4) Run the test from the JMeter UI one of several ways:
+5) Run the test from the JMeter UI one of several ways:
 
   * Click the Run button
   * Select menu Run | Start
   * Press command + R.
 
-5) During the run, at the upper-right corner in the gray bar is "0/1".
+6) During the run, at the upper-right corner in the gray bar is "0/1".
 
 
 ## <a name="ThreadGroups"> Thread Groups</a>
 Load on servers is imposed by activities within various program <strong>thread</strong>.
 The more threads, the more virtual users are being simulated.
 
-1) Create the <strong>Thread Group</strong> for the Test Plan:
-  select menu <strong>Edit | Add</strong> to create a <strong>Thread Group</strong>.
+1) Create the <strong>Thread Group</strong> for the Test Plan: 
+Right-Click on Test Plan to select <strong>Edit | Add</strong> to create a <strong>Thread Group</strong>.
 
-2) Specify <strong>2</strong> as the initial number of Threads (users).
+2) In the current situation (for recording described below), use 1 user and loop count 1.
 
 3) PROTIP: Change the Thread Group's name to summarize the various settings, 
-   such as "2Users".
+   such as "1UserRecorded".
 
 4) Depending on the type of test, change the <strong>Ramp-up period</strong> 
    to provide one second per user. For example, for 2 users, specify 2 seconds.
-   
-   In the current situation (for recording described below), use 1 user and loop count 1.
-
-5) If there is work to do just once before iterating through,
-  select menu <strong>Edit | Add</strong> to create a <strong>setUp Thread Group</strong>.
-  This is similar to the LoadRunner VuserInit action.
-
-6) Create a <strong>tearDown Thread Group</strong> to execute once.
-This is similar to the LoadRunner VuserEnd action.
+   For now, leave the default of 1.
 
 Add directory to jar or classpath
 
@@ -157,7 +154,8 @@ such as requests recorded (captured) by a proxy and converted into commands.
 
 Below is a remix of
 https://chipcorrera.wordpress.com/2010/01/25/using-jmeter-and-firefox-to-load-test/
-by Chip Correra
+by Chip Correra and
+http://jmeter.apache.org/usermanual/jmeter_proxy_step_by_step.pdf
 
 
 1) Get Firefox to use the JMeter proxy ???
@@ -310,6 +308,16 @@ If JavaScript is downloaded from the server, JMeter can only parse it for data.
 Plug-ins extend the capability of JMeter.
 
 https://github.com/undera/jmeter-plugins
+
+
+## <a name="SetupThreadGroup"> Setup Thread Group</a>
+If there is work to do just once before iterating through,
+  select menu <strong>Edit | Add</strong> to create a <strong>setUp Thread Group</strong>.
+  This is similar to the LoadRunner VuserInit action.
+
+## <a name="tearDownThreadGroup"> tearDown Thread Group</a>
+Create a <strong>tearDown Thread Group</strong> to execute once.
+This is similar to the LoadRunner VuserEnd action.
 
 
 ## Others
