@@ -69,7 +69,7 @@ So it's useful in server automation scripts.
 NOTE: Instructions below are based on version 2.1.2 downloaded June 30, 2015.
 
 
-## <a name="TestPlanFolders"> Test Assets Folders</a>
+## <a name="TestPlanFolders"> Download Sample to Test Assets Folder</a>
 1) Switch to Windows Explorer or Finder 
   (Press Ctrl+Tab or command+Tab). 
 
@@ -82,31 +82,38 @@ NOTE: Instructions below are based on version 2.1.2 downloaded June 30, 2015.
 
 5) Unzip.
 
-## <a name="SampleTestPlans"> Sample Test Plans</a>
+6) Drill down to the <strong>.jmx</strong> file, which is the Test Plan.
 
-3) Copy sample scripts within the folder.
-
+7) Copy the path.
 
 ## <a name="RunBatch"> Run in Batch Mode</a>
 JMeter is often invoked automatically by a continuous integration tool such as Jenkins.
 See https://wiki.jenkins-ci.org/display/JENKINS/Performance+Plugin.
-A sample command to invoke JMeter:
+
+1) Open a command (terminal) window.
+
+2) Type cd and paste the file path to the test plan.
+
+3) Type:
 
 ```
-jmeter -n -t test.jmx -l test.jtl.
+jmeter -n -t demo.jmx -l test.jtl.
 ```
 
-Parameter `-l` disables all listeners because they can be resource intensive.
+* Parameter `-n` ???
+* Parameter `-t` ???
+* Parameter `-l` disables all listeners because they can be resource intensive.
+* test.jtl ???
 
 
 ## <a name="JMeterUI"> JMeter UI Run</a>
 1) Invoke the JMeter UI from Windows Explorer or Mac Finder.
 
+  Open a command window, navigate into JMeter's bin folder, and invoke <strong>Jmeter.bat</strong>.
+
 2) Select menu Open.
 
 3) Navigate to the sample test plan.
-
-Open a command window, navigate into JMeter's bin folder, and invoke <strong>Jmeter.bat</strong>.
 
 4) Run the test from the JMeter UI one of several ways:
 
@@ -116,7 +123,6 @@ Open a command window, navigate into JMeter's bin folder, and invoke <strong>Jme
 
 5) During the run, at the upper-right corner in the gray bar is "0/1".
 
-6) 
 
 ## <a name="ThreadGroups"> Thread Groups</a>
 Load on servers is imposed by activities within various program <strong>thread</strong>.
