@@ -12,6 +12,24 @@ This page is based on several sources:
   filters (controllers), and listeners. These are build using IntelliJ, built using Maven,
   and run on Tomcat.apache.org web servers.
 
+## Contents
+0. <a href="#Java"> Java SDK Pre-requisite</a>
+0. <a href="#Download"> Download</a>
+0. <a href="#TestPlanFolders"> Test Assets Folders</a>
+0. <a href="#JMeterUI"> JMeter UI</a>
+0. <a href="#ThreadGroups"> Thread Groups</a>
+0. <a href="#Workbench"> Workbench</a>
+0. <a href="#TestPlan"> Test Plan Elements</a>
+0. <a href="#Samplers"> Samplers</a>
+0. <a href="#ConfigNodes"> Configuration Nodes</a>
+0. <a href="#LogicControllers"> Logic Controllers</a>
+0. <a href="#Timers"> Timers</a>
+0. <a href="#Listeners"> Listeners</a>
+0. <a href="#Attributes"> Attributes</a>
+0. <a href="#Assertions"> Assertions</a>
+0. <a href="#Run"> Run in UI &amp; Batch</a>
+
+
 ## <a name="Java"> Java SDK Pre-requisite</a>
 JMeter was written in Java.
 
@@ -94,6 +112,44 @@ such as those recorded.
 Recording Controller.
 
 
+2. Add a HTTP Request Defaults config element
+# This can be used to specify defaults for you entire test suite
++ Specify your Server Name or IP address and any required port #
+
+3. Add a HTTP Cookie Manager config element
+# This can be used to control and manage the cookie policy across the test
+
+4. Add a Thread Group
+# No need for multi-threaded recording, so:
++ Specify 1 thread, 1 sec ramp up time and loop count of 1
+
+5. Add a Once Only Controller
+# My application has a user login that also generates a session, cookie
+# If your application does not, you can skip this step and the next
+
+6. Add a HTTP Request Sampler to the Once Only Controller
+# Here you specify the protocol method (put/get), path to the request and any parameters
+
+7. Add a Recording Controller to the Thread Group
+
+8. Test Plan > Add > Listener > Aggregate Report
+
+9. Under Workbench, Add > Non-Test Element > HTTP Proxy Server
++ Port 9090
++ Target Controller: Thread Group > Recording Controller
++ Patterns to include: Click Add then enter “.*”
+
+10. Under HTTP Proxy Server, Add > Timer > Gaussian Random Timer
++ Set Constant Delay Offset (in milliseconds): ${T}
+
+Now, lets set up Firefox to proxy actions. Bring up the Firefox browser and under Tools/options/advanced tab/network tab/settings button/”Manual proxy configuration”
++ Set 127.0.0.1 port 9090
++ Enable the “Use this proxy for all protocols” check box
+
+And when ready to start recording the browser action just bring up the HTPP Proxy Server within JMeter and click Start. Everything that is done within Firefox will be recorded in JMeter’s recording controller. When done, just click the Stop button on the HTTP Proxy Server within JMeter.
+
+
+https://chipcorrera.wordpress.com/2010/01/25/using-jmeter-and-firefox-to-load-test/
 
 
 ## <a name="TestPlan"> Test Plan Elements</a>
@@ -130,7 +186,7 @@ Within each <strong>test plan</strong> are these elements:
 7. <a href="#Listeners"> Listeners</a>
 
 
-<a name="Samplers"></a>
+## <a name="Samplers"> Samplers</a>
 JMeter <strong>samplers</strong> emulate real clients by sending (a lot of) requests to servers.
 One sampler for WebSockets was created by 
 https://github.com/maciejzaleski/JMeter-WebSocketSampler
@@ -149,41 +205,41 @@ different parameters passed into sampler request code by using
 Save Node as Image 
 
 
-<a name="LogicControllers"></a>
+## <a name="LogicControllers"> Logic Controllers</a>
 The order of execution of different samplers is controlled by
 <strong>Logic controllers</strong>: 
 If, While, FoEach, Loop, Random, etc.
 
 
-<a name="PreProcessors"></a>
+## <a name="PreProcessors"> Pre-Processors</a>
 Before a sampler is executed, elements (actions, assertions or basically whatever) that is going to happen 
 are defined in <strong>pre-processors</strong> which
 extract variables from a response that can be used in the sampler afterwards via configuration elements.
 
-<a name="Timers"></a>
+## <a name="Timers"> Timers</a>
 The time period to wait between requests are defined by <strong>timers</strong>,
 also known as "think time" in LoadRunner.
 By default, requests are executed immediately one after another without any waiting time.
 
 
-<a name="PostProcessors"></a>
+## <a name="PostProcessors"> Post-Processors</a>
 After a sampler execution finishes,
 response data from the server can be parsed to extract values 
 by <strong>post-processors</strong>.
 
 
-<a name="Listeners"></a>
+## <a name="Listeners"> Listeners</a>
 Output from samplers to tables, trees, or plain log files are formatted by
 <strong>listeners</strong>
 provide different ways to view the results produced by a Sampler requests. 
 
 
-<a name="Attributes"></a>
+## <a name="Attributes"> Attributes</a>
 In the various listeners,
 sample results have various attributes (success/fail, elapsed time, data size etc).
 
 
-<a name="Assertions"></a>
+## <a name="Assertions"> Assertions</a>
 Validation of the validity of what was returned from the server is done by 
 <strong>assertions</strong>, which are based on the format of the response:
 HTTP, XML, JSON, etc.
@@ -192,15 +248,22 @@ HTTP, XML, JSON, etc.
 ## <a name="Firefox"> Firefox</a>
 
 
-## <a name="Run"> Run</a>
+## <a name="Run"> Run in UI &amp; Batch</a>
 A test is invoked from the JMeter UI several ways:
 
 * Click the Run button
 * Select menu Run | Start
 * Press command + R.
 
-However, JMeter is more often invoked automatically by a continuous integration tool such as Jenkins.
+However, JMeter is often invoked automatically by a continuous integration tool such as Jenkins.
 See https://wiki.jenkins-ci.org/display/JENKINS/Performance+Plugin.
+A sample command to invoke JMeter:
+
+```
+jmeter -n -t test.jmx -l test.jtl.
+```
+
+Parameter `-l` disables all listeners because they can be resource intensive.
 
 
 ## Others
