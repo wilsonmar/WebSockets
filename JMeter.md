@@ -9,19 +9,23 @@ Several tests can run JMeter.
 Open the JMeter UI.
 
 <a name="TestPlan"></a>
-Specify the Test Plan to execute.
+Open a Test Plan group to be executed.
 
 A test plan can contain other test plans, to group tests by functional or technical logic together.
 
-Each <strong>test plan</strong> specifies the various elements:
+Each test plan can be selectively disabled for execution.
 
-1. Configuration nodes
+Within each <strong>test plan</strong> specifies these elements:
+
+0. <a href="#Samplers"> Samplers</a>
+1. <a href="#Node"> Configuration nodes</a>
 2. <a href="#Preprocessors"> Pre-processors</a>
 3. <a href="#Timers">Timers</a>
-4. <a href="#Samplers"> Samplers</a>
 5. <a href="#PreProcessors"> Post processors</a> (only executed if there are results available)
 6. <a href="#Assertions"> Assertions</a> (only executed if there are results available)
 7. <a href="#Listeners"> Listeners</a> (only executed if there are results available)
+
+
 
 
 <a name="Samplers"></a>
@@ -31,6 +35,7 @@ https://github.com/maciejzaleski/JMeter-WebSocketSampler
 
 <a name="ThreadGroups"></a>
 Samplers run as <strong>Thread groups</strong>.
+The more threads, the more virtual users are being simulated.
 
 Each group contains <strong>nodes</strong> which contain various <strong>elements</strong>.
 
@@ -51,7 +56,6 @@ Before a sampler is executed, elements (actions, assertions or basically whateve
 are defined in <strong>pre-processors</strong> which
 extract variables from a response that can be used in the sampler afterwards via configuration elements.
 
-
 <a name="Timers"></a>
 The time period to wait between requests are defined by <strong>timers</strong>,
 also known as "think time" in LoadRunner.
@@ -69,9 +73,25 @@ Output from samplers to tables, trees, or plain log files are formatted by
 <strong>listeners</strong>
 provide different ways to view the results produced by a Sampler requests. 
 
+<a name="Attributes"></a>
+In the various listeners,
+sample results have various attributes (success/fail, elapsed time, data size etc).
+
 
 <a name="Assertions"></a>
 Validation of the validity of what was returned from the server is done by 
 <strong>assertions</strong>, which are based on the format of the response:
 HTTP, XML, JSON, etc.
+
+
+## <a name="Run"> Run</a>
+A test is invoked several ways:
+
+* Click the Run button
+* Select menu Run | Start
+* Press command + R.
+
+Start no pauses.
+
+
 
