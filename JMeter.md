@@ -22,7 +22,7 @@ Within each <strong>test plan</strong> specifies these elements:
 2. <a href="#Preprocessors"> Pre-processors</a>
 3. <a href="#Timers">Timers</a>
 
-If results are available: 
+  If results are available: 
 
 5. <a href="#PreProcessors"> Post processors</a> (only executed if there are results available)
 6. <a href="#Assertions"> Assertions</a> (only executed if there are results available)
