@@ -16,6 +16,8 @@ This page is based on several sources:
 0. <a href="#Java"> Java SDK Pre-requisite</a>
 0. <a href="#Download"> Download</a>
 0. <a href="#TestPlanFolders"> Test Assets Folders</a>
+0. <a href="#Run"> Run in UI &amp; Batch</a>
+
 0. <a href="#JMeterUI"> JMeter UI</a>
 0. <a href="#ThreadGroups"> Thread Groups</a>
 0. <a href="#Workbench"> Workbench</a>
@@ -27,7 +29,6 @@ This page is based on several sources:
 0. <a href="#Listeners"> Listeners</a>
 0. <a href="#Attributes"> Attributes</a>
 0. <a href="#Assertions"> Assertions</a>
-0. <a href="#Run"> Run in UI &amp; Batch</a>
 
 
 ## <a name="Java"> Java SDK Pre-requisite</a>
@@ -41,7 +42,7 @@ The path to JVM_HOME also needs to be defined.
 This is the same across operating systems, which is why JMeter can run on PC and Mac.
 
 
-## <a name="Download"> Download</a>
+## <a name="Download"> Download JMeter</a>
 If you run Windows, rather than downloading and running the installer directly from
 Apache, 
 it's simpler to:
@@ -70,6 +71,25 @@ So it's useful in server automation scripts.
 
 
 
+## <a name="Run"> Run in UI &amp; Batch</a>
+A test is invoked from the JMeter UI several ways:
+
+* Click the Run button
+* Select menu Run | Start
+* Press command + R.
+
+However, JMeter is often invoked automatically by a continuous integration tool such as Jenkins.
+See https://wiki.jenkins-ci.org/display/JENKINS/Performance+Plugin.
+A sample command to invoke JMeter:
+
+```
+jmeter -n -t test.jmx -l test.jtl.
+```
+
+Parameter `-l` disables all listeners because they can be resource intensive.
+
+
+
 ## <a name="JMeterUI"> JMeter UI</a>
 1) Open the JMeter UI from Windows Explorer
 
@@ -88,10 +108,12 @@ The more threads, the more virtual users are being simulated.
 
 4) Depending on the type of test, change the <strong>Ramp-up period</strong> 
    to provide one second per user. For example, for 2 users, specify 2 seconds.
+   
+   In the current situation (for recording described below), use 1 user and loop count 1.
 
 5) If there is work to do just once before iterating through,
-select menu <strong>Edit | Add</strong> to create a <strong>setUp Thread Group</strong>.
-This is similar to the LoadRunner VuserInit action.
+  select menu <strong>Edit | Add</strong> to create a <strong>setUp Thread Group</strong>.
+  This is similar to the LoadRunner VuserInit action.
 
 6) Create a <strong>tearDown Thread Group</strong> to execute once.
 This is similar to the LoadRunner VuserEnd action.
@@ -101,55 +123,52 @@ Add directory to jar or classpath
 
 ## <a name="Workbench"> Workbench</a>
 WorkBench is a temporary space to store a test plan's elements,
-such as those recorded.
+such as requests recorded (captured) by a proxy and converted into commands.
 
-1) Get Firefox to use the JMeter proxy
+Below is a remix of
+https://chipcorrera.wordpress.com/2010/01/25/using-jmeter-and-firefox-to-load-test/
+by Chip Correra
+
+
+1) Get Firefox to use the JMeter proxy ???
+
+Now, lets set up Firefox to proxy actions. Bring up the Firefox browser and 
+  under Tools/options/advanced tab/network tab/settings button/”Manual proxy configuration”
+  + Set 127.0.0.1 port 9090
+  + Enable the “Use this proxy for all protocols” check box.
+
 
 2) Configure Internet Options to define Manual proxy configuration to localhost port 8080.
 
-3) Right-click on Workbench to Add | Non-test Elements | HTTP(S) Test Script Recorder.
-
-Recording Controller.
-
+3) Right-click on Workbench to Add | <strong>Non-test Elements | HTTP(S) Test Script Recorder</strong>.
 
 2. Add a HTTP Request Defaults config element
-# This can be used to specify defaults for you entire test suite
-+ Specify your Server Name or IP address and any required port #
+  This can be used to specify defaults for you entire test suite.
+  + Specify your Server Name or IP address and any required port #
 
 3. Add a HTTP Cookie Manager config element
-# This can be used to control and manage the cookie policy across the test
-
-4. Add a Thread Group
-# No need for multi-threaded recording, so:
-+ Specify 1 thread, 1 sec ramp up time and loop count of 1
+    This can be used to control and manage the cookie policy across the test.
 
 5. Add a Once Only Controller
-# My application has a user login that also generates a session, cookie
-# If your application does not, you can skip this step and the next
+    My application has a user login that also generates a session cookie.
+    If your application does not, you can skip this step and the next.
 
 6. Add a HTTP Request Sampler to the Once Only Controller
-# Here you specify the protocol method (put/get), path to the request and any parameters
+    Specify the protocol method (put/get), path to the request and any parameters
 
-7. Add a Recording Controller to the Thread Group
+7. Add a Recording Controller to the Thread Group.
 
-8. Test Plan > Add > Listener > Aggregate Report
+8. Test Plan > Add > Listener > Aggregate Report.
 
 9. Under Workbench, Add > Non-Test Element > HTTP Proxy Server
-+ Port 9090
-+ Target Controller: Thread Group > Recording Controller
-+ Patterns to include: Click Add then enter “.*”
+  + Port 9090
+  + Target Controller: Thread Group > Recording Controller
+  + Patterns to include: Click Add then enter “.*”
 
 10. Under HTTP Proxy Server, Add > Timer > Gaussian Random Timer
-+ Set Constant Delay Offset (in milliseconds): ${T}
-
-Now, lets set up Firefox to proxy actions. Bring up the Firefox browser and under Tools/options/advanced tab/network tab/settings button/”Manual proxy configuration”
-+ Set 127.0.0.1 port 9090
-+ Enable the “Use this proxy for all protocols” check box
+  + Set Constant Delay Offset (in milliseconds): ${T}
 
 And when ready to start recording the browser action just bring up the HTPP Proxy Server within JMeter and click Start. Everything that is done within Firefox will be recorded in JMeter’s recording controller. When done, just click the Stop button on the HTTP Proxy Server within JMeter.
-
-
-https://chipcorrera.wordpress.com/2010/01/25/using-jmeter-and-firefox-to-load-test/
 
 
 ## <a name="TestPlan"> Test Plan Elements</a>
@@ -246,25 +265,6 @@ HTTP, XML, JSON, etc.
 
 
 ## <a name="Firefox"> Firefox</a>
-
-
-## <a name="Run"> Run in UI &amp; Batch</a>
-A test is invoked from the JMeter UI several ways:
-
-* Click the Run button
-* Select menu Run | Start
-* Press command + R.
-
-However, JMeter is often invoked automatically by a continuous integration tool such as Jenkins.
-See https://wiki.jenkins-ci.org/display/JENKINS/Performance+Plugin.
-A sample command to invoke JMeter:
-
-```
-jmeter -n -t test.jmx -l test.jtl.
-```
-
-Parameter `-l` disables all listeners because they can be resource intensive.
-
 
 ## Others
 Start no pauses.
