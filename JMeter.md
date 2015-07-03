@@ -5,16 +5,22 @@ PROTIP of "best practices" are noted when appropriate.
 
 This page is based on several sources:
 * https://blazemeter.com/blog/websocket-testing-apache-jmeter
+* http://www.javacodegeeks.com/2014/11/jmeter-tutorial-load-testing.html
 * https://www.youtube.com/watch?t=933&v=8D6nKml88vE by Ashish Takur, who also published paid content at
 * http://loadrunnerjmeter.com
+* http://www.pluralsight.com/courses/java-web-fundamentals by Kevin Jones about creating Java servlets,
+  filters (controllers), and listeners. These are build using IntelliJ, built using Maven,
+  and run on Tomcat.apache.org web servers.
 
 ## <a name="Java"> Java SDK Pre-requisite</a>
-JMeter is based on Java.
+JMeter was written in Java.
 
 The path to the Java bin folder must be in the system PATH environment variable
 so Java executables can be found.
 
-That's why JMeter can run on PC and Mac.
+The path to JVM_HOME also needs to be defined.
+
+This is the same across operating systems, which is why JMeter can run on PC and Mac.
 
 
 ## <a name="Download"> Download</a>
@@ -40,7 +46,7 @@ So it's useful in server automation scripts.
 1) Switch to Windows Explorer or Finder 
   (Press Ctrl+Tab or command+Tab). 
 
-2) Create a folder to hold test assets
+2) Create a folder to hold test assets. Test plans are containers.
 
 3) Copy sample scripts within the folder.
 
@@ -74,7 +80,20 @@ This is similar to the LoadRunner VuserEnd action.
 
 Add directory to jar or classpath
 
-WorkBench is a temporary space to store work elements.
+
+## <a name="Workbench"> Workbench</a>
+WorkBench is a temporary space to store a test plan's elements,
+such as those recorded.
+
+1) Get Firefox to use the JMeter proxy
+
+2) Configure Internet Options to define Manual proxy configuration to localhost port 8080.
+
+3) Right-click on Workbench to Add | Non-test Elements | HTTP(S) Test Script Recorder.
+
+Recording Controller.
+
+
 
 
 ## <a name="TestPlan"> Test Plan Elements</a>
@@ -174,13 +193,17 @@ HTTP, XML, JSON, etc.
 
 
 ## <a name="Run"> Run</a>
-A test is invoked several ways:
+A test is invoked from the JMeter UI several ways:
 
 * Click the Run button
 * Select menu Run | Start
 * Press command + R.
 
+However, JMeter is more often invoked automatically by a continuous integration tool such as Jenkins.
+See https://wiki.jenkins-ci.org/display/JENKINS/Performance+Plugin.
+
+
+## Others
 Start no pauses.
 
-
-
+Maven build tool which manages dependencies.
