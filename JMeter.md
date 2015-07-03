@@ -21,6 +21,9 @@ Within each <strong>test plan</strong> specifies these elements:
 1. <a href="#Node"> Configuration nodes</a>
 2. <a href="#Preprocessors"> Pre-processors</a>
 3. <a href="#Timers">Timers</a>
+
+If results are available: 
+
 5. <a href="#PreProcessors"> Post processors</a> (only executed if there are results available)
 6. <a href="#Assertions"> Assertions</a> (only executed if there are results available)
 7. <a href="#Listeners"> Listeners</a> (only executed if there are results available)
