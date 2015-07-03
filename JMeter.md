@@ -5,7 +5,8 @@ PROTIP of "best practices" are noted when appropriate.
 
 This page is based on several sources:
 * https://blazemeter.com/blog/websocket-testing-apache-jmeter
-* https://www.youtube.com/watch?t=933&v=8D6nKml88vE by 
+* https://www.youtube.com/watch?t=933&v=8D6nKml88vE by Ashish Takur, who also published paid content at
+* http://loadrunnerjmeter.com
 
 ## <a name="Java"> Java SDK Pre-requisite</a>
 JMeter is based on Java.
@@ -28,16 +29,24 @@ it's simpler to:
 3) run the command (described at https://chocolatey.org/packages?q=jmeter)
 
 ```
-inst jmeter
+inst jmeter -y
 ```
+
+Chocolatey installs without prompting for more user interaction.
+So it's useful in server automation scripts.
+
 
 ## <a name="TestPlanFolders"> Test Assets Folders</a>
 1) Switch to Windows Explorer or Finder 
   (Press Ctrl+Tab or command+Tab). 
 
-2) Create a folder to hold test assets.
+2) Create a folder to hold test assets
 
-## <a name="JMeterUI"> JMeter</a>
+3) Copy sample scripts within the folder.
+
+
+
+## <a name="JMeterUI"> JMeter UI</a>
 1) Open the JMeter UI from Windows Explorer
 
 
@@ -159,6 +168,9 @@ sample results have various attributes (success/fail, elapsed time, data size et
 Validation of the validity of what was returned from the server is done by 
 <strong>assertions</strong>, which are based on the format of the response:
 HTTP, XML, JSON, etc.
+
+
+## <a name="Firefox"> Firefox</a>
 
 
 ## <a name="Run"> Run</a>
