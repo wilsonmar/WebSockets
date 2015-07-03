@@ -1,4 +1,7 @@
-This page introduces you to JMeter in a hands-on way.
+This page introduces you to JMeter in a hands-on way, with concepts pointed out along the way.
+(rather than bombarding you with random concepts)
+Similarities to LoadRunner, Visual Studio, and other similar tools is pointed out along the way.
+PROTIP of "best practices" are noted when appropriate.
 
 This page is based on several sources:
 * https://blazemeter.com/blog/websocket-testing-apache-jmeter
@@ -14,7 +17,7 @@ That's why JMeter can run on PC and Mac.
 
 
 ## <a name="Download"> Download</a>
-If you run Windows, rather than downloading and running the installer from
+If you run Windows, rather than downloading and running the installer directly from
 Apache, 
 it's simpler to:
 
@@ -42,16 +45,28 @@ inst jmeter
 Load on servers is imposed by activities within various program <strong>thread</strong>.
 The more threads, the more virtual users are being simulated.
 
-If there is work to do just once before iterating through,
+1) Create the <strong>Thread Group</strong> for the Test Plan:
+  select menu <strong>Edit | Add</strong> to create a <strong>Thread Group</strong>.
+
+2) Specify <strong>2</strong> as the initial number of Threads (users).
+
+3) PROTIP: Change the Thread Group's name to summarize the various settings, 
+   such as "2Users".
+
+4) Depending on the type of test, change the <strong>Ramp-up period</strong> 
+   to provide one second per user. For example, for 2 users, specify 2 seconds.
+
+5) If there is work to do just once before iterating through,
 select menu <strong>Edit | Add</strong> to create a <strong>setUp Thread Group</strong>.
+This is similar to the LoadRunner VuserInit action.
 
-Create a <strong>tearDown Thread Group</strong> to execute once.
-
-Create the <strong>Thread Group</strong> for the Test Plan.
+6) Create a <strong>tearDown Thread Group</strong> to execute once.
+This is similar to the LoadRunner VuserEnd action.
 
 Add directory to jar or classpath
 
 WorkBench is a temporary space to store work elements.
+
 
 ## <a name="TestPlan"> Test Plan Elements</a>
 JMeter invokes <strong>Test Plans</strong>
@@ -76,7 +91,7 @@ Each test plan can be selectively disabled for execution.
 Within each <strong>test plan</strong> are these elements:
 
 0. <a href="#Samplers"> Samplers</a>
-1. <a href="#Node"> Configuration nodes</a>
+1. <a href="#ConfigNodes"> Configuration Nodes</a>
 2. <a href="#Preprocessors"> Pre-processors</a>
 3. <a href="#Timers">Timers</a>
 
@@ -96,11 +111,15 @@ Samplers run as <strong>Thread groups</strong>.
 
 Each group contains <strong>nodes</strong> which contain various <strong>elements</strong>.
 
-<a name="Nodes"></a>
+
+## <a name="ConfigNodes"> Configuration Nodes</a>
 Nodes are associated with 
 different parameters passed into sampler request code by using 
 <strong>configuration elements</strong> which provide values to
 <strong>variables</strong> referenced by sampler code.
+
+Save Node as Image 
+
 
 <a name="LogicControllers"></a>
 The order of execution of different samplers is controlled by
