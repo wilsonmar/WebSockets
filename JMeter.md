@@ -16,9 +16,9 @@ This page is based on several sources:
 0. <a href="#Java"> Java SDK Pre-requisite</a>
 0. <a href="#Download"> Download</a>
 0. <a href="#TestPlanFolders"> Test Assets Folders</a>
-0. <a href="#Run"> Run in UI &amp; Batch</a>
-
-0. <a href="#JMeterUI"> JMeter UI</a>
+0. <a href="#SampleTestPlans"> Sample Test Plans</a>
+0. <a href="#RunBatch"> Run in Batch Mode</a>
+0. <a href="#JMeterUI"> JMeter UI Run</a>
 0. <a href="#ThreadGroups"> Thread Groups</a>
 0. <a href="#Workbench"> Workbench</a>
 0. <a href="#TestPlan"> Test Plan Elements</a>
@@ -29,6 +29,7 @@ This page is based on several sources:
 0. <a href="#Listeners"> Listeners</a>
 0. <a href="#Attributes"> Attributes</a>
 0. <a href="#Assertions"> Assertions</a>
+0. <a href="#Plugins"> JMeter Plug-ins</a>
 
 
 ## <a name="Java"> Java SDK Pre-requisite</a>
@@ -60,6 +61,8 @@ inst jmeter -y
 Chocolatey installs without prompting for more user interaction.
 So it's useful in server automation scripts.
 
+NOTE: Instructions below are based on version 2.1.2 downloaded June 30, 2015.
+
 
 ## <a name="TestPlanFolders"> Test Assets Folders</a>
 1) Switch to Windows Explorer or Finder 
@@ -67,11 +70,18 @@ So it's useful in server automation scripts.
 
 2) Create a folder to hold test assets. Test plans are containers.
 
+3) Open an internet browser to htt://github.com/wilsonmar/WebSockets/JMeterSample1.
+  
+4) Click <strong>Download ZIP</strong> to obtain file JMeterSample1-repository.zip.
+
+5) Unzip.
+
+## <a name="SampleTestPlans"> Sample Test Plans</a>
+
 3) Copy sample scripts within the folder.
 
 
-
-## <a name="Run"> Run in UI &amp; Batch</a>
+## <a name="RunBatch"> Run in Batch Mode</a>
 A test is invoked from the JMeter UI several ways:
 
 * Click the Run button
@@ -89,10 +99,22 @@ jmeter -n -t test.jmx -l test.jtl.
 Parameter `-l` disables all listeners because they can be resource intensive.
 
 
+## <a name="JMeterUI"> JMeter UI Run</a>
+1) Invoke the JMeter UI from Windows Explorer or Mac Finder.
 
-## <a name="JMeterUI"> JMeter UI</a>
-1) Open the JMeter UI from Windows Explorer
+2) Select menu Open.
 
+3) Navigate to the sample test plan.
+
+4) Run the test from the JMeter UI one of several ways:
+
+  * Click the Run button
+  * Select menu Run | Start
+  * Press command + R.
+
+5) During the run, at the upper-right corner in the gray bar is "0/1".
+
+6) 
 
 ## <a name="ThreadGroups"> Thread Groups</a>
 Load on servers is imposed by activities within various program <strong>thread</strong>.
@@ -260,11 +282,18 @@ sample results have various attributes (success/fail, elapsed time, data size et
 
 ## <a name="Assertions"> Assertions</a>
 Validation of the validity of what was returned from the server is done by 
-<strong>assertions</strong>, which are based on the format of the response:
-HTTP, XML, JSON, etc.
+<strong>assertions</strong>, which are based on the format of the response.
+
+VIDEO: 
+https://www.youtube.com/watch?t=74&v=kKnLsKpHn0Y
+provides a 30-minute introduction to various assertions:
+Duration, Size, XML, HTML, Response, XPath Compare.
 
 
-## <a name="Firefox"> Firefox</a>
+## <a name="Plugins"> JMeter Plug-ins</a>
+Plug-ins extend the capability of JMeter.
+
+https://github.com/undera/jmeter-plugins
 
 ## Others
 Start no pauses.
