@@ -1,18 +1,76 @@
+This page introduces you to JMeter in a hands-on way.
 
 This page is based on several sources:
 * https://blazemeter.com/blog/websocket-testing-apache-jmeter
+* https://www.youtube.com/watch?t=933&v=8D6nKml88vE by 
 
-Download the JMeter UI installer.
+## <a name="Java"> Java SDK Pre-requisite</a>
+JMeter is based on Java.
 
-Several tests can run JMeter.
+The path to the Java bin folder must be in the system PATH environment variable
+so Java executables can be found.
 
-Open the JMeter UI.
+That's why JMeter can run on PC and Mac.
 
-<a name="TestPlan"></a>
-Open a Test Plan group to be executed.
 
-A test plan can contain other test plans, to group tests by functional or technical logic together.
+## <a name="Download"> Download</a>
+If you run Windows, rather than downloading and running the installer from
+Apache, 
+it's simpler to:
 
+1) open a command window,
+
+2) install Chocolatey in Powershell (if your haven't already)
+
+3) run the command (described at https://chocolatey.org/packages?q=jmeter)
+
+```
+inst jmeter
+```
+
+## <a name="TestPlanFolders"> Test Assets Folders</a>
+1) Switch to Windows Explorer or Finder 
+  (Press Ctrl+Tab or command+Tab). 
+
+2) Create a folder to hold test assets.
+
+## <a name="JMeterUI"> JMeter</a>
+1) Open the JMeter UI from Windows Explorer
+
+
+## <a name="ThreadGroups"> Thread Groups</a>
+Load on servers is imposed by activities within various program <strong>thread</strong>.
+The more threads, the more virtual users are being simulated.
+
+If there is work to do just once before iterating through,
+select menu <strong>Edit | Add</strong> to create a <strong>setUp Thread Group</strong>.
+
+Create a <strong>tearDown Thread Group</strong> to execute once.
+
+Create the <strong>Thread Group</strong> for the Test Plan.
+
+Add directory to jar or classpath
+
+WorkBench is a temporary space to store work elements.
+
+## <a name="TestPlan"> Test Plan Elements</a>
+JMeter invokes <strong>Test Plans</strong>
+
+Test Plans are equivalent to what LoadRunner call Scenarios
+which references all that is required to run a test.
+
+Test Plans are XML files.
+
+Open an existing Test Plan group () to be executed.
+
+Select menu Edit | Add | Thread Group.
+
+<a target="_blank" href="https://cloud.githubusercontent.com/assets/300046/8502621/c48a5aca-216f-11e5-860a-fb57d757bb4e.png">
+<img src="https://cloud.githubusercontent.com/assets/300046/8502621/c48a5aca-216f-11e5-860a-fb57d757bb4e.png"
+/></a>
+
+To group tests by functional or technical logic together,
+a test plan can contain other test plans.
 Each test plan can be selectively disabled for execution.
 
 Within each <strong>test plan</strong> are these elements:
@@ -29,16 +87,12 @@ Within each <strong>test plan</strong> are these elements:
 7. <a href="#Listeners"> Listeners</a>
 
 
-
-
 <a name="Samplers"></a>
 JMeter <strong>samplers</strong> emulate real clients by sending (a lot of) requests to servers.
 One sampler for WebSockets was created by 
 https://github.com/maciejzaleski/JMeter-WebSocketSampler
 
-<a name="ThreadGroups"></a>
 Samplers run as <strong>Thread groups</strong>.
-The more threads, the more virtual users are being simulated.
 
 Each group contains <strong>nodes</strong> which contain various <strong>elements</strong>.
 
@@ -75,6 +129,7 @@ by <strong>post-processors</strong>.
 Output from samplers to tables, trees, or plain log files are formatted by
 <strong>listeners</strong>
 provide different ways to view the results produced by a Sampler requests. 
+
 
 <a name="Attributes"></a>
 In the various listeners,
