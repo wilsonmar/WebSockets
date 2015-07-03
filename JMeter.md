@@ -15,7 +15,7 @@ A test plan can contain other test plans, to group tests by functional or techni
 
 Each test plan can be selectively disabled for execution.
 
-Within each <strong>test plan</strong> specifies these elements:
+Within each <strong>test plan</strong> are these elements:
 
 0. <a href="#Samplers"> Samplers</a>
 1. <a href="#Node"> Configuration nodes</a>
@@ -24,9 +24,9 @@ Within each <strong>test plan</strong> specifies these elements:
 
   If results are available: 
 
-5. <a href="#PreProcessors"> Post processors</a> (only executed if there are results available)
-6. <a href="#Assertions"> Assertions</a> (only executed if there are results available)
-7. <a href="#Listeners"> Listeners</a> (only executed if there are results available)
+5. <a href="#PreProcessors"> Post processors</a>
+6. <a href="#Assertions"> Assertions</a>
+7. <a href="#Listeners"> Listeners</a>
 
 
 
