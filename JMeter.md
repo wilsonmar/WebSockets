@@ -16,7 +16,8 @@ This page is based on several sources:
 
 ## Contents
 0. <a href="#Java"> Java SDK Pre-requisite</a>
-0. <a href="#Download"> Download JMeter</a>
+0. <a href="#Download4PC"> Download JMeter for PCs</a>
+0. <a href="#Download4Mac"> Download JMeter for Macs</a>
 0. <a href="#TestPlanFolders"> Test Assets Folders</a>
 0. <a href="#SampleTestPlans"> Sample Test Plans</a>
 0. <a href="#RunBatch"> Run in Batch Mode</a>
@@ -50,19 +51,17 @@ set JAVA_HOME=C:\jdk1.7.0_45
 This is the same across operating systems, which is why JMeter can run on PC and Mac.
 
 
-## <a name="Download"> Download JMeter</a>
-(as <a target="_blank" href="http://zacster.blogspot.com/2008/03/quick-howto-to-setup-jmeter.html">
-Zac explained in 2008</a>),
+## <a name="Download4PC"> Download JMeter for PCs</a>
+If you follow what <a target="_blank" href="http://zacster.blogspot.com/2008/03/quick-howto-to-setup-jmeter.html">
+Zac explained in 2008</a>) and download from a mirror website on the
 <a target="_blank" href="http://jmeter.apache.org/download_jmeter.cgi"> 
-The Apache download web page</a> provides an installer directly from various mirrors.
-
-When I downloaded on Jun 30, 2015 it was apache-jmeter-2.13.zip which 
-I unzip to the Downloads folder.
+Apache download web page</a>,
+you then need to unzip, create a folder, move it, etc.
 
 PROTIP:
 If you run Windows, I think it's simpler to:
 
-1) open a command window,
+1) Open a command window,
 
 2) install Chocolatey in Powershell (if your haven't already)
 
@@ -78,6 +77,17 @@ So it's useful in server automation scripts.
 NOTE: Instructions below are based on version 2.1.2 downloaded June 30, 2015.
 
 http://www.apache.org/info/verification.html
+
+## <a name="Download4Mac"> Download JMeter for Macs</a>
+Similarly, on the Mac, open a Terminal windows and use Homebrew:
+
+```
+brew install jmeter
+```
+
+Homebrew saves jmeter to folder /usr/local/Cellar/jmeter
+
+It was apache-jmeter-2.13.zip when I downloaded on Jun 30, 2015.
 
 
 ## <a name="TestPlanFolders"> Download Sample to Test Assets Folder</a>
