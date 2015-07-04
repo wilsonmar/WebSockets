@@ -51,7 +51,7 @@ set JAVA_HOME=C:\jdk1.7.0_45
 This is the same across operating systems, which is why JMeter can run on PC and Mac.
 
 
-## <a name="Download4PC"> Download JMeter for PCs</a>
+## <a name="Download4PC"> Download, Install JMeter for PCs</a>
 If you follow what <a target="_blank" href="http://zacster.blogspot.com/2008/03/quick-howto-to-setup-jmeter.html">
 Zac explained in 2008</a>) and download from a mirror website on the
 <a target="_blank" href="http://jmeter.apache.org/download_jmeter.cgi"> 
@@ -78,7 +78,7 @@ NOTE: Instructions below are based on version 2.1.2 downloaded June 30, 2015.
 
 http://www.apache.org/info/verification.html
 
-## <a name="Download4Mac"> Download JMeter for Macs</a>
+## <a name="Download4Mac"> Download, Install JMeter for Macs</a>
 Similarly, on the Mac, open a Terminal windows and use Homebrew:
 
 ```
@@ -128,12 +128,16 @@ jmeter -n -t demo.jmx -l test.jtl.
 
 
 ## <a name="JMeterUI"> JMeter UI Run</a>
-1) Invoke the JMeter UI from Windows Explorer or Mac Finder.
+1) Run a command or terminal window.
 
-  Open a command window, navigate into JMeter's bin folder (src/test/jmeter)
-  
-2) Invoke <strong>Jmeter.bat</strong>.
+2) Invoke the JMeter UI by typing in `Jmeter`.
 
+    On the PC this invokes <strong>Jmeter.bat</strong>.
+
+    Wait for the JMeter window to appear.
+
+    WARNING: Do not dismiss the command/terminal window which invoked JMeter.
+    
 3) Select menu Open.
 
 4) Navigate to the sample test plan.
