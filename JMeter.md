@@ -20,10 +20,10 @@ This page is based on several sources:
 0. <a href="#Download4Mac"> Download JMeter for Macs</a>
 0. <a href="#InvokeUI"> Invoke JMeter UI</a>
 0. <a href="#TestPlanFolders"> Test Assets Folders</a>
-0. <a href="#SampleTestPlans"> Sample Test Plans</a>
+## <a name="PythonSetup"> Sample Test Setup for Python</a>
+0. <a href="#JMeterUI"> JMeter UI Run</a>
 0. <a href="#RunBatch"> Run in Batch Mode</a>
 0. <a href="#ViewLog"> View Log File</a>
-0. <a href="#JMeterUI"> JMeter UI Run</a>
 0. <a href="#ThreadGroups"> Thread Groups</a>
 0. <a href="#Workbench"> Workbench</a>
 0. <a href="#TestPlan"> Test Plan Elements</a>
@@ -119,7 +119,7 @@ It was apache-jmeter-2.13.zip when I downloaded on Jun 30, 2015.
 4) Click Cancel.
   
 
-## <a name="TestPlanFolders"> Sample Test with Python</a>
+## <a name="PythonSetup"> Sample Test Setup for Python</a>
 Unlike other tutorials that only scratches the surface,
 let's look at a JMeter test plan that has scripting logic often needed.
 
@@ -202,6 +202,29 @@ cd 99bottles-jmeter
 pip install --requirement=requirements.txt
 ```
 
+## <a name="JMeterUI"> JMeter UI Run</a>
+1) Run a command or terminal window.
+
+2) Invoke the JMeter UI by typing in `Jmeter`.
+
+  On the PC this invokes <strong>Jmeter.bat</strong>.
+
+  Wait for the JMeter window to appear.
+
+  WARNING: Do not dismiss the command/terminal window which invoked JMeter.
+    
+3) Select menu Open.
+
+4) Navigate to the sample test plan.
+
+5) Run the test from the JMeter UI one of several ways:
+
+  * Click the Run button
+  * Select menu Run | Start
+  * Press command + R.
+
+6) During the run, at the upper-right corner in the gray bar is "0/1".
+
 
 ## <a name="RunBatch"> Run in Batch Mode</a>
 JMeter is often invoked automatically by a continuous integration tool such as Jenkins.
@@ -217,10 +240,9 @@ See https://wiki.jenkins-ci.org/display/JENKINS/Performance+Plugin.
 jmeter -n -t "Test Plan.jmx" -l run001.jtl
 ```
 
-* Parameter `-n` ???
-* Parameter `-t` ???
-* Parameter `-l` disables all listeners because they can be resource intensive.
-* run001.jtl is the text file to hold results from the run. See http://wiki.apache.org/jmeter/JtlFiles.
+* Parameter `-n` specifies no GUI.
+* Parameter `-t "Test Plan.jmx"` specifies the test plan.
+* Parameter `-l run001.jtl` specifies the text file to hold results from the run. See http://wiki.apache.org/jmeter/JtlFiles.
 
 PROTIP:
 Avoid using spaces in test plan names.
@@ -259,29 +281,6 @@ In this example, the output file as 211,148 bytes:
 ```
 1436013917275,67,HTTP Request,Non HTTP response code: org.apache.http.conn.Http$
 ```
-
-## <a name="JMeterUI"> JMeter UI Run</a>
-1) Run a command or terminal window.
-
-2) Invoke the JMeter UI by typing in `Jmeter`.
-
-  On the PC this invokes <strong>Jmeter.bat</strong>.
-
-  Wait for the JMeter window to appear.
-
-  WARNING: Do not dismiss the command/terminal window which invoked JMeter.
-    
-3) Select menu Open.
-
-4) Navigate to the sample test plan.
-
-5) Run the test from the JMeter UI one of several ways:
-
-  * Click the Run button
-  * Select menu Run | Start
-  * Press command + R.
-
-6) During the run, at the upper-right corner in the gray bar is "0/1".
 
 
 ## <a name="ThreadGroups"> Thread Groups</a>
