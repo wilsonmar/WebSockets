@@ -18,6 +18,7 @@ This page is based on several sources:
 0. <a href="#Java"> Java SDK Pre-requisite</a>
 0. <a href="#Download4PC"> Download JMeter for PCs</a>
 0. <a href="#Download4Mac"> Download JMeter for Macs</a>
+0. <a href="#InvokeUI"> Invoke JMeter UI</a>
 0. <a href="#TestPlanFolders"> Test Assets Folders</a>
 0. <a href="#SampleTestPlans"> Sample Test Plans</a>
 0. <a href="#RunBatch"> Run in Batch Mode</a>
@@ -78,30 +79,64 @@ NOTE: Instructions below are based on version 2.1.2 downloaded June 30, 2015.
 
 http://www.apache.org/info/verification.html
 
+
 ## <a name="Download4Mac"> Download, Install JMeter for Macs</a>
 Similarly, on the Mac, open a Terminal windows and use Homebrew:
 
 ```
-brew install jmeter
+brew update
+brew install jmeter --with-plugins
 ```
 
-Homebrew saves jmeter to folder /usr/local/Cellar/jmeter
+These instructions update instructions
+<a target="_blank" href="http://biscminds.blogspot.fr/2011/12/quick-jmeter-setup-on-mac.html">
+here from 2011</a>.
+
+Homebrew saves jmeter to folder <strong>/usr/local/Cellar/jmeter</strong>.
 
 It was apache-jmeter-2.13.zip when I downloaded on Jun 30, 2015.
 
+## <a name="InvokeUI"> Invoke JMeter UI</a>
+1) Open a new command or terminal window.
+
+2) Invoke the JMeter UI by typing in `Jmeter`.
+
+  On the PC this invokes <strong>Jmeter.bat</strong>.
+
+  Wait for the JMeter window to appear.
+
+  WARNING: Do not dismiss the command/terminal window which invoked JMeter.
+
+3) Press command + N or click menu <strong>File | Open</strong>.
+
+  On a Mac, notice the default location of test plans is <strong>usr</strong>.
+  
+  Notice the file format is JMeter [<strong>.jmx</strong>].
+  
+4) Click Cancel.
+  
 
 ## <a name="TestPlanFolders"> Download Sample to Test Assets Folder</a>
-1) Switch to Windows Explorer or Finder 
-  (Press Ctrl+Tab or command+Tab). 
+1) Open an internet browser to a basic demo:
 
-2) Create a folder to hold test assets. Test plans are containers.
+  * https://github.com/jribble/jmeter-demo
+ 
+  WARNING: This is a 3rd party content and may change or disappear at any time.
 
-3) Open an internet browser to https://github.com/jribble/jmeter-demo
-(http://github.com/wilsonmar/WebSockets/JMeterSimpleDemo1).
-  
+3b) Alternately, open an internet browser to 
+
+  * /Users/wilsonmar/Downloads/JMeter-WebSocketSampler-master/src/main/java/JMeter
+
 4) Click <strong>Download ZIP</strong> to obtain file name ending with <strong>-master.zip</strong>.
 
 5) Unzip.
+
+1) Switch to Windows Explorer or Finder (Press Ctrl+Tab or command+Tab). 
+
+2) On a Mac, in the Finder favorites list, click the house icon,
+then press command+up arrow for the <strong>Macintosh HD</strong> (root) folder.
+
+3) Create a folder to hold test assets. Test plans are containers.
 
 6) Drill down to the <strong>.jmx</strong> file, which is the Test Plan.
 
@@ -132,11 +167,11 @@ jmeter -n -t demo.jmx -l test.jtl.
 
 2) Invoke the JMeter UI by typing in `Jmeter`.
 
-    On the PC this invokes <strong>Jmeter.bat</strong>.
+  On the PC this invokes <strong>Jmeter.bat</strong>.
 
-    Wait for the JMeter window to appear.
+  Wait for the JMeter window to appear.
 
-    WARNING: Do not dismiss the command/terminal window which invoked JMeter.
+  WARNING: Do not dismiss the command/terminal window which invoked JMeter.
     
 3) Select menu Open.
 
@@ -334,6 +369,11 @@ Plug-ins extend the capability of JMeter.
 
 https://github.com/undera/jmeter-plugins
 
+https://github.com/afranken/jmeter-analysis-maven-plugin
+is a Maven plugin that parses JMeter result XML files and generates detailed reports with charts
+Can be used in combination with the JMeter Maven Plugin 
+https://github.com/afranken/jmeter-analysis-maven-plugin
+developed by the same author.
 
 ## <a name="SetupThreadGroup"> Setup Thread Group</a>
 If there is work to do just once before iterating through,
