@@ -90,7 +90,7 @@ brew install jmeter --with-plugins
 
 These instructions update instructions
 <a target="_blank" href="http://biscminds.blogspot.fr/2011/12/quick-jmeter-setup-on-mac.html">
-here from 2011</a>.
+here from 2011</a> when JMeter was still under the Apache Jakarta project.
 
 Homebrew saves jmeter to folder <strong>/usr/local/Cellar/jmeter</strong>.
 
@@ -116,12 +116,36 @@ It was apache-jmeter-2.13.zip when I downloaded on Jun 30, 2015.
 4) Click Cancel.
   
 
-## <a name="TestPlanFolders"> Download Sample to Test Assets Folder</a>
-1) Open an internet browser to a basic demo:
+## <a name="TestPlanFolders"> Sample Test Assets</a>
+1) Open an internet browser to the "99 Bottles of JMeter on the wall" website (dated November, 2011):
 
-  * https://github.com/jribble/jmeter-demo
+  * http://tech.mindcandy.com/2011/11/99-bottles-of-jmeter-on-the-wall/
  
   WARNING: This is a 3rd party content and may change or disappear at any time.
+
+  The site describes the use of BSF PreProcessor which contains JavaScript.
+
+  BSF is the Bean Scriptingl Framework at http://beanshell.org/manual/bsf.html
+  and http://commons.apache.org/proper/commons-bsf/
+  and https://en.wikipedia.org/wiki/Bean_Scripting_Framework
+  
+ It is generic framework that allows many scripting languages to be plugged into an application. It shields the application from knowledge of how to invoke the scripting languages and their APIs, via adapter "engines". 
+  BeanShell dynamically executes Java code (is a Lightweight embedded Java source interpreter that).
+  for Java per [JSR223](http://jcp.org/en/jsr/detail?id=274)
+  described on http://www.drdobbs.com/jvm/jsr-223-scripting-for-the-java-platform/215801163
+  
+  BSP supports dynamic execution of JavaScript, achieved using Mozilla Rhino engine (from 
+  https://developer.mozilla.org/en-US/docs/Mozilla/Projects/Rhino)
+  which is also used in Oracle JVM.
+ 
+ However, it is recommended that for "heavy" operations it's better to use JSR223 Sampler and Groovy as a language.
+ See https://blazemeter.com/blog/beanshell-vs-jsr223-vs-java-jmeter-scripting-its-performance
+ 
+  It uses the ScriptEngine interface which became available in Java 6.
+ 
+2) Open website https://github.com/groodt/99bottles-jmeter
+
+3) 
 
 3b) Alternately, open an internet browser to 
 
@@ -227,21 +251,23 @@ Now, lets set up Firefox to proxy actions. Bring up the Firefox browser and
 
 3) Right-click on Workbench to Add | <strong>Non-test Elements | HTTP(S) Test Script Recorder</strong>.
 
-4) Right-clock Thread Group to Add | Config Element | HTTP Request Defaults.
+4) Right-click on Recorder to Add | <strong>Logic Controller | Recording Controller</strong>
+    (Once Only Controller)
+    If your application has a user login which generates session cookies,
+    otherwise skip this step and the next.
+
+  This conveniently packages all samples under one controller, which can be given a name that describes the test case.
+
+5) Right-clock Thread Group to Add | Config Element | HTTP Request Defaults.
   This applies to your entire test suite.
 
-5) Specify <strong>Server Name or IP</strong> address and any required port #.
+6) Specify <strong>Server Name or IP</strong> address and any required port #.
 
   Other tutorials use google.com or jmeter.apache.org.
   One live demo WebSockets website is 
 
-6) Add a HTTP Cookie Manager config element
+7) Add a HTTP Cookie Manager config element
     This can be used to control and manage the cookie policy across the test.
-
-7) Right-click on Thread Group to Add | Logic Controller | Recording Controller
-    (Once Only Controller)
-    My application has a user login that also generates a session cookie.
-    If your application does not, you can skip this step and the next.
 
 8) Add a HTTP Request Sampler to the Once Only Controller
     Specify the protocol method (put/get), path to the request and any parameters
@@ -299,7 +325,7 @@ are at https://github.com/ATLANTBH/jmeter-components.
 ## <a name="Samplers"> Samplers</a>
 JMeter <strong>samplers</strong> emulate real clients by sending (a lot of) requests to servers.
 
-Samplers for WebSockets:
+Samplers plug-in for WebSockets:
 
   * https://github.com/kawasima/jmeter-websocket
   * https://github.com/maciejzaleski/JMeter-WebSocketSampler
@@ -324,6 +350,9 @@ If, While, FoEach, Loop, Random, etc.
 Before a sampler is executed, elements (actions, assertions or basically whatever) that is going to happen 
 are defined in <strong>pre-processors</strong> which
 extract variables from a response that can be used in the sampler afterwards via configuration elements.
+
+Pre-processor is able to create variables for the next steps (sampler or any other entity in current thread group), something like vars.put("variable_name", "variable_value") in the pre-processor followed by ${variable_name} wherever you need to refer it. 
+
 
 ## <a name="Timers"> Timers</a>
 The time period to wait between requests are defined by <strong>timers</strong>,
@@ -375,6 +404,9 @@ Can be used in combination with the JMeter Maven Plugin
 https://github.com/afranken/jmeter-analysis-maven-plugin
 developed by the same author.
 
+http://stackoverflow.com/users/460802/ubik-load-pack
+
+
 ## <a name="SetupThreadGroup"> Setup Thread Group</a>
 If there is work to do just once before iterating through,
   select menu <strong>Edit | Add</strong> to create a <strong>setUp Thread Group</strong>.
@@ -389,3 +421,8 @@ This is similar to the LoadRunner VuserEnd action.
 Start no pauses.
 
 Maven build tool which manages dependencies.
+
+https://github.com/oliverlloyd/jmeter-ec2
+Automates running Apache JMeter on Amazon EC2 
+
+
