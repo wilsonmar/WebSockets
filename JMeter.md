@@ -22,6 +22,7 @@ This page is based on several sources:
 0. <a href="#TestPlanFolders"> Test Assets Folders</a>
 0. <a href="#SampleTestPlans"> Sample Test Plans</a>
 0. <a href="#RunBatch"> Run in Batch Mode</a>
+0. <a href="#ViewLog"> View Log File</a>
 0. <a href="#JMeterUI"> JMeter UI Run</a>
 0. <a href="#ThreadGroups"> Thread Groups</a>
 0. <a href="#Workbench"> Workbench</a>
@@ -213,7 +214,7 @@ See https://wiki.jenkins-ci.org/display/JENKINS/Performance+Plugin.
 3) Type:
 
 ```
-jmeter -n -t "Test Plan.jmx" -l run001.jtl.
+jmeter -n -t "Test Plan.jmx" -l run001.jtl
 ```
 
 * Parameter `-n` ???
@@ -239,6 +240,25 @@ Tidying up ...    @ Sat Jul 04 06:45:31 MDT 2015 (1436013931672)
 (env1)
 ```
 
+## <a name="ViewLog"> View Log File</a>
+
+4) View the list of files with file sizes:
+
+```
+ls -all
+```
+
+In this example, the output file as 211,148 bytes:
+
+```
+  -rw-r--r--    1 wilsonmar  staff  211148 Jul  4 06:45 run001.jtl
+```
+
+5) Open the file using a text editor:
+
+```
+1436013917275,67,HTTP Request,Non HTTP response code: org.apache.http.conn.Http$
+```
 
 ## <a name="JMeterUI"> JMeter UI Run</a>
 1) Run a command or terminal window.
