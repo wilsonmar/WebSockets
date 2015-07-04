@@ -30,6 +30,8 @@ This page is based on several sources:
 0. <a href="#ConfigNodes"> Configuration Nodes</a>
 0. <a href="#LogicControllers"> Logic Controllers</a>
 0. <a href="#Timers"> Timers</a> (to add delays)
+0. <a href="#PreProcessors"> Pre-Processors</a>
+0. <a href="#PostProcessors"> Post-Processors</a>
 0. <a href="#Listeners"> Listeners</a> (for reporting, logging, debugging)
 0. <a href="#Attributes"> Attributes</a>
 0. <a href="#Assertions"> Assertions</a> (for error checking)
@@ -116,55 +118,89 @@ It was apache-jmeter-2.13.zip when I downloaded on Jun 30, 2015.
 4) Click Cancel.
   
 
-## <a name="TestPlanFolders"> Sample Test Assets</a>
-1) Open an internet browser to the "99 Bottles of JMeter on the wall" website (dated November, 2011):
+## <a name="TestPlanFolders"> Sample Test with Python</a>
+Unlike other tutorials that only scratches the surface,
+let's look at a JMeter test plan that has scripting logic often needed.
 
-  * http://tech.mindcandy.com/2011/11/99-bottles-of-jmeter-on-the-wall/
- 
-  WARNING: This is a 3rd party content and may change or disappear at any time.
+1) Open an internet browser to https://github.com/wilsonmar/99bottles-jmeter
+  which was forked from https://github.com/groodt/99bottles-jmeter (dated November, 2011 and not updated since).
 
-  The site describes the use of BSF PreProcessor which contains JavaScript.
+2) Click <strong>Download ZIP</strong> to obtain file name ending with <strong>-master.zip</strong>
+  then unzip. 
+  Or use git to clone the repo locally.
 
-  BSF is the Bean Scriptingl Framework at http://beanshell.org/manual/bsf.html
-  and http://commons.apache.org/proper/commons-bsf/
-  and https://en.wikipedia.org/wiki/Bean_Scripting_Framework
+3) Copy the repo's path to the Clipboard.
+
+  On a Mac Finder window opened to the repo stored locally, 
+  right-click on <strong>requirements.txt</strong> 
+  and select Get Info. Double-click on "99bottles" within the Where: text
+  until the whole path is highlighted.
+  Press command+C to store the highlighted string in the Clipboard.
+
+4) Open a command or Terminal window.
+
+5) Type `cd` and paste the Clipboard containing the path to the "99bottles" repo folder on your local drive.
+  For example:
   
- It is generic framework that allows many scripting languages to be plugged into an application. It shields the application from knowledge of how to invoke the scripting languages and their APIs, via adapter "engines". 
-  BeanShell dynamically executes Java code (is a Lightweight embedded Java source interpreter that).
-  for Java per [JSR223](http://jcp.org/en/jsr/detail?id=274)
-  described on http://www.drdobbs.com/jvm/jsr-223-scripting-for-the-java-platform/215801163
-  
-  BSP supports dynamic execution of JavaScript, achieved using Mozilla Rhino engine (from 
-  https://developer.mozilla.org/en-US/docs/Mozilla/Projects/Rhino)
-  which is also used in Oracle JVM.
- 
- However, it is recommended that for "heavy" operations it's better to use JSR223 Sampler and Groovy as a language.
- See https://blazemeter.com/blog/beanshell-vs-jsr223-vs-java-jmeter-scripting-its-performance
- 
-  It uses the ScriptEngine interface which became available in Java 6.
- 
-2) Open website https://github.com/groodt/99bottles-jmeter
+```
+  /Users/wilsonmar/Downloads/99bottles-jmeter-master
+```
 
-3) 
+6) View files by typing `ls`.
 
-3b) Alternately, open an internet browser to 
+  This JMeter Test Plan contains a <strong>server.py</strong> Python script.
+  It is called from within a
+  BSF PreProcessor.
+  So the Python package installer (pip) needs to be installed.
 
-  * /Users/wilsonmar/Downloads/JMeter-WebSocketSampler-master/src/main/java/JMeter
+6) Install pip
 
-4) Click <strong>Download ZIP</strong> to obtain file name ending with <strong>-master.zip</strong>.
+```
+sudo easy_install pip
+```
 
-5) Unzip.
+7) Create a virtualenv for Python. 
+  (as described in the "99 Bottles of JMeter on the wall" website
+  http://tech.mindcandy.com/2011/11/99-bottles-of-jmeter-on-the-wall )
 
-1) Switch to Windows Explorer or Finder (Press Ctrl+Tab or command+Tab). 
+```
+pip install virtualenv
+```
 
-2) On a Mac, in the Finder favorites list, click the house icon,
-then press command+up arrow for the <strong>Macintosh HD</strong> (root) folder.
+8) Use virtualenv to install virtualenvwrapper:
+  (based on http://virtualenvwrapper.readthedocs.org/en/latest/)
 
-3) Create a folder to hold test assets. Test plans are containers.
+```
+sudo pip install virtualenvwrapper
+export WORKON_HOME=~/Envs
+mkdir -p $WORKON_HOME
+echo $WORKON_HOME
+source /usr/local/bin/virtualenvwrapper.sh
+```
 
-6) Drill down to the <strong>.jmx</strong> file, which is the Test Plan.
+9) Make custom virtual environment:
 
-7) Copy the path.
+```
+mkvirtualenv env1
+mkvirtualenv 99bottles --no-site-packages
+```
+
+The response:
+
+```
+  New python executable in 99bottles/bin/python
+  Installing setuptools, pip...done.
+  (env1)
+```
+
+10) Install dependencies:
+
+```
+cd 99bottles-jmeter
+pip install --requirement=requirements.txt
+ls $WORKON_HOME
+```
+
 
 ## <a name="RunBatch"> Run in Batch Mode</a>
 JMeter is often invoked automatically by a continuous integration tool such as Jenkins.
@@ -346,6 +382,12 @@ The order of execution of different samplers is controlled by
 If, While, FoEach, Loop, Random, etc.
 
 
+## <a name="Timers"> Timers</a>
+The time period to wait between requests are defined by <strong>timers</strong>,
+also known as "think time" in LoadRunner.
+By default, requests are executed immediately one after another without any waiting time.
+
+
 ## <a name="PreProcessors"> Pre-Processors</a>
 Before a sampler is executed, elements (actions, assertions or basically whatever) that is going to happen 
 are defined in <strong>pre-processors</strong> which
@@ -353,13 +395,26 @@ extract variables from a response that can be used in the sampler afterwards via
 
 Pre-processor is able to create variables for the next steps (sampler or any other entity in current thread group), something like vars.put("variable_name", "variable_value") in the pre-processor followed by ${variable_name} wherever you need to refer it. 
 
+## <a name="BSFPreProcessors"> BSF Pre-Processors</a>
 
-## <a name="Timers"> Timers</a>
-The time period to wait between requests are defined by <strong>timers</strong>,
-also known as "think time" in LoadRunner.
-By default, requests are executed immediately one after another without any waiting time.
-
-
+  BSF is the Bean Scriptingl Framework at http://beanshell.org/manual/bsf.html
+  and http://commons.apache.org/proper/commons-bsf/
+  and https://en.wikipedia.org/wiki/Bean_Scripting_Framework
+  
+ It is generic framework that allows many scripting languages to be plugged into an application. It shields the application from knowledge of how to invoke the scripting languages and their APIs, via adapter "engines". 
+  BeanShell dynamically executes Java code (is a Lightweight embedded Java source interpreter that).
+  for Java per [JSR223](http://jcp.org/en/jsr/detail?id=274)
+  described on http://www.drdobbs.com/jvm/jsr-223-scripting-for-the-java-platform/215801163
+  
+  BSP supports dynamic execution of JavaScript, achieved using Mozilla Rhino engine (from 
+  https://developer.mozilla.org/en-US/docs/Mozilla/Projects/Rhino)
+  which is also used in Oracle JVM.
+ 
+ However, it is recommended that for "heavy" operations it's better to use JSR223 Sampler and Groovy as a language.
+ See https://blazemeter.com/blog/beanshell-vs-jsr223-vs-java-jmeter-scripting-its-performance
+ 
+  It uses the ScriptEngine interface which became available in Java 6.
+ 
 ## <a name="PostProcessors"> Post-Processors</a>
 After a sampler execution finishes,
 response data from the server can be parsed to extract values 
