@@ -175,6 +175,7 @@ sudo pip install virtualenvwrapper
 export WORKON_HOME=~/Envs
 mkdir -p $WORKON_HOME
 echo $WORKON_HOME
+ls $WORKON_HOME
 source /usr/local/bin/virtualenvwrapper.sh
 ```
 
@@ -198,7 +199,6 @@ The response:
 ```
 cd 99bottles-jmeter
 pip install --requirement=requirements.txt
-ls $WORKON_HOME
 ```
 
 
@@ -213,13 +213,31 @@ See https://wiki.jenkins-ci.org/display/JENKINS/Performance+Plugin.
 3) Type:
 
 ```
-jmeter -n -t demo.jmx -l test.jtl.
+jmeter -n -t "Test Plan.jmx" -l run001.jtl.
 ```
 
 * Parameter `-n` ???
 * Parameter `-t` ???
 * Parameter `-l` disables all listeners because they can be resource intensive.
-* test.jtl is the text file to hold results from the run. See http://wiki.apache.org/jmeter/JtlFiles.
+* run001.jtl is the text file to hold results from the run. See http://wiki.apache.org/jmeter/JtlFiles.
+
+PROTIP:
+Avoid using spaces in test plan names.
+
+The response:
+
+```
+Creating summariser <summary>
+Created the tree successfully using Test Plan.jmx
+Starting the test @ Sat Jul 04 06:45:16 MDT 2015 (1436013916367)
+Waiting for possible shutdown message on port 4445
+summary +    876 in  14.3s =   61.4/s Avg:   129 Min:     0 Max:  2011 Err:   876 (100.00%) Active: 10 Started: 10 Finished: 0
+summary +    124 in   2.1s =   58.4/s Avg:   146 Min:     0 Max:  2005 Err:   124 (100.00%) Active: 0 Started: 10 Finished: 10
+summary =   1000 in  14.4s =   69.5/s Avg:   131 Min:     0 Max:  2011 Err:  1000 (100.00%)
+Tidying up ...    @ Sat Jul 04 06:45:31 MDT 2015 (1436013931672)
+... end of run
+(env1)
+```
 
 
 ## <a name="JMeterUI"> JMeter UI Run</a>
