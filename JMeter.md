@@ -1,4 +1,4 @@
-This page introduces you to JMeter in a hands-on way, with concepts pointed out along the way.
+This page introduces you to JMeter in a deeply technical hands-on way, with concepts pointed out along the way.
 (rather than bombarding you with random concepts)
 Similarities to LoadRunner, Visual Studio, and other similar tools is pointed out along the way.
 PROTIP of "best practices" are noted when appropriate.
@@ -16,7 +16,7 @@ This page is based on several sources:
 
 ## Contents
 0. <a href="#Java"> Java SDK Pre-requisite</a>
-0. <a href="#Download"> Download</a>
+0. <a href="#Download"> Download JMeter</a>
 0. <a href="#TestPlanFolders"> Test Assets Folders</a>
 0. <a href="#SampleTestPlans"> Sample Test Plans</a>
 0. <a href="#RunBatch"> Run in Batch Mode</a>
@@ -38,7 +38,8 @@ This page is based on several sources:
 
 
 ## <a name="Java"> Java SDK Pre-requisite</a>
-JMeter was written in Java.
+JMeter was written in Java from
+http://www.oracle.com/technetwork/java/javase/downloads/index.html
 
 The path to the Java bin folder must be in the system PATH environment variable
 so Java executables can be found. See https://wiki.apache.org/jmeter/TestRecording210
@@ -50,11 +51,16 @@ This is the same across operating systems, which is why JMeter can run on PC and
 
 
 ## <a name="Download"> Download JMeter</a>
-If you run Windows, rather than downloading and running the installer directly from a mirror listed 
-<a target="_blank" href="http://jmeter.apache.org/download_jmeter.cgi"> Apache website</a>
 (as <a target="_blank" href="http://zacster.blogspot.com/2008/03/quick-howto-to-setup-jmeter.html">
 Zac explained in 2008</a>),
-I think it's simpler to:
+<a target="_blank" href="http://jmeter.apache.org/download_jmeter.cgi"> 
+The Apache download web page</a> provides an installer directly from various mirrors.
+
+When I downloaded on Jun 30, 2015 it was apache-jmeter-2.13.zip which 
+I unzip to the Downloads folder.
+
+PROTIP:
+If you run Windows, I think it's simpler to:
 
 1) open a command window,
 
@@ -70,6 +76,8 @@ Chocolatey installs without prompting for more user interaction.
 So it's useful in server automation scripts.
 
 NOTE: Instructions below are based on version 2.1.2 downloaded June 30, 2015.
+
+http://www.apache.org/info/verification.html
 
 
 ## <a name="TestPlanFolders"> Download Sample to Test Assets Folder</a>
@@ -170,30 +178,33 @@ Now, lets set up Firefox to proxy actions. Bring up the Firefox browser and
 
 3) Right-click on Workbench to Add | <strong>Non-test Elements | HTTP(S) Test Script Recorder</strong>.
 
-2. Add a HTTP Request Defaults config element
-  This can be used to specify defaults for you entire test suite.
-  + Specify your Server Name or IP address and any required port #
+4) Right-clock Thread Group to Add | Config Element | HTTP Request Defaults.
+  This applies to your entire test suite.
 
-3. Add a HTTP Cookie Manager config element
+5) Specify <strong>Server Name or IP</strong> address and any required port #.
+
+  Other tutorials use google.com or jmeter.apache.org.
+  One live demo WebSockets website is 
+
+6) Add a HTTP Cookie Manager config element
     This can be used to control and manage the cookie policy across the test.
 
-5. Add a Once Only Controller
+7) Right-click on Thread Group to Add | Logic Controller | Recording Controller
+    (Once Only Controller)
     My application has a user login that also generates a session cookie.
     If your application does not, you can skip this step and the next.
 
-6. Add a HTTP Request Sampler to the Once Only Controller
+8) Add a HTTP Request Sampler to the Once Only Controller
     Specify the protocol method (put/get), path to the request and any parameters
 
-7. Add a Recording Controller to the Thread Group.
+9) Test Plan > Add > Listener > Aggregate Report.
 
-8. Test Plan > Add > Listener > Aggregate Report.
-
-9. Under Workbench, Add > Non-Test Element > HTTP Proxy Server
+11) Right-click Workbench to Add | Non-Test Element | HTTP Proxy Server
   + Port 9090
   + Target Controller: Thread Group > Recording Controller
   + Patterns to include: Click Add then enter “.*”
 
-10. Under HTTP Proxy Server, Add > Timer > Gaussian Random Timer
+12) Under HTTP Proxy Server, Add > Timer > Gaussian Random Timer
   + Set Constant Delay Offset (in milliseconds): ${T}
 
 And when ready to start recording the browser action just bring up the HTPP Proxy Server within JMeter and click Start. Everything that is done within Firefox will be recorded in JMeter’s recording controller. When done, just click the Stop button on the HTTP Proxy Server within JMeter.
