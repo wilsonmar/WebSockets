@@ -225,7 +225,7 @@ jmeter -n -t "Test Plan.jmx" -l run001.jtl
 PROTIP:
 Avoid using spaces in test plan names.
 
-The response:
+Example response to the Terminal:
 
 ```
 Creating summariser <summary>
