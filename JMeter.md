@@ -143,7 +143,7 @@ README.md        jmeter.log
 Test Plan.jmx    requirements.txt server.py
 ```
 
-## <a name="SetupServerUnderTest"> Setup Python Server Under Tests</a>
+## <a name="SetupServerUnderTest"> Setup Python Server Under Test</a>
 The env1 folder contains a <strong>server.py</strong> Python script.
 So the Python package installer (pip) needs to be installed.
 
