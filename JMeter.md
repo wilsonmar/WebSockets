@@ -22,10 +22,13 @@ This page is based on several sources:
 0. <a href="#InvokeUI"> Invoke JMeter UI</a>
 0. <a href="#TestPlanFolders"> Test Assets Folders</a>
 0. <a href="#GetSampleTest"> Get Sample Test Assets from Github</a>
+0. <a href="#SetupServerUnderTest"> Setup Python Server Under Test</a>
+0. <a href="#ExamineSampleTest"> Examine Sample Test Plan Assets</a>
 0. <a href="#PythonSetup"> Setup for Python</a>
 0. <a href="#JMeterUI"> JMeter UI Run</a>
 0. <a href="#RunBatch"> Run in Batch Mode</a>
 0. <a href="#ViewLog"> View Log File</a>
+0. <a href="#ViewResultTree"> View Result Tree</a>
 0. <a href="#NewTestPlan"> New Test Plan</a>
 0. <a href="#ThreadGroups"> Thread Groups</a>
 0. <a href="#Workbench"> Workbench</a>
@@ -140,20 +143,17 @@ README.md        jmeter.log
 Test Plan.jmx    requirements.txt server.py
 ```
 
-  This folder contains a <strong>server.py</strong> Python script.
-  It is called from within a
-  BSF PreProcessor.
-  So the Python package installer (pip) needs to be installed.
+## <a name="SetupServerUnderTest"> Setup Python Server Under Tests</a>
+The env1 folder contains a <strong>server.py</strong> Python script.
+So the Python package installer (pip) needs to be installed.
 
-
-## <a name="PythonSetup"> Setup for Python</a>
-6) Install pip
+1) Install pip
 
 ```
 sudo easy_install pip
 ```
 
-7) Create a virtualenv for Python. 
+2) Create a virtualenv for Python. 
   (as described in the "99 Bottles of JMeter on the wall" website
   http://tech.mindcandy.com/2011/11/99-bottles-of-jmeter-on-the-wall )
 
@@ -161,7 +161,7 @@ sudo easy_install pip
 pip install virtualenv
 ```
 
-8) Use virtualenv to install virtualenvwrapper:
+3) Use virtualenv to install virtualenvwrapper:
   (based on http://virtualenvwrapper.readthedocs.org/en/latest/)
 
 ```
@@ -173,7 +173,7 @@ ls $WORKON_HOME
 source /usr/local/bin/virtualenvwrapper.sh
 ```
 
-9) Make custom virtual environment:
+4) Make custom virtual environment:
 
 ```
 mkvirtualenv env1
@@ -188,14 +188,14 @@ The response:
   (env1)
 ```
 
-10) Install dependencies:
+5) Install dependencies:
 
 ```
 cd 99bottles-jmeter
 pip install --requirement=requirements.txt
 ```
 
-11) Invoke server:
+6) Invoke server:
 
 ```
 ./server.py
@@ -210,6 +210,36 @@ The response:
   
   serving on http://127.0.0.1:9999
 ```
+
+Stopping the command/terminal window stops the app server.
+
+
+## <a name="ExamineSampleTest"> Examine Sample Test Plan Assets</a>
+General Variables (key value pairs) defined are available for use within JMeter configuration elements.
+
+In Thread Group, ${threads} and ${loopCount}.
+
+The Loop Controller has a loop count of 1 (once).
+
+Under that is a HTTP Request element that uses variables to specify the URL:
+
+```
+http://${host}:${port}/bottle
+```
+
+Variables are also used in the request body spec:
+
+```
+{"drink":"${drink}", "bottles":"${bottles}", "date":"${date}", "thread":"${thread}"}
+```
+
+The <strong>BSF PreProcessor</strong> executes <strong>JavaScript</strong> and other programming languages.
+
+PROTIP: 
+https://blazemeter.com/blog/beanshell-vs-jsr223-vs-java-jmeter-scripting-its-performance
+reports that native compiled Java runs twice faster than JSR233/Groovy and BeanShell scripts.
+
+
 
 ## <a name="InvokeUI"> Invoke JMeter UI</a>
 1) Open a new command or terminal window.
@@ -246,6 +276,30 @@ The response:
 9) During the run, at the upper-right corner in the gray bar is "0/1".
 
 
+## <a name="ViewResultTree"> View Result Tree</a>
+1) Click on View Result Tree element.
+
+2) Click on an exchange, typically "HTTP Request".
+
+3) Click on Request.
+
+  This details the URL end-point, such as `http://localhost:9999/bottle`
+  and the JSON-formatted POST data, which you can toggle between Raw and HTTP.
+  
+  `Content-Type: application/json` means that 
+  JSON data is expected back.
+
+4) Click on Sampler result.
+
+  The expected response header is `HTTP/1.0 200 OK`.
+
+5) Click on Response Data.
+
+  "Cheers!" is what the server.py program returns.
+
+NOTE: This detail for every request/response exchange is expensive to capture and store.
+
+
 ## <a name="RunBatch"> Run in Batch Mode</a>
 JMeter is often invoked automatically by a continuous integration tool such as Jenkins.
 See https://wiki.jenkins-ci.org/display/JENKINS/Performance+Plugin.
@@ -263,6 +317,7 @@ jmeter -n -t "Test Plan.jmx" -l run001.jtl
 * Parameter `-n` specifies no GUI.
 * Parameter `-t "Test Plan.jmx"` specifies the test plan.
 * Parameter `-l run001.jtl` specifies the text file to hold results from the run. See http://wiki.apache.org/jmeter/JtlFiles.
+* Parameter `-p parameters.txt` specifies the parameters to define.
 
 PROTIP:
 Avoid using spaces in test plan names.
@@ -299,12 +354,19 @@ In this example, the output file as 211,148 bytes:
 5) Open the file using a text editor:
 
 ```
+25 bottles of mead on the wall. Date=1436066062941 Thread=0
+127.0.0.1 - - [04/Jul/2015:21:14:22 -0600] "POST /bottle HTTP/1.1" 200 7 "-" "Apache-HttpClient/4.2.6 (java 1.5)"
+
 1436013917275,67,HTTP Request,Non HTTP response code: org.apache.http.conn.Http$
 ```
+
+## <a name="Languages"> Languages</a>
+Python is one of several programming languages that JMeter can support.
 
 
 ## <a name="NewTestPlan"> New Test Plan</a>
 We next create a new test.
+
 
 ## <a name="ThreadGroups"> Thread Groups</a>
 Load on servers is imposed by activities within various program <strong>thread</strong>.
