@@ -23,6 +23,7 @@ This page is based on several sources:
 0. <a href="#TestPlanFolders"> Test Assets Folders</a>
 0. <a href="#GetSampleTest"> Get Sample Test Assets from Github</a>
 0. <a href="#SetupServerUnderTest"> Setup Python Server Under Test</a>
+0. <a href="#ExamineAppCode"> Examine Sample App Code</a>
 0. <a href="#ExamineSampleTest"> Examine Sample Test Plan Assets</a>
 0. <a href="#PythonSetup"> Setup for Python</a>
 0. <a href="#JMeterUI"> JMeter UI Run</a>
@@ -213,6 +214,17 @@ The response:
 
 Stopping the command/terminal window stops the app server.
 
+## <a name="ExamineAppCode"> Examine Sample App Code</a>
+7) Open in a text editor utility the <strong>server.py</strong> application code.
+  The print() function outputs should look like this:
+
+```
+25 bottles of mead on the wall. Date=1436066062941 Thread=0
+127.0.0.1 - - [04/Jul/2015:21:14:22 -0600] "POST /bottle HTTP/1.1" 200 7 "-" "Apache-HttpClient/4.2.6 (java 1.5)"
+```
+
+In this example, the date 1436066062941 is a Unix Epoch of seconds since Jan. 1, 1970.
+
 
 ## <a name="ExamineSampleTest"> Examine Sample Test Plan Assets</a>
 General Variables (key value pairs) defined are available for use within JMeter configuration elements.
@@ -354,11 +366,9 @@ In this example, the output file as 211,148 bytes:
 5) Open the file using a text editor:
 
 ```
-25 bottles of mead on the wall. Date=1436066062941 Thread=0
-127.0.0.1 - - [04/Jul/2015:21:14:22 -0600] "POST /bottle HTTP/1.1" 200 7 "-" "Apache-HttpClient/4.2.6 (java 1.5)"
-
 1436013917275,67,HTTP Request,Non HTTP response code: org.apache.http.conn.Http$
 ```
+
 
 ## <a name="Languages"> Languages</a>
 Python is one of several programming languages that JMeter can support.
