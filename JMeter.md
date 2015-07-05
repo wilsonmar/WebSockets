@@ -1,5 +1,6 @@
 This page introduces you to JMeter in a deeply technical hands-on way, with concepts pointed out along the way.
-(rather than bombarding you with random concepts)
+(rather than bombarding you with random concepts and making obvious statements).
+
 Similarities to LoadRunner, Visual Studio, and other similar tools is pointed out along the way.
 PROTIP of "best practices" are noted when appropriate.
 
@@ -20,10 +21,12 @@ This page is based on several sources:
 0. <a href="#Download4Mac"> Download JMeter for Macs</a>
 0. <a href="#InvokeUI"> Invoke JMeter UI</a>
 0. <a href="#TestPlanFolders"> Test Assets Folders</a>
-## <a name="PythonSetup"> Sample Test Setup for Python</a>
+0. <a href="#GetSampleTest"> Get Sample Test Assets from Github</a>
+0. <a name="#PythonSetup"> Setup for Python</a>
 0. <a href="#JMeterUI"> JMeter UI Run</a>
 0. <a href="#RunBatch"> Run in Batch Mode</a>
 0. <a href="#ViewLog"> View Log File</a>
+0. <a href="#NewTestPlan"> New Test Plan</a>
 0. <a href="#ThreadGroups"> Thread Groups</a>
 0. <a href="#Workbench"> Workbench</a>
 0. <a href="#TestPlan"> Test Plan Elements</a>
@@ -99,27 +102,8 @@ Homebrew saves jmeter to folder <strong>/usr/local/Cellar/jmeter</strong>.
 
 It was apache-jmeter-2.13.zip when I downloaded on Jun 30, 2015.
 
-## <a name="InvokeUI"> Invoke JMeter UI</a>
-1) Open a new command or terminal window.
 
-2) Invoke the JMeter UI by typing in `Jmeter`.
-
-  On the PC this invokes <strong>Jmeter.bat</strong>.
-
-  Wait for the JMeter window to appear.
-
-  WARNING: Do not dismiss the command/terminal window which invoked JMeter.
-
-3) Press command + N or click menu <strong>File | Open</strong>.
-
-  On a Mac, notice the default location of test plans is <strong>usr</strong>.
-  
-  Notice the file format is JMeter [<strong>.jmx</strong>].
-  
-4) Click Cancel.
-  
-
-## <a name="PythonSetup"> Sample Test Setup for Python</a>
+## <a name="GetSampleTest"> Get Sample Test Assets from Github</a>
 Unlike other tutorials that only scratches the surface,
 let's look at a JMeter test plan that has scripting logic often needed.
 
@@ -147,13 +131,20 @@ let's look at a JMeter test plan that has scripting logic often needed.
   /Users/wilsonmar/Downloads/99bottles-jmeter-master
 ```
 
-6) View files by typing `ls`.
+6) View files by typing `ls` then Enter. The response:
 
-  This JMeter Test Plan contains a <strong>server.py</strong> Python script.
+```
+README.md        jmeter.log       
+Test Plan.jmx    requirements.txt server.py
+```
+
+  This folder contains a <strong>server.py</strong> Python script.
   It is called from within a
   BSF PreProcessor.
   So the Python package installer (pip) needs to be installed.
 
+
+## <a name="PythonSetup"> Setup for Python</a>
 6) Install pip
 
 ```
@@ -202,8 +193,11 @@ cd 99bottles-jmeter
 pip install --requirement=requirements.txt
 ```
 
-## <a name="JMeterUI"> JMeter UI Run</a>
-1) Run a command or terminal window.
+11) Invoke server???
+
+
+## <a name="InvokeUI"> Invoke JMeter UI</a>
+1) Open a new command or terminal window.
 
 2) Invoke the JMeter UI by typing in `Jmeter`.
 
@@ -212,18 +206,26 @@ pip install --requirement=requirements.txt
   Wait for the JMeter window to appear.
 
   WARNING: Do not dismiss the command/terminal window which invoked JMeter.
-    
-3) Select menu Open.
 
-4) Navigate to the sample test plan.
+3) Press command + N or click menu <strong>File | Open</strong>.
 
-5) Run the test from the JMeter UI one of several ways:
+  On a Mac, notice the default location of test plans is <strong>usr</strong>.
+  
+  Notice the file format is JMeter [<strong>.jmx</strong>].
+  
+4) Select menu Open.
+
+5) Navigate to the test plan file described above: `/Users/wilsonmar/Downloads/99bottles-jmeter-master`
+
+6) Make sure menu <strong>Options | Log Viewer</strong> is checked.
+
+7) Run the test from the JMeter UI one of several ways:
 
   * Click the Run button
   * Select menu Run | Start
   * Press command + R.
 
-6) During the run, at the upper-right corner in the gray bar is "0/1".
+7) During the run, at the upper-right corner in the gray bar is "0/1".
 
 
 ## <a name="RunBatch"> Run in Batch Mode</a>
@@ -283,12 +285,17 @@ In this example, the output file as 211,148 bytes:
 ```
 
 
+## <a name="NewTestPlan"> New Test Plan</a>
+We next create a new test.
+
 ## <a name="ThreadGroups"> Thread Groups</a>
 Load on servers is imposed by activities within various program <strong>thread</strong>.
 The more threads, the more virtual users are being simulated.
 
 1) Create the <strong>Thread Group</strong> for the Test Plan: 
 Right-Click on Test Plan to select <strong>Edit | Add</strong> to create a <strong>Thread Group</strong>.
+
+  NOTE: Thread groups define the metadata
 
 2) In the current situation (for recording described below), use 1 user and loop count 1.
 
