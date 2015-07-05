@@ -195,8 +195,21 @@ cd 99bottles-jmeter
 pip install --requirement=requirements.txt
 ```
 
-11) Invoke server???
+11) Invoke server:
 
+```
+./server.py
+```
+
+The response:
+
+```
+  Bottle server starting up (using PasteServer())...
+  Listening on http://localhost:9999/
+  Use Ctrl-C to quit.
+  
+  serving on http://127.0.0.1:9999
+```
 
 ## <a name="InvokeUI"> Invoke JMeter UI</a>
 1) Open a new command or terminal window.
@@ -219,15 +232,18 @@ pip install --requirement=requirements.txt
 
 5) Navigate to the test plan file described above: `/Users/wilsonmar/Downloads/99bottles-jmeter-master`
 
-6) Make sure menu <strong>Options | Log Viewer</strong> is checked.
+6) Make sure menu <strong>Options | Log Viewer</strong> is checked so logs appear in the lower-right pane.
 
-7) Run the test from the JMeter UI one of several ways:
+7) To see more log entries, click on the edge above the log pane.
+   Scroll to the far left of log entries.
+   
+8) Run the test from the JMeter UI one of several ways:
 
   * Click the Run button
   * Select menu Run | Start
   * Press command + R.
 
-7) During the run, at the upper-right corner in the gray bar is "0/1".
+9) During the run, at the upper-right corner in the gray bar is "0/1".
 
 
 ## <a name="RunBatch"> Run in Batch Mode</a>
