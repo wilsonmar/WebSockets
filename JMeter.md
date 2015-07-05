@@ -1,8 +1,8 @@
-This page introduces you to JMeter in a deeply technical hands-on way, with concepts pointed out along the way.
-(rather than bombarding you with random concepts and making obvious statements).
-
-Similarities to LoadRunner, Visual Studio, and other similar tools is pointed out along the way.
-PROTIP of "best practices" are noted when appropriate.
+This page introduces you to JMeter in a deeply technical hands-on way working on full samples, not incomplete demos.
+Rather than bombarding you with random concepts and making obvious statements,
+concepts are pointed out along the way at "teachable moments".
+PROTIP of "best practices" are noted when appropriate, as are
+Similarities to LoadRunner, Visual Studio, and other similar tools.
 
 This page is based on several sources:
 * https://blazemeter.com/blog/websocket-testing-apache-jmeter
@@ -22,7 +22,7 @@ This page is based on several sources:
 0. <a href="#InvokeUI"> Invoke JMeter UI</a>
 0. <a href="#TestPlanFolders"> Test Assets Folders</a>
 0. <a href="#GetSampleTest"> Get Sample Test Assets from Github</a>
-0. <a name="#PythonSetup"> Setup for Python</a>
+0. <a href="#PythonSetup"> Setup for Python</a>
 0. <a href="#JMeterUI"> JMeter UI Run</a>
 0. <a href="#RunBatch"> Run in Batch Mode</a>
 0. <a href="#ViewLog"> View Log File</a>
@@ -83,8 +83,6 @@ So it's useful in server automation scripts.
 
 NOTE: Instructions below are based on version 2.1.2 downloaded June 30, 2015.
 
-http://www.apache.org/info/verification.html
-
 
 ## <a name="Download4Mac"> Download, Install JMeter for Macs</a>
 Similarly, on the Mac, open a Terminal windows and use Homebrew:
@@ -101,6 +99,10 @@ here from 2011</a> when JMeter was still under the Apache Jakarta project.
 Homebrew saves jmeter to folder <strong>/usr/local/Cellar/jmeter</strong>.
 
 It was apache-jmeter-2.13.zip when I downloaded on Jun 30, 2015.
+
+http://www.apache.org/info/verification.html
+
+JMETER_BIN ???
 
 
 ## <a name="GetSampleTest"> Get Sample Test Assets from Github</a>
