@@ -280,6 +280,7 @@ source /usr/local/bin/virtualenvwrapper.sh
 5) Make custom virtual environment:
 
 ```
+cd to where your 99bottles is installed
 mkvirtualenv env1
 mkvirtualenv 99bottles --no-site-packages
 ```
