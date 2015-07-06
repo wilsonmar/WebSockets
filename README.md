@@ -5,9 +5,9 @@ This repo contains a description of what WebSockets is
 and the landscape of technologies around its
 development and testing, summarized by this graph:
 
-<a target="_blank" href="https://cloud.githubusercontent.com/assets/300046/8532140/6bb85a6a-23e9-11e5-90c6-73f7763085b2.png"
+<a target="_blank" href="https://cloud.githubusercontent.com/assets/300046/8532242/f06bdb2e-23e9-11e5-8eac-a4396363fe70.png"
 title="Diagram of WebSocket Technologies. Click to open in separate window.">
-<img src="https://cloud.githubusercontent.com/assets/300046/8532140/6bb85a6a-23e9-11e5-90c6-73f7763085b2.png" 
+<img src="https://cloud.githubusercontent.com/assets/300046/8532242/f06bdb2e-23e9-11e5-8eac-a4396363fe70.png" 
 /></a>
 
 There are several stacks of technologies to offer real-time capabilities to various clients.
