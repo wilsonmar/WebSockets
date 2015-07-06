@@ -244,7 +244,8 @@ Test Plan.jmx    requirements.txt server.py
 The env1 folder contains a <strong>server.py</strong> Python script.
 So the Python package installer (pip) needs to be installed.
 
-1) Install pip. On PCs see http://tylerbutler.com/2012/05/how-to-install-python-pip-and-virtualenv-on-windows-with-powershell/.
+1) Install pip. On PCs see http://tylerbutler.com/2012/05/how-to-install-python-pip-and-virtualenv-on-windows-with-powershell/
+  which makes use of a Powershell clone of the unix scripts.
   On Macs:
 
 ```
