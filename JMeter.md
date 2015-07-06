@@ -289,7 +289,11 @@ reports that native compiled Java runs twice faster than JSR233/Groovy and BeanS
 
 
 ## <a name="ViewResultTree"> View Result Tree</a>
-1) Click on View Result Tree element.
+1) This was created by right-clicking Thread Group, then Listeners, View Result Tree element.
+
+  This captures details on each request and response.
+  
+  QUESTION: Can JMeter capture in a buffer and not display unless there is an error, like what LoadRunner does?
 
 2) Click on an exchange, typically "HTTP Request".
 
