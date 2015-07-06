@@ -7,7 +7,7 @@ using Microsoft's SignalR library on the server and various client technologies.
 <a target="_blank" href="https://cloud.githubusercontent.com/assets/300046/8526595/e348623e-23c4-11e5-9916-95f0566fd1af.png"
 title="Diagram of WebSocket Technologies. Click to open in separate window.">
 <img src="https://cloud.githubusercontent.com/assets/300046/8526595/e348623e-23c4-11e5-9916-95f0566fd1af.png" 
-/>
+width="350" /></a>
 
 We being by analyzing communications between a sample apps and the server,
 then we build the client and server app demonstrated.
