@@ -4,7 +4,8 @@ demonstrate how to program, run, and performance-test
 **WebSockets** protocol implemented in the C# language within Visual Studio 
 using Microsoft's SignalR library on the server and various client technologies.
 
-<a target="_blank" href="https://cloud.githubusercontent.com/assets/300046/8526595/e348623e-23c4-11e5-9916-95f0566fd1af.png">
+<a target="_blank" href="https://cloud.githubusercontent.com/assets/300046/8526595/e348623e-23c4-11e5-9916-95f0566fd1af.png"
+title="Diagram of WebSocket Technologies. Click to open in separate window.">
 <img src="https://cloud.githubusercontent.com/assets/300046/8526595/e348623e-23c4-11e5-9916-95f0566fd1af.png" 
 />
 
