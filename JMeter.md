@@ -229,9 +229,9 @@ In this example, the date 1436066062941 is a Unix Epoch of seconds since Jan. 1,
 ## <a name="ExamineSampleTest"> Examine Sample Test Plan Assets</a>
 General Variables (key value pairs) defined are available for use within JMeter configuration elements.
 
-In Thread Group, ${threads} and ${loopCount}.
+In Thread Group, ${threads} and ${loopCount}. (Loop count is equivalent to what LoadRunner calls iterations)
 
-The Loop Controller has a loop count of 1 (once).
+The Loop Controller has a loop count of 1 (once). 
 
 Under that is a HTTP Request element that uses variables to specify the URL:
 
