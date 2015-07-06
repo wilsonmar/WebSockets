@@ -63,8 +63,8 @@ This is the same across operating systems, which is why JMeter can run on PC and
 
 
 ## <a name="Download4PC"> Download, Install JMeter for PCs</a>
-If you follow what <a target="_blank" href="http://zacster.blogspot.com/2008/03/quick-howto-to-setup-jmeter.html">
-Zac explained in 2008</a>) and download from a mirror website on the
+Instead of following what <a target="_blank" href="http://zacster.blogspot.com/2008/03/quick-howto-to-setup-jmeter.html">
+Zac explained in 2008</a> and download from a mirror website on the
 <a target="_blank" href="http://jmeter.apache.org/download_jmeter.cgi"> 
 Apache download web page</a>,
 you then need to unzip, create a folder, move it, etc.
@@ -72,11 +72,14 @@ you then need to unzip, create a folder, move it, etc.
 PROTIP:
 If you run Windows, I think it's simpler to:
 
-1) Open a command window,
+1) Open an internet browser 
 
-2) install Chocolatey in Powershell (if your haven't already)
+2) If you haven't already, go to https://chocolatey.org/ and copy the whole @powershell command.
+  Open a command window and paste the command to install Chocolatey.
+  Exit the command.
 
-3) run the command (described at https://chocolatey.org/packages?q=jmeter)
+3) Open a command window to run this command (described at https://chocolatey.org/packages?q=jmeter).
+  (Instead of `choco install jmeter -y`).
 
 ```
 inst jmeter -y
