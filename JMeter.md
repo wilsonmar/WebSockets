@@ -100,21 +100,35 @@ These instructions update instructions
 <a target="_blank" href="http://biscminds.blogspot.fr/2011/12/quick-jmeter-setup-on-mac.html">
 here from 2011</a> when JMeter was still under the Apache Jakarta project.
 
-Homebrew saves jmeter to folder <strong>/usr/local/Cellar/jmeter</strong>.
-
-It was apache-jmeter-2.13.zip when I downloaded on Jun 30, 2015.
-
 http://www.apache.org/info/verification.html
 
 JMETER_BIN ???
+
+Since <storng>apache-jmeter-2.12.zip</strong> was installed,
+Homebrew saves jmeter to folder <strong>/usr/local/Cellar/jmeter/2.12/libexec</strong>.
+This is good to know for adding plug-ins, whose
+<strong>jar</strong> files go into JMeter's <strong>lib/ext</strong> (extension) folder.
+
+Jar files contents should follow
+http://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html
+
+The <strong>pom.xml</strong> file in a github repository is used by maven to create jar files,
+perhaps with a script such as:
+https://draptik.wordpress.com/tag/pom-xml/
+
+See https://ribblescode.wordpress.com/2012/04/16/how-to-run-jmeter-tests-with-maven/
+
+Create the jar file using Maven ???
 
 
 ## <a name="Plugins"> JMeter Plug-ins</a>
 Plug-ins extend the capability of JMeter.
 
+In Eclipse IDE, export it to a JAR.
+
 Samplers plug-in for WebSockets:
 
-  * https://github.com/kawasima/jmeter-websocket was last updated  in 2014.
+  * https://github.com/kawasima/jmeter-websocket was last updated by Yoshitaka Kawashima in 2013.
 
     The path `src/main/java/net/unit8/jmeter/protocol/websocket/control/gui` contains
     
@@ -144,6 +158,9 @@ Samplers plug-in for WebSockets:
       * chat.js
 
   * https://github.com/maciejzaleski/JMeter-WebSocketSampler was last updated by Maciej Zaleski in 2013.
+  
+    It features a Swing GUI. 
+  
     The path `src/main/java/JMeter` contains a controler [sic] folder and functional folder.
     The path `src/main/java/JMeter/plugins/functional/samplers` contains java program code:
 
@@ -182,6 +199,7 @@ developed by the same author.
 
 * https://github.com/flood-io/ruby-jmeter
   is a Ruby based DSL for building JMeter test plans 
+
 
 ## <a name="GetSampleTest"> Get Sample Test Assets from Github</a>
 Unlike other tutorials that only scratches the surface,
