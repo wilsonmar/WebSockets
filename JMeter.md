@@ -709,3 +709,4 @@ https://github.com/oliverlloyd/jmeter-ec2
 Automates running Apache JMeter on Amazon EC2 
 
 
+QUESTION: Who is working on JMeter's use of Nashon, the Java 8 JavaScript scrpting language?
