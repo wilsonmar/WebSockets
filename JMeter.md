@@ -19,6 +19,7 @@ This page is based on several sources:
 0. <a href="#Java"> Java SDK Pre-requisite</a>
 0. <a href="#Download4PC"> Download JMeter for PCs</a>
 0. <a href="#Download4Mac"> Download JMeter for Macs</a>
+0. <a href="#Plugins"> JMeter Plug-ins</a>
 0. <a href="#InvokeUI"> Invoke JMeter UI</a>
 0. <a href="#TestPlanFolders"> Test Assets Folders</a>
 0. <a href="#GetSampleTest"> Get Sample Test Assets from Github</a>
@@ -44,7 +45,6 @@ This page is based on several sources:
 0. <a href="#Attributes"> Attributes</a>
 0. <a href="#Assertions"> Assertions</a> (for error checking)
 0. <a href="#SimulateJavaScript"> Simulate JavaScript</a>
-0. <a href="#Plugins"> JMeter Plug-ins</a>
 0. <a href="#SetupThreadGroup"> Setup Thread Group</a>
 0. <a href="#tearDownThreadGroup"> tearDown Thread Group</a>
 
@@ -108,6 +108,80 @@ http://www.apache.org/info/verification.html
 
 JMETER_BIN ???
 
+
+## <a name="Plugins"> JMeter Plug-ins</a>
+Plug-ins extend the capability of JMeter.
+
+Samplers plug-in for WebSockets:
+
+  * https://github.com/kawasima/jmeter-websocket was last updated  in 2014.
+
+    The path `src/main/java/net/unit8/jmeter/protocol/websocket/control/gui` contains
+    
+      * WebSocketSamplerGui.java
+
+    The path `src/main/java/net/unit8/jmeter/protocol/websocket/sampler` contains
+
+      *  WebSocketSampler.java
+
+    The path `src/main/resources/net/unit8/jmeter/protocol/websocket/sampler` contains 
+    
+      * WebSocketSamplerResources_ja.properties (Japanese translation overrides)
+      * WebSocketSamplerResources.properties
+
+    The path `src/test/java/net/unit8/jmeter/protocol/websocket/sampler` contains
+    
+      * WebSocketSamplerTest.java
+
+    The path `src/test/resources` contains
+    
+      * jmeter.properties
+      * saveservice.properties
+      * users.csv
+
+    The path `src/test/scripts` contains
+    
+      * chat.js
+
+  * https://github.com/maciejzaleski/JMeter-WebSocketSampler was last updated by Maciej Zaleski in 2013.
+    The path `src/main/java/JMeter` contains a controler [sic] folder and functional folder.
+    The path `src/main/java/JMeter/plugins/functional/samplers` contains java program code:
+
+      * ServiceSocket.java
+      * WebSocketImplementation.java
+      * WebSocketSampler.java
+      * WebSocketSamplerGui.java
+      * WebSocketSamplerPanel.form
+      * WebSocketSamplerPanel.java
+
+    The path `src/main/java/JMeter/plugins/controler`
+
+      * WebSocketApplicationConfig.form
+      * WebSocketApplicationConfig.java
+      * WebSocketApplicationRequest.form
+      * WebSocketApplicationRequest.java
+      * WebSocketApplicationResponse.form
+      * WebSocketApplicationResponse.java
+      * WebSocketSampler.java
+      * WebSocketSamplerGui.java
+
+Others:
+
+* https://github.com/undera/jmeter-plugins
+
+* https://github.com/ATLANTBH/jmeter-components.
+  provides samplers for JSON, OAuth, HBase and Hadoop, etc.
+
+* https://github.com/afranken/jmeter-analysis-maven-plugin
+is a Maven plugin that parses JMeter result XML files and generates detailed reports with charts
+Can be used in combination with the JMeter Maven Plugin 
+https://github.com/afranken/jmeter-analysis-maven-plugin
+developed by the same author.
+
+* http://stackoverflow.com/users/460802/ubik-load-pack
+
+* https://github.com/flood-io/ruby-jmeter
+  is a Ruby based DSL for building JMeter test plans 
 
 ## <a name="GetSampleTest"> Get Sample Test Assets from Github</a>
 Unlike other tutorials that only scratches the surface,
@@ -492,17 +566,11 @@ Within each <strong>test plan</strong> are these elements:
 6. <a href="#Assertions"> Assertions</a>
 7. <a href="#Listeners"> Listeners</a>
 
-More samplers (for JSON, OAuth, HBase and Hadoop, etc.)
-are at https://github.com/ATLANTBH/jmeter-components.
 
 
 ## <a name="Samplers"> Samplers</a>
 JMeter <strong>samplers</strong> emulate real clients by sending (a lot of) requests to servers.
 
-Samplers plug-in for WebSockets:
-
-  * https://github.com/kawasima/jmeter-websocket
-  * https://github.com/maciejzaleski/JMeter-WebSocketSampler
 
 
 ## <a name="ConfigNodes"> Configuration Nodes</a>
@@ -585,19 +653,6 @@ JMeter does not execute JavaScript.
 
 If JavaScript is downloaded from the server, JMeter can only parse it for data.
 
-
-## <a name="Plugins"> JMeter Plug-ins</a>
-Plug-ins extend the capability of JMeter.
-
-https://github.com/undera/jmeter-plugins
-
-https://github.com/afranken/jmeter-analysis-maven-plugin
-is a Maven plugin that parses JMeter result XML files and generates detailed reports with charts
-Can be used in combination with the JMeter Maven Plugin 
-https://github.com/afranken/jmeter-analysis-maven-plugin
-developed by the same author.
-
-http://stackoverflow.com/users/460802/ubik-load-pack
 
 
 ## <a name="SetupThreadGroup"> Setup Thread Group</a>
