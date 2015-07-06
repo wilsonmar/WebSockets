@@ -184,7 +184,8 @@ Samplers plug-in for WebSockets:
 
 Others:
 
-* https://github.com/undera/jmeter-plugins
+* https://github.com/undera/jmeter-plugins (described in http://jmeter-plugins.org/wiki/PluginInstall/)
+  are shown in menus prefixed with "jp@gc".
 
 * https://github.com/ATLANTBH/jmeter-components.
   provides samplers for JSON, OAuth, HBase and Hadoop, etc.
