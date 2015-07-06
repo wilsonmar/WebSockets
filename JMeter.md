@@ -204,7 +204,8 @@ developed by the same author.
 * https://github.com/flood-io/ruby-jmeter
   is a Ruby based DSL (Domain Specific Language) for building JMeter test plans 
 
-* is the most forked among jmeter repos. It is used to work with the flood.io cloud testing service.
+* https://github.com/flood-io/ruby-jmeter 
+is the most forked among jmeter repos. It is used to work with the flood.io cloud testing service.
 
 
 ## <a name="GetSampleTest"> Get Sample Test Assets from Github</a>
