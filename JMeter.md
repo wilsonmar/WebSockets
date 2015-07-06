@@ -63,14 +63,13 @@ This is the same across operating systems, which is why JMeter can run on PC and
 
 
 ## <a name="Download4PC"> Download, Install JMeter for PCs</a>
+PROTIP:
 Instead of following what <a target="_blank" href="http://zacster.blogspot.com/2008/03/quick-howto-to-setup-jmeter.html">
 Zac explained in 2008</a> and download from a mirror website on the
 <a target="_blank" href="http://jmeter.apache.org/download_jmeter.cgi"> 
 Apache download web page</a>,
 you then need to unzip, create a folder, move it, etc.
-
-PROTIP:
-If you run Windows, I think it's simpler to:
+I think it's simpler to:
 
 1) If you haven't already, open an internet browser,
   go to https://chocolatey.org/ and copy the whole @powershell command.
@@ -264,6 +263,12 @@ pip install virtualenv
 
 ```
 sudo pip install virtualenvwrapper
+```
+
+4) Create environment variable $WORKON_HOME. On PCs, it's at `c:\python27\lib\site-packages`
+On Macs:
+
+```
 export WORKON_HOME=~/Envs
 mkdir -p $WORKON_HOME
 echo $WORKON_HOME
@@ -271,7 +276,7 @@ ls $WORKON_HOME
 source /usr/local/bin/virtualenvwrapper.sh
 ```
 
-4) Make custom virtual environment:
+5) Make custom virtual environment:
 
 ```
 mkvirtualenv env1
@@ -286,14 +291,14 @@ The response:
   (env1)
 ```
 
-5) Install dependencies:
+6) Install dependencies:
 
 ```
 cd 99bottles-jmeter
 pip install --requirement=requirements.txt
 ```
 
-6) Invoke server:
+7) Invoke server:
 
 ```
 ./server.py
@@ -310,6 +315,7 @@ The response:
 ```
 
 Stopping the command/terminal window stops the app server.
+
 
 ## <a name="ExamineAppCode"> Examine Sample App Code</a>
 7) Open in a text editor utility the <strong>server.py</strong> application code.
