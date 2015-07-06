@@ -72,13 +72,12 @@ you then need to unzip, create a folder, move it, etc.
 PROTIP:
 If you run Windows, I think it's simpler to:
 
-1) Open an internet browser 
-
-2) If you haven't already, go to https://chocolatey.org/ and copy the whole @powershell command.
+1) If you haven't already, open an internet browser,
+  go to https://chocolatey.org/ and copy the whole @powershell command.
   Open a command window and paste the command to install Chocolatey.
   Exit the command.
 
-3) Open a command window to run this command (described at https://chocolatey.org/packages?q=jmeter).
+2) Open a command window to run this command (described at https://chocolatey.org/packages?q=jmeter).
   (Instead of `choco install jmeter -y`).
 
 ```
