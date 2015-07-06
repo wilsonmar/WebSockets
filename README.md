@@ -1,13 +1,19 @@
-This mark-down text page and associated files within this git repo 
-demonstrate how to program, run, and performance-test 
-<a href="#RealTimeUseCse">**real-time** capabilities</a> using the
-**WebSockets** protocol implemented in the C# language within Visual Studio 
-using Microsoft's SignalR library on the server and various client technologies.
+I hope that you join us to learn how to really use real-time (WebSockets) technologies 
+while we define a fair comparison of the various technologies.
+
+This repo contains a description of what WebSockets is 
+and the landscape of technologies around its
+development and testing, summarized by this graph:
 
 <a target="_blank" href="https://cloud.githubusercontent.com/assets/300046/8526595/e348623e-23c4-11e5-9916-95f0566fd1af.png"
 title="Diagram of WebSocket Technologies. Click to open in separate window.">
 <img src="https://cloud.githubusercontent.com/assets/300046/8526595/e348623e-23c4-11e5-9916-95f0566fd1af.png" 
-width="350" /></a>
+/></a>
+
+There are several stacks of technologies to offer real-time capabilities to various clients.
+LightStreamer is the boss. But there's also Node.js
+and C# language within Visual Studio 
+using Microsoft's SignalR library on the server and various client technologies.
 
 We being by analyzing communications between a sample apps and the server,
 then we build the client and server app demonstrated.
@@ -19,9 +25,7 @@ Along the way, we talk about the architecture.
 0. <a href="#Why"> WebSockets Smaller and Faster</a>
 0. <a href="#JavaFirst"> WebSockets Origin in Java</a>
 0. <a href="#BenchmarkStudies"> Benchmark Studies of Efficiency and Scalability</a>
-
 0. <a href="#ASP.NET_Env"> Microsoft Web Servers</a>
-
 0. <a href="#OlderTech"> Older Technologies for Real-Time</a>
 
 
