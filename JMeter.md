@@ -709,4 +709,6 @@ https://github.com/oliverlloyd/jmeter-ec2
 Automates running Apache JMeter on Amazon EC2 
 
 
-QUESTION: Who is working on JMeter's use of Nashon, the Java 8 JavaScript scrpting language?
+QUESTION: Who is working on JMeter's use of "Nashon" Groovy and Ruby engine in Java 8.
+Its REPL (Read, Eval, Print Loop) shell (jjs> prompt) interactively inteprets JavaScript inside Java programs.
+
