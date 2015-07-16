@@ -34,6 +34,13 @@ Applications such as stock and sports tickers that roll across the screen
 chat windows, on-line gaming, inventory trackers, 
 and other apps need "real-time" update to **all participants at the same time**.
 
+## <a name="Limitations"> Real Limitations</a>
+Before you get too excited, 
+even though websockets use the same ports as HTTP and HTTPS do,
+websocket connections are not allowed through Amazon's ELB (Their load HTTP/TCP balancer).
+As of this writing, Amazon's ELB proxy does not allow the PATCH HTTP method in the WebSocket standard.
+
+Websockets upgrade from HTTP because it was believed that servers would serve both websocket connections as well as HTTP ones.
 
 ## <a name="ModernBrowsers"> Internet Browsers for Real-Time</a>
 
