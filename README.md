@@ -120,6 +120,7 @@ The "front page" face of ASP.NET is at
 Here is where the documentation and references to all things ASP.NET.
 
 
+
 ## <a name="SignalRAppDemo"> Trace a Production Demo SignalR App</a>
 Before showing how to <a href="#BuildSignalR">build apps from scratch</a> later in this page,
 let's dive into some sample apps running in production mode over the internet
@@ -663,3 +664,9 @@ Node.js has the Socket.io module.
 http://www.pythian.com/blog/basic-io-monitoring-on-linux/
 
 Some also use Redis cache to cache data such as leaderboars.
+
+
+## <a name="Resources"> Additional Resources</a>
+Armin Ronacher provides a good overview at
+http://lucumr.pocoo.org/2012/9/24/websockets-101/
+
